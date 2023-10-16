@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left{
+  height: 150px;
+  width: 350px;
+  background-image: url(../public/img/logo_transparent.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.header-right{
+  display: flex;
+  margin-right: 3%;
+  align-items: end;
+}
