@@ -1,18 +1,17 @@
 :root{
-  --primaryColor: #3771de;
-  --secondColor: #5573b6;
+  --primaryColor: #245ddc;
+  --secondColor: #508cd2;
   --mainWhite:#fff;
   --mainBlack:#222;
   --mainRed:#db3e3e;
   --mainGreen:#4caf50;
-  --mainBackground:#F5F5F5;
+  --mainBackground: #efefef;
+  --testcolor: #ff00ff;
 }
 
 body {
-  margin: 0px;
-  padding: 0px;
   background-color: var(--mainBackground);
-  color: var(--mainBlack);
+  margin: 1.5rem;
 }
 
 code {
@@ -21,6 +20,16 @@ code {
 }
 
 .normal-button {
-  margin: 0px 0px 0px 10px;
+  margin: 0 0 0 10px;
 }
 
+
+.btn-primary {
+  background-color: var(--primaryColor) !important;
+  border: var(--primaryColor) 1px solid !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondColor) !important;
+  border: var(--secondColor) 1px solid !important;
+}

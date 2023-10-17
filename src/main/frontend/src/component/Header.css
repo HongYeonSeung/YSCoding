@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.header-left{
+    height: 150px;
+    width: 350px;
+    background-image: url('../../public/img/logo_transparent.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-right{
+    display: flex;
+    margin-right: 3%;
+    align-items: end;
+}
+
+
+
+.btn-xxl {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+}

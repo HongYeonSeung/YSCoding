@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Mypage = () => {
+const Profile = () => {
     return (
-        <div>
+        <div className='profile'>
             <h1>마이페이지 입니다</h1>
         </div>
     );
 }
-export default Mypage;
+export default Profile;
