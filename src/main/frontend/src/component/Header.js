@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, Router} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import './Header.css'
 
 const Header= () =>{
@@ -9,21 +10,26 @@ const Header= () =>{
             <div className='header-left'>
             </div>
             <div className='header-right'>
-                <Link to="/">
-                    <Button variant="primary" className="normal-button">
-                        Home
-                    </Button>
-                </Link>
-                <Link to="/Login">
-                    <Button variant="primary" className="normal-button">
-                        로그인
-                    </Button>
-                </Link>
-                <Link to="/Profile">
-                    <Button variant="primary" className="normal-button">
-                        내 정보
-                    </Button>
-                </Link>
+                <ListGroup horizontal>
+                    <ListGroup.Item>
+                        <Link to="/" style={{ textDecoration: "none"}}>
+                            <div className='Header-list'>메인 화면</div>
+                        </Link>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Link to="/Login" style={{ textDecoration: "none"}}>
+                            <div className='Header-list'> 로그인</div>
+                        </Link>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Link to="/Profile" style={{ textDecoration: "none"}}>
+                            <div className='Header-list'>내 정보</div>
+                        </Link>
+                    </ListGroup.Item>
+                </ListGroup>
+
+
+
             </div>
         </div>
     )
