@@ -6,24 +6,24 @@ import './Header.css'
 
 const Header= () =>{
     return(
-        <div className='header'>
+        <div id='header'>
             <div className='header-left'>
             </div>
             <div className='header-right'>
                 <ListGroup horizontal>
-                    <ListGroup.Item>
+                    <ListGroup.Item className='Header-list'>
                         <Link to="/" style={{ textDecoration: "none"}}>
-                            <div className='Header-list'>메인 화면</div>
+                            <div >메인 화면</div>
                         </Link>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item className='Header-list'>
                         <Link to="/Login" style={{ textDecoration: "none"}}>
-                            <div className='Header-list'> 로그인</div>
+                            <div> 로그인</div>
                         </Link>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item className='Header-list'>
                         <Link to="/Profile" style={{ textDecoration: "none"}}>
-                            <div className='Header-list'>내 정보</div>
+                            <div>내 정보</div>
                         </Link>
                     </ListGroup.Item>
                 </ListGroup>

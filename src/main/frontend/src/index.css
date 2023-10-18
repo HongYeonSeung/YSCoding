@@ -5,7 +5,7 @@
   --mainBlack:#222;
   --mainRed:#db3e3e;
   --mainGreen:#4caf50;
-  --mainBackground: #efefef;
+  --mainBackground: #EFEFEF;
   --testcolor: #ff00ff;
 }
 
@@ -24,12 +24,3 @@ code {
 }
 
 
-.btn-primary {
-  background-color: var(--primaryColor) !important;
-  border: var(--primaryColor) 1px solid !important;
-}
-
-.btn-primary:hover {
-  background-color: var(--secondColor) !important;
-  border: var(--secondColor) 1px solid !important;
-}
