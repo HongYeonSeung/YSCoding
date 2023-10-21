@@ -5,9 +5,9 @@
 }
 
 .header-left{
-    height: 150px;
-    width: 350px;
-    background-image: url('../../public/img/logo_transparent.png');
+    height: 200px;
+    width: 200px;
+    background-image: url('../../public/img/logo1.png');
     background-size: cover;
     background-position: center;
 }
