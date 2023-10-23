@@ -16,3 +16,5 @@ public class PersonController {
         personRepository.save(person);
     }
 }
+
+// DB 코드

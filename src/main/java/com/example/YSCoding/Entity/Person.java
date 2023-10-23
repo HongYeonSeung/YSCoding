@@ -21,3 +21,5 @@ public class Person {
     @Column(name="person_age")
     private int age;
 }
+
+//DB 예제 테이블 생성 코드
