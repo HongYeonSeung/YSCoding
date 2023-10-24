@@ -5,9 +5,14 @@
   --mainBlack:#222;
   --mainRed:#db3e3e;
   --mainGreen:#4caf50;
+  --subGreen:#6bff98;
   --mainBackground: #fff;
   --mainBackground2: #EFEFEF;
+  --mainGray : #737373;
   --testcolor: #ff00ff;
+  --button-color: #ffffff;
+  --button-bg-color: #0d6efd;
+  --button-hover-bg-color: #025ce2;
 }
 
 body {
@@ -24,4 +29,7 @@ code {
   margin: 0 0 0 10px;
 }
 
+a{
+  text-decoration: none;
+}
 

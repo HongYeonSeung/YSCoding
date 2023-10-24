@@ -33,24 +33,38 @@ const LoginBox = () => {
 
     return (
         <div className='login_box_main'>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={data.name}
-                    onChange={handleInputChange}
-                    placeholder="이름"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={data.password}
-                    onChange={handleInputChange}
-                    placeholder="비밀번호"
-                />
-                {/* 다른 폼 필드를 추가하세요 */}
-                <button type="submit">전송</button>
-            </form>
+            <div className='login-box-white'>
+                <form onSubmit={handleSubmit}>
+                    <div className='input-box'>
+                        <input
+                            type="text"
+                            name="name"
+                            value={data.name}
+                            onChange={handleInputChange}
+                            placeholder="이름"
+                        />
+                        <label htlFor="name">아이디</label>
+                    </div>
+
+
+                    <div className='input-box'>
+                        <input
+                            type="password"
+                            name="password"
+                            value={data.password}
+                            onChange={handleInputChange}
+                            placeholder="비밀번호"
+                        />
+                        <label htmlFor="password">비밀번호</label>
+                    </div>
+
+                    {/* 다른 폼 필드를 추가하세요 */}
+
+                    <button className='button-submit' type="submit">전송</button>
+                    <a href='/password-find' id="password-link">비밀번호 찾기</a>
+                    <a href='/password-find' id="sign_in-link">회원가입</a>
+                </form>
+            </div>
         </div>
     );
 }
