@@ -1,0 +1,18 @@
+/* src/components/Layout3.css */
+.layout3 {
+    background-color: #6bff98; /* 배경색 (원하는 색상으로 변경 가능) */
+    padding: 20px; /* 내부 여백 (원하는 값으로 변경 가능) */
+    text-align: center; /* 가운데 정렬 (선택 사항) */
+    height: 500px;
+  }
+  .popular-products {
+    position: absolute;
+    top: 600px; /* 원하는 위치로 조절 */
+    left: 10px; /* 원하는 위치로 조절 */
+  }
+  
+  .popular-products-text {
+    font-size: 30px; /* 텍스트 크기 조절 (원하는 크기로 변경) */
+    text-decoration: underline; /* 밑줄 추가 (선택 사항) */
+  }
+  

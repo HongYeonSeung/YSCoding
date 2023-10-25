@@ -1,35 +1,22 @@
-:root{
-  --primaryColor: #245ddc;
-  --secondColor: #508cd2;
-  --mainWhite:#fff;
-  --mainBlack:#222;
-  --mainRed:#db3e3e;
-  --mainGreen:#4caf50;
-  --subGreen:#6bff98;
-  --mainBackground: #fff;
-  --mainBackground2: #EFEFEF;
-  --mainGray : #737373;
-  --testcolor: #ff00ff;
-  --button-color: #ffffff;
-  --button-bg-color: #0d6efd;
-  --button-hover-bg-color: #025ce2;
-}
-
 body {
-  background-color: var(--mainBackground);
-  margin: 1.5rem;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.normal-button {
-  margin: 0 0 0 10px;
+@font-face {
+  font-family: "Maplestory Bold";
+  font-weight: normal;
+  src: url("./font/Maplestory Bold.ttf") format("truetype");
 }
 
-a{
-  text-decoration: none;
+body {
+  font-family: "Maplestory Bold";
 }
-
