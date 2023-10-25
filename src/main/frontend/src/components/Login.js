@@ -4,8 +4,8 @@ import axios from "axios"; // 로그인 스타일 파일을 임포트합니다.
 
 const Login = () => {
   const [data, setData] = useState({
-    name: '',
-    password: '',
+    memberName: '',
+    memberPassword: '',
   });
 
 
@@ -44,8 +44,8 @@ const Login = () => {
               <div className='input-box'>
                 <input
                     type="text"
-                    name="name"
-                    value={data.name}
+                    name="memberName"
+                    value={data.memberName}
                     onChange={handleInputChange}
                     placeholder="이름"
                 />
@@ -56,8 +56,8 @@ const Login = () => {
               <div className='input-box'>
                 <input
                     type="password"
-                    name="password"
-                    value={data.password}
+                    name="memberPassword"
+                    value={data.memberPassword}
                     onChange={handleInputChange}
                     placeholder="비밀번호"
                 />
