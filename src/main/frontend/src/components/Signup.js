@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import axios from "axios";
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -15,6 +16,25 @@ function Signup() {
   const handleSignup = () => {
     if (password === confirmPassword) {
       // 비밀번호가 일치할 때 회원가입 로직을 구현하거나 API 호출을 수행합니다.
+      const userData = {
+        email,
+        password,
+        username,
+        name,
+        birthdate,
+        phoneNumber,
+      };
+
+      axios.post('/api/signupData', userData)
+          .then((response) => {
+            // 회원가입 성공 처리
+            console.log('회원가입이 성공적으로 완료되었습니다.');
+          })
+          .catch((error) => {
+            // 에러 처리
+            console.error('회원가입 오류:', error);
+          });
+
     } else {
       // 비밀번호가 일치하지 않을 때 처리 (예: 오류 메시지 표시)
       setPasswordMatch(false);
@@ -29,7 +49,7 @@ function Signup() {
         <h2>회원가입</h2>
         <form>
           <div>
-            <label htmlFor="email">이메일:</label>
+            <label htmlFor="email">이메일</label>
             <input
               type="email"
               id="email"
@@ -38,7 +58,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="username">아이디:</label>
+            <label htmlFor="username">아이디</label>
             <input
               type="text"
               id="username"
@@ -47,7 +67,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="password">비밀번호:</label>
+            <label htmlFor="password">비밀번호</label>
             <input
               type="password"
               id="password"
@@ -56,7 +76,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword">비밀번호 확인:</label>
+            <label htmlFor="confirmPassword">비밀번호 확인</label>
             <input
               type="password"
               id="confirmPassword"
@@ -66,7 +86,7 @@ function Signup() {
             {!passwordMatch && <p className="error-message">{error}</p>}
           </div>
           <div>
-            <label htmlFor="name">이름:</label>
+            <label htmlFor="name">이름</label>
             <input
               type="text"
               id="name"
@@ -75,7 +95,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="birthdate">생년월일:</label>
+            <label htmlFor="birthdate">생년월일</label>
             <input
               type="text"
               id="birthdate"
@@ -84,7 +104,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="phoneNumber">전화번호:</label>
+            <label htmlFor="phoneNumber">전화번호</label>
             <input
               type="tel"
               id="phoneNumber"

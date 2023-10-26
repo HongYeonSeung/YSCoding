@@ -21,7 +21,7 @@ const Login = () => {
     event.preventDefault();
 
     // Axios를 사용하여 데이터를 서버로 보냅니다.
-    axios.post('/api/submitData', data)
+    axios.post('/api/login', data)
         .then((response) => {
           // 성공적으로 데이터를 보낸 후 실행할 코드를 여기에 추가하세요.
           console.log('데이터가 성공적으로 전송되었습니다.');
@@ -42,7 +42,7 @@ const Login = () => {
           <div className='login-box-white'>
             <form onSubmit={handleSubmit}>
               <div className='input-box'>
-                <input
+                <input className='login_input'
                     type="text"
                     name="memberName"
                     value={data.memberName}
@@ -54,7 +54,7 @@ const Login = () => {
 
 
               <div className='input-box'>
-                <input
+                <input className='login_input'
                     type="password"
                     name="memberPassword"
                     value={data.memberPassword}
@@ -66,7 +66,7 @@ const Login = () => {
 
               {/* 다른 폼 필드를 추가하세요 */}
 
-              <button className='button-submit' type="submit">전송</button>
+              <button className='button-submit' type="submit">로그인</button>
               <a href='/password-find' id="password-link">비밀번호 찾기</a>
               <a href='/password-find' id="sign_in-link">회원가입</a>
             </form>

@@ -39,7 +39,7 @@ form{
 
 }
 
-.input-box > input{
+.input-box input{
     background:transparent;
     border:none;
     border-bottom: solid 1px #ccc;
@@ -59,7 +59,7 @@ input:placeholder-shown + label{
     top:15px;
 }
 
-input:focus + label, label{
+label,input:focus + label{
     color:#8aa1a1;
     font-size:10pt;
     pointer-events: none;
@@ -71,6 +71,7 @@ input:focus + label, label{
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
 }
+
 
 input:focus, input:not(:placeholder-shown){
     border-bottom: solid 1px #8aa1a1;

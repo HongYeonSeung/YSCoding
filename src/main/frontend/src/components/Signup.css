@@ -5,7 +5,7 @@
   height: 100vh;
   text-align: center;
   flex-direction: column;
-  
+
 }
 .signup-box {
   text-align: center;
@@ -28,6 +28,8 @@
 }
 
 .signup-container label {
+  position: relative;
+  font-size:12pt;
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
