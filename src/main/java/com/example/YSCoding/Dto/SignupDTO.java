@@ -27,6 +27,6 @@ public class SignupDTO {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
-    //    toString 없어도 됨
+    //    toString 없어도 됨 이건 서비스쪽 내용같은데
 
 }

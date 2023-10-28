@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Signup() {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,6 +13,9 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [error, setError] = useState('');
+
+
+  const navigate = useNavigate();
 
   const handleSignup = () => {
     if (password === confirmPassword) {
@@ -25,10 +29,13 @@ function Signup() {
         phoneNumber,
       };
 
+
       axios.post('/api/signupData', userData)
           .then((response) => {
             // 회원가입 성공 처리
             console.log('회원가입이 성공적으로 완료되었습니다.');
+            alert("회원가입 완료")
+            navigate('/login');
           })
           .catch((error) => {
             // 에러 처리

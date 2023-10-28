@@ -1,25 +1,32 @@
 package com.example.YSCoding.Entity;
 
+
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "person_table1")
 @Getter
 @Setter
-public class Person {
+public class Signup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @Column(unique = true, length = 12)
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
     private String password;
 
-    @Column(unique = true)
-    private String email;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "birthdate")
+    private String birthdate;
 
     @Column(name = "phone_number")
     private String phoneNumber;

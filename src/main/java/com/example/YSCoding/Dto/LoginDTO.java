@@ -12,6 +12,8 @@ public class LoginDTO {
     private String memberPassword;
 
 
+
+
     @Override
     public String toString(){
         return "submitData{" +
@@ -19,7 +21,7 @@ public class LoginDTO {
                 ", memberPassword='" + memberPassword + '\'' +
                 '}';
     }
-    //    toString 없어도 됨
+    //    toString 없어도 됨 이건 서비스쪽 내용같은데
 
 
 }
