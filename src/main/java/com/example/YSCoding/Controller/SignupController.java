@@ -27,8 +27,6 @@ public class SignupController {
     @PostMapping("/signupData")
     public ResponseEntity<String> submitData(@RequestBody Signup data) {
         // 여기에서 SignupData 객체를 사용하여 데이터 처리를 수행하고 데이터베이스에 저장할 수 있습니다.
-        // 예: userRepository.save(data);
-
         // 데이터 처리 예시 - 로그로 출력
         System.out.println("받은 데이터: " + data);
 

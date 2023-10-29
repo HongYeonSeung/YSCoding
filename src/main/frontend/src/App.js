@@ -7,7 +7,9 @@ import Layout from './components/Layout';
 import Login from './components/Login'; // Login 컴포넌트를 임포트합니다.
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
-
+import Layout2 from "./components/Layout2";
+import ProductPage from "./components/ProductPage";
+import ProductCreate from "./components/ProductCreate";
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
@@ -18,22 +20,27 @@ const App = () => {
         .then(response => setHello(response.data))
         .catch(error => console.log(error));
   }, []);
+
   return (
-    <Router>
-      <div>
-        <ActionBar />
-        <Routes>
-          {/* 다른 라우트 추가 */}
-          <Route path="/" element={<Layout />} />
-          <Route path="/login" element={<Login />} /> {/* /login 경로로 들어오면 Login 컴포넌트를 보여줍니다. */}
-          <Route path="/signup" element={<Signup />} /> {/* /signup 경로로 들어오면 Signup 컴포넌트를 보여줍니다. */}        
-          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* 아이디/비밀번호 찾기 페이지로 이동합니다. */}
-          <Route path='*' element={<div className='error'>에러 페이지</div>} />
-        </Routes>
-        <hr></hr>
-        백엔드 연동 테스트: {hello}
-      </div>
-    </Router>
+      <Router>
+        <div>
+          <ActionBar />
+          <Routes>
+            <Route path="/" element={<Layout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path='*' element={<div className='error'>에러 페이지</div>} />
+            <Route path="/category1" component={ProductPage} />
+            <Route path="/" component={Layout2} />
+            <Route path="/product-create" element={<ProductCreate />} />
+          </Routes>
+          <hr></hr>
+          백엔드 연동 테스트: {hello}
+          {/* ProductCreate 컴포넌트 추가 */}
+
+        </div>
+      </Router>
   );
 }
 
