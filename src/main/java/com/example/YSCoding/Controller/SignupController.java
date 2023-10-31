@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api") // "/api"를 엔드포인트 경로의 일부로 사용
 public class SignupController {
 
-    private String receivedData; // 데이터를 저장할 변수
-
     private final SignupService signupService; //회원가입 서비스
 
     @Autowired

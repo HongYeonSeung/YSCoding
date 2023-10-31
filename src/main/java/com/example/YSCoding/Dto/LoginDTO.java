@@ -11,17 +11,4 @@ public class LoginDTO {
     private String memberName;
     private String memberPassword;
 
-
-
-
-    @Override
-    public String toString(){
-        return "submitData{" +
-                "memberName='" + memberName + '\'' +
-                ", memberPassword='" + memberPassword + '\'' +
-                '}';
-    }
-    //    toString 없어도 됨 이건 서비스쪽 내용같은데
-
-
 }
