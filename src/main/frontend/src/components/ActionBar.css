@@ -36,3 +36,29 @@
   color: #000000;
   padding: 10px;
 }
+
+  .login-bar-box{
+    height: 100px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+  .login-box{
+    width: 200px;
+    height: 70px;
+    border: black 2px solid;
+    border-radius: 20px;
+    background-color: #cccccc;
+    text-align: center;
+    align-items: center;
+    position: relative;
+  }
+.login-box div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -50px;
+
+
+
+}

@@ -6,10 +6,7 @@ import com.example.YSCoding.Service.LoginService;
 import com.example.YSCoding.Service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -19,6 +16,7 @@ import java.util.Map;
 public class LoginController {
 
     private final LoginService loginService;
+
 
     @Autowired
     public LoginController(LoginService loginService) {
@@ -34,8 +32,15 @@ public class LoginController {
         System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
 
         String result = loginService.LoginFind(memberName, memberPassword);
-        System.out.println("로그인 결과: " + result);
 
-        return ResponseEntity.ok("데이터를 성공적으로 받았습니다.");
+        String resultId = loginService.getLoginResultId();
+
+
+        System.out.println("로그인 결과: " + resultId);
+
+//        loginBox(result);
+        return ResponseEntity.ok(result);
     }
+
+
 }

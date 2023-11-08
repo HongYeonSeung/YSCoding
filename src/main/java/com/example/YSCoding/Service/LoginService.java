@@ -11,25 +11,35 @@ import java.util.List;
 @Service
 public class LoginService {
     private final LoginRepository loginRepository;
+    private String loginResultId; // 필드를 private으로 변경
 
     @Autowired
     public LoginService(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
+    public String getLoginResultId() {
+        return loginResultId;
+    }
+
+    public void setLoginResultId(String loginResultId) {
+        this.loginResultId = loginResultId;
+    }
+
+
     public String LoginFind(String username, String password) {
         List<Signup> usersWithSameUsername = loginRepository.findAllByUsername(username);
 
-        if (usersWithSameUsername.isEmpty()) {
-            return "아이디가 존재하지 않습니다."; // 해당 아이디를 찾을 수 없음
-        } else {
-            for (Signup user : usersWithSameUsername) {
-                if (user.getPassword().equals(password)) {
-                    return "로그인 성공"; // 패스워드가 일치함
-                }
-            }
-            return "패스워드가 일치하지 않습니다."; // 패스워드가 일치하지 않음
+        for (Signup user : usersWithSameUsername) {
+            if (user.getPassword().equals(password)) {
+                setLoginResultId(user.getName());
+                System.out.println(getLoginResultId());
+                return user.getName(); // 로그인 성공시 아이디 리턴
 
+            }
         }
+
+
+        return "-1"; // 해당 아이디를 찾을 수 없거나 패스워드가 일치하지 않음
     }
 }
