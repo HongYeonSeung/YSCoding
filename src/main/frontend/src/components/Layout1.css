@@ -1,0 +1,9 @@
+.layout1 {
+    background-color: #f7f7f7; /* 배너의 배경색 (원하는 색상으로 변경) */
+    padding: 10px; /* 배너의 내부 여백 (원하는 값으로 변경) */
+    text-align: center; /* 배너 내용 가운데 정렬 (선택 사항) */
+}
+
+.img-box{
+    margin-top: 10px;
+}

@@ -1,64 +1,91 @@
 /* src/components/Layout3.css */
 .layout3 {
-    background-color: #007bff; /* 배경색 (원하는 색상으로 변경 가능) */
-    padding: 20px; /* 내부 여백 (원하는 값으로 변경 가능) */
-    text-align: center; /* 가운데 정렬 (선택 사항) */
-    height: 500px;
+    background-color: #f7f7f7; /* 변경: 배경색 조정 */
+    padding: 20px; /* 내부 여백 조정 */
+    text-align: center;
 }
+
 .popular-products {
-    top: 600px; /* 원하는 위치로 조절 */
-    left: 10px; /* 원하는 위치로 조절 */
+    margin-top: 20px; /* 변경: 상단 여백 추가 */
 }
 
 .popular-products-text {
-    font-size: 30px; /* 텍스트 크기 조절 (원하는 크기로 변경) */
-    text-decoration: underline; /* 밑줄 추가 (선택 사항) */
+    font-size: 24px; /* 변경: 텍스트 크기 감소 */
+    font-weight: bold; /* 추가: 굵게 표시 */
+    margin-bottom: 10px; /* 추가: 하단 여백 추가 */
 }
 
-.product_container{
-    display:flex;
-    flex-direction: row;
-    flex-wrap : wrap;
-    width: 100%;
-}
-.product{
-    width:25%;
-    height: 100%;
-    margin-bottom : 4%;
-    /*border: 1px solid black;*/
+.product_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* 변경: 가운데 정렬 */
 }
 
-.product_img_div{
+.product {
+    position: relative;
+    border: 2px solid #ddd; /* 변경: 테두리 스타일 조정 */
+    border-radius: 15px;
+    width: 30%;
+    max-width: 300px; /* 변경: 최대 너비 설정 */
+    height: 450px;
+    margin: 20px;
+    overflow: hidden; /* 추가: 내용이 넘칠 경우 숨김 처리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 추가: 그림자 효과 */
+    transition: transform 0.3s ease-in-out; /* 추가: 마우스 호버 시 부드러운 효과 */
+
+&:hover {
+     transform: scale(1.05); /* 변경: 마우스 호버 시 확대 효과 */
+ }
+}
+
+.product_img_div img {
+    max-height: 200px;
+    max-width: 90%;
+    border-radius: 20px;
+    object-fit: cover; /* 변경: 이미지 비율 유지하며 조절 */
+    margin-top: 50px;
+}
+
+.product_content {
+    padding: 15px; /* 추가: 내용 영역에 여백 추가 */
+}
+
+.product_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.product_des {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.product_mon {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.product_link_div {
     text-align: center;
-}
-.product_img{
-    max-width:95%;
-    max-height:100%;
+    margin-top: 20px;
 }
 
-.product_title{
-    font-size : 1.3rem;
-    font-weight: 600;
-    margin : 4%;
-}
-.product_des{
-    font-size : 0.8rem;
-    margin : 2% 3% 2% 4%;
-}
-.product_mon{
-    font-size : 1rem;
-    margin : 2% 3% 1% 4%;
-}
-.product_link_div{
-    text-align: center;
-}
-.product_link{
-    position:inherit;
-    font-size : 1.2rem;
-    font-weight: 500;
+.product_link {
+    display: inline-block; /* 변경: 인라인 블록 요소로 변경 */
+    font-size: 1rem;
+    font-weight: bold;
     text-decoration: none;
-    background : #0B5ED9;
-    color : white;
-    border-radius : 10px;
-    padding :5px;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    padding: 8px 15px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* 변경: 부드러운 효과 추가 */
+
+&:hover {
+     background-color: #0056b3;
+     border-color: #0056b3;
+     color: #fff;
+ }
 }

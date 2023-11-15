@@ -49,7 +49,7 @@ form{
     width:300px;
 }
 
-input::placeholder{
+.input-box input::placeholder{
     color:transparent;
 }
 

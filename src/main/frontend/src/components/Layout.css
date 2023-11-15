@@ -1,7 +1,6 @@
 /* src/components/Layout.css */
 .layout {
-  
-    /* 필요한 레이아웃 스타일을 추가하세요. */
+
   }
   
   .logo-search-container {
@@ -21,12 +20,7 @@
 
 
   }
-  .layout1 {
-    background-color: #ccc; /* 배너의 배경색 (원하는 색상으로 변경) */
-    padding: 0px; /* 배너의 내부 여백 (원하는 값으로 변경) */
-    text-align: center; /* 배너 내용 가운데 정렬 (선택 사항) */
-    /*height: 200px; !* 배너의 높이를 200px로 설정 (원하는 높이로 변경) *!*/
-  }
+
   /* src/components/Layout.css */
 .layout2 {
     /* 필요한 스타일을 추가합니다. */

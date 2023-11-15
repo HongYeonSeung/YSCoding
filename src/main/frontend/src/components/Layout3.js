@@ -23,22 +23,24 @@ function Layout3() {
     return (
         <div className="layout3">
             <div className="popular-products">
-                <p className="popular-products-text">인기상품</p>
+                <p className="popular-products-text">판매 상품</p>
             </div>
             <div className="rectangle">
                 <div className="product_container">
                     {products.map((product) => (
                         <div key={product.id} className="product">
-                            <div className="product_img_div">
-                                <img src={`/api/images/${product.imagePath}`} className="product_img" alt={product.productName} />
-                            </div>
-                            <h5 className="product_title">{product.productName}</h5>
-                            <p className="product_des">{product.content}</p>
-                            <div className="product_mon">월 : {product.startingPrice}￦</div>
-                            <div className="product_link_div">
-                                <a href={`/product/${product.id}`} className="product_link">
-                                    상세보기
-                                </a>
+                            <div className="product_box">
+                                <div className="product_img_div">
+                                    <img src={`/api/images/${product.imagePath}`} className="product_img" alt={product.productName}/>
+                                </div>
+                                <p className="product_title"> {product.productName}</p>
+                                <p className="product_des">{product.content}</p>
+                                <div className="product_mon">현재 입찰가 : ￦{product.startingPrice}</div>
+                                <div className="product_link_div">
+                                    <a href={`/product/${product.id}`} className="product_link">
+                                        상세보기
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     ))}
