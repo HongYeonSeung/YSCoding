@@ -23,7 +23,10 @@ public class ProductServiceImpl implements ProductService {
         // 엔티티 생성 및 저장
         Product product = new Product();
         product.setProductName(productDTO.getProductName());
+        product.setCategory(productDTO.getCategory());
         product.setStartingPrice(productDTO.getStartingPrice());
+        product.setRegistrationTime(productDTO.getRegistrationTime());
+        product.setContent(productDTO.getContent());
         product.setImagePath(imageName);
 
         return productRepository.save(product);

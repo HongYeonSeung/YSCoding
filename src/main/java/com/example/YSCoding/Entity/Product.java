@@ -14,14 +14,30 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //물품명
     @Column(nullable = false)
     private String productName;
 
+    //시작가
     @Column(nullable = false)
     private double startingPrice;
 
+    //이미지 파일이름 
     @Column(nullable = false)
     private String imagePath;
+
+    //카테고리
+    @Column(nullable = false)
+    private String category;
+
+    //물건 설명
+    @Column(nullable = false)
+    private String content;
+
+    //물품올린시간
+    @CreationTimestamp
+    @Column
+    private LocalDateTime registrationTime = LocalDateTime.now();
 
     // 생성자, getter, setter 등 필요한 메서드 추가
 }
