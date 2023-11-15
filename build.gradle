@@ -28,6 +28,9 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 //	testImplementation 'org.springframework.security:spring-security-test' //로그인을 위한 스프링 시큐리티
 
+
+
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.6'
 }
 
 tasks.named('test') {
