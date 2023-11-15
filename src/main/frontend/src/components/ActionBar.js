@@ -9,6 +9,11 @@ function ActionBar() {
     const [time, setTime] = useState(new Date());
     const { loginId } = useUser();
 
+    const handleLogoutClick = () => {
+        // 로그아웃 버튼을 클릭했을 때
+        localStorage.setItem('loginId','');
+    };
+
     useEffect(() => {
         const id = setInterval(() => {
             setTime(new Date());
@@ -27,13 +32,17 @@ function ActionBar() {
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
-                        <Link to="/login">로그인</Link>
+                        {loginId === "" && <Link to="/login">로그인</Link>}
                         <Link to="/signup">회원가입</Link>
                         <Link to="/myPage">마이페이지</Link>
                     </div>
                     {loginId && (
+                        <div>
                         <p className="logged-in-user">현재 로그인한 아이디: {loginId}</p>
+                            <a href="/" onClick={handleLogoutClick}>로그아웃</a>
+                        </div>
                     )}
+
                 </div>
             </div>
         </div>

@@ -30,6 +30,10 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
+    //등록자
+    @Column(nullable = false)
+    private String loginId;
+
     //물건 설명
     @Column(nullable = false)
     private String content;

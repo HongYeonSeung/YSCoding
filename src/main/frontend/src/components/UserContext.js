@@ -4,9 +4,10 @@ import React, { createContext, useContext, useState } from 'react';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [loginId, setLoginId] = useState(null);
+    const [loginId, setLoginId] = useState(localStorage.getItem('loginId'));
 
     const setResponseData = (data) => {
+        localStorage.setItem('loginId', data);
         setLoginId(data);
     };
 

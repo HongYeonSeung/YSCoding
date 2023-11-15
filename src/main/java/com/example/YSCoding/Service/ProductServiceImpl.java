@@ -37,10 +37,10 @@ public class ProductServiceImpl implements ProductService {
         product.setRegistrationTime(productDTO.getRegistrationTime());
         product.setContent(productDTO.getContent());
         product.setImagePath(imageName);
+        product.setLoginId(productDTO.getLoginId());
 
         // 24시간을 더한 값을 설정
         calculateTimeAfter24Hours(product);
-
 
 
 

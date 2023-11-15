@@ -17,6 +17,7 @@ public class ProductDTO {
     private String productName;
     private String content;
     private double startingPrice;
+    private String loginId;
     private LocalDateTime registrationTime;
     private LocalDateTime timeAfter24Hours;
     // 생성자, getter, setter 등 필요한 메서드 추가

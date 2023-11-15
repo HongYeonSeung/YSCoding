@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './ProductCreate.css';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
+import { useUser } from './UserContext';
 
 function ProductCreate() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ function ProductCreate() {
         category:'',
         content:'',
     });
+    const { loginId } = useUser();
 
 
     const handleInputChange = (e) => {
@@ -45,9 +47,9 @@ function ProductCreate() {
         for (const key in product) {
             formDataToSend.append(key, product[key]);
         }
-        // console.log('상품 이미지:', product.image);
-        // console.log('상품 이름:', product.productName);
-        // console.log('시작 가격:', product.startingPrice);
+
+        formDataToSend.append('loginId', loginId);
+        console.log('아이디:',loginId);
 
         try {
             // axios를 사용하여 서버로 데이터 전송
@@ -86,7 +88,7 @@ function ProductCreate() {
                     </div>
                     <div className="product-details">
                         <h2>상품 카테고리</h2>
-                        <select name="category" class="box" id="domain-list" onChange={handleInputChange}>
+                        <select name="category" className="box" id="domain-list" onChange={handleInputChange}>
                             <option value="">카테고리를 선택해주세요</option>
                             <option value="의류">의류</option>
                             <option value="뷰티">화장품/뷰티</option>

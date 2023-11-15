@@ -5,6 +5,8 @@ import { UserProvider, useUser } from './UserContext'; // UserProvider를 import
 import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
 
 const Login = () => {
+  const { loginId } = useUser();
+
   const navigate = useNavigate();
   const { setResponseData } = useUser();
   const [data, setData] = useState({

@@ -41,6 +41,7 @@ function ProductDetailPage() {
             <div className="right-section">
                 <div className="product-info">
                     <h2>상품 이름: {product.productName}</h2>
+                    <p>판매자 ID : {product.loginId}</p>
                     <p>시작 가격: 10000원</p>
                     <p>현재 입찰가: ￦{product.startingPrice}</p>
                     <p>상품 설명 : {product.content}</p>
