@@ -10,7 +10,7 @@ function Layout() {
   return (
     <div className="layout">
       <div className="logo-search-container">
-        <Logo1 className="logo1" /> {/* 로고 이미지에 "logo1" 클래스 추가 */}
+        {/*<Logo1 className="logo1" /> /!* 로고 이미지에 "logo1" 클래스 추가 *!/*/}
           <SearchBar /> {/* 검색창 컴포넌트 추가 */}
           <Link to="/product-create"> {/* 물품 등록 페이지로 이동하는 링크 */}
         <button className="register-button">물품등록</button> {/* 물품등록 버튼 추가 */}

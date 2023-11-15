@@ -26,7 +26,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="forgot-password-container" style={{ backgroundColor: '#6bff98' }}>
+    <div className="forgot-password-container" style={{ backgroundColor: '#007bff' }}>
     <div className="forgot-password-container">
     <div className="forgot-password-box">
       <div className="centered-content">

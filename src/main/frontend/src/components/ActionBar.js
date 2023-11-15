@@ -20,23 +20,22 @@ function ActionBar() {
       <div className="action-bar-main">
         <div className="action-bar">
           <div className="logo">
-            <Link to="/">My Website</Link>
+            <Link to="/"><img src="/logo3.png"/></Link>
           </div>
           <div className="right-section">
             <div className="time">{time.toLocaleTimeString()}</div>
             <div className="links">
               <Link to="/login">로그인</Link>
               <Link to="/signup">회원가입</Link>
-              <Link to="/mypage">마이페이지</Link>
+              <Link to="/myPage">마이페이지</Link>
             </div>
           </div>
         </div>
-          <div className="login-bar-box">
-              <div className="login-box">
-                  <div></div>
-              </div>
-
-          </div>
+          {/*<div className="login-bar-box">*/}
+          {/*    <div className="login-box">*/}
+          {/*        <div></div>*/}
+          {/*    </div>*/}
+          {/*</div>*/}
       </div>
   );
 }

@@ -71,6 +71,8 @@ function ProductCreate() {
 
     return (
         <div className="product-create-container">
+
+
             <div className="product-create-form">
                 <h2>상품 등록</h2>
                 <div className="image-upload">
@@ -90,6 +92,7 @@ function ProductCreate() {
                                     src={image}
                                     alt={`Uploaded ${index}`}
                                     className="preview-image"
+                                    style={{ width: "400px", height: "450px" }}
                                 />
                             ))}
                         </div>

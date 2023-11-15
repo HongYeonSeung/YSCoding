@@ -6,7 +6,9 @@
     color: #000000;
     padding: 10px;
   }
-  
+  .logo img {
+    margin: 20px;
+  }
   .logo a {
     text-decoration: none;
     font-size: 1.5rem;

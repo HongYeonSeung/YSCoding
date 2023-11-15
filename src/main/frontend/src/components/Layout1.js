@@ -5,8 +5,7 @@ import './Layout.css'; // 스타일 파일을 임포트합니다.
 function Layout1() {
   return (
     <div className="layout1">
-      {/* Layout1 내용 추가 */}
-      <h1>banner</h1>
+      <img src="/banner1.png"/>
     </div>
   );
 }

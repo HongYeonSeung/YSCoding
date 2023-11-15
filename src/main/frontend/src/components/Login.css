@@ -7,7 +7,7 @@ a{
 }
 
 .login_box{
-
+    background-color: #007bff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +17,7 @@ a{
     width: 400px;
     height: 550px;
     padding: 20px;
-    background-color: #6bff98;
+    background-color: #007bff;
     border-radius: 20px;
 
 }
@@ -107,7 +107,7 @@ input:focus, input:not(:placeholder-shown){
 
     cursor: pointer;
 
-    background: #6bff98;
+    background: #007bff;
     color: #333333;
 
     transition: 0.5s;
