@@ -1,32 +1,55 @@
+/* ActionBar.css */
+
 .action-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
-    color: #000000;
+    background-color: #3498db; /* 변경: 배경색 변경 */
+    color: #ffffff; /* 변경: 글자색 변경 */
     padding: 10px;
-  }
-  .logo img {
-    margin: 20px;
-  }
-  .logo a {
+    border-radius: 30px;
+}
+
+.logo img {
+    margin: 10px; /* 변경: 로고 여백 줄이기 */
+}
+
+.logo a {
     text-decoration: none;
     font-size: 1.5rem;
-    color: #000000;
-  }
-  
-  .right-section {
-    display: flex; /* right-section 내부의 항목을 가로로 나란히 배치 */
+    color: #ffffff; /* 변경: 로고 글자색 변경 */
+}
+.right-section {
+    display: flex;
     align-items: center;
-  }
-  
-  .time {
+    flex-direction: column; /* 변경: 컬럼으로 정렬 */
+}
+
+.time {
     font-size: 1rem;
-    margin-right: 10px; /* 항목 간 간격 추가 */
-  }
-  
-  .links a {
+    margin-bottom: 5px; /* 변경: 시간과 로그인 아이디 간 여백 추가 */
+    color: #ffffff; /* 변경: 시간 글자색 변경 */
+}
+
+.links {
+    display: flex;
+    align-items: center;
+}
+
+.links a {
     text-decoration: none;
+    color: #ffffff;
+    margin: 0 10px; /* 변경: 각 링크 사이 여백 조정 */
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.links a:hover {
+    color: #f39c12;
+}
+
+.logged-in-user {
+    font-size: 0.9rem;
+    margin-left: 10px; /* 변경: 로그인 아이디 좌측 여백 조정 */
     color: #000000;
-    margin-right: 10px; /* 항목 간 간격 추가 */
-  }
+}

@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './Login.css';
 import axios from "axios";
+import { UserProvider, useUser } from './UserContext'; // UserProvider를 import
 import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const { setResponseData } = useUser();
   const [data, setData] = useState({
     memberName: '',
     memberPassword: '',
   });
-
-  const [responseData, setResponseData] = useState('테스트');
 
     const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,6 +37,7 @@ const Login = () => {
             // 로그인 성공 시 처리
             // console.log('로그인 성공');
             setResponseData(response.data);
+            console.log(response.data)
             handleLogin(); // 로그인 후의 작업을 수행
 
           }
@@ -54,42 +54,44 @@ const Login = () => {
   };
 
   return (
-      <div className='login_box' style={{ backgroundColor: '#007bff' }}>
-        <div className='login_box_main'>
-          <div className='login-box-white'>
-            <form onSubmit={handleSubmit}>
-              <div className='input-box'>
-                <input className='login_input'
-                    type="text"
-                    name="memberName"
-                    value={data.memberName}
-                    onChange={handleInputChange}
-                    placeholder="이름"
-                />
-                <label htmlFor="name">아이디</label>
-              </div>
+      <UserProvider>
+        <div className='login_box' style={{ backgroundColor: '#007bff' }}>
+          <div className='login_box_main'>
+            <div className='login-box-white'>
+              <form onSubmit={handleSubmit}>
+                <div className='input-box'>
+                  <input className='login_input'
+                      type="text"
+                      name="memberName"
+                      value={data.memberName}
+                      onChange={handleInputChange}
+                      placeholder="이름"
+                  />
+                  <label htmlFor="name">아이디</label>
+                </div>
 
 
-              <div className='input-box'>
-                <input className='login_input'
-                    type="password"
-                    name="memberPassword"
-                    value={data.memberPassword}
-                    onChange={handleInputChange}
-                    placeholder="비밀번호"
-                />
-                <label htmlFor="password">비밀번호</label>
-              </div>
+                <div className='input-box'>
+                  <input className='login_input'
+                      type="password"
+                      name="memberPassword"
+                      value={data.memberPassword}
+                      onChange={handleInputChange}
+                      placeholder="비밀번호"
+                  />
+                  <label htmlFor="password">비밀번호</label>
+                </div>
 
-              {/* 다른 폼 필드를 추가하세요 */}
+                {/* 다른 폼 필드를 추가하세요 */}
 
-              <button className='button-submit' type="submit">로그인</button>
-              <a href='/password-find' id="password-link">비밀번호 찾기</a>
-              <a href='/password-find' id="sign_in-link">회원가입</a>
-            </form>
+                <button className='button-submit' type="submit">로그인</button>
+                <a href='/password-find' id="password-link">비밀번호 찾기</a>
+                <a href='/password-find' id="sign_in-link">회원가입</a>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </UserProvider>
   );
 }
 

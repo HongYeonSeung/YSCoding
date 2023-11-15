@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Layout3.css';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Layout3() {
     const [products, setProducts] = useState([]);
@@ -37,9 +38,9 @@ function Layout3() {
                                 <p className="product_des">{product.content}</p>
                                 <div className="product_mon">현재 입찰가 : ￦{product.startingPrice}</div>
                                 <div className="product_link_div">
-                                    <a href={`/product/${product.id}`} className="product_link">
+                                    <Link to={`/product/${product.id}`} className="product_link">
                                         상세보기
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -4,6 +4,7 @@
     text-align: center; /* 배너 내용 가운데 정렬 (선택 사항) */
 }
 
-.img-box{
+.img-box img{
     margin-top: 10px;
+    border-radius: 20px 20px 0px 0px;
 }

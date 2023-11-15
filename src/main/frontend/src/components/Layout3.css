@@ -31,11 +31,8 @@
     margin: 20px;
     overflow: hidden; /* 추가: 내용이 넘칠 경우 숨김 처리 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 추가: 그림자 효과 */
-    transition: transform 0.3s ease-in-out; /* 추가: 마우스 호버 시 부드러운 효과 */
-
-&:hover {
-     transform: scale(1.05); /* 변경: 마우스 호버 시 확대 효과 */
- }
+    transition: transform 0.3s ease-in-out;
+    &:hover {transform: scale(1.05);}
 }
 
 .product_img_div img {

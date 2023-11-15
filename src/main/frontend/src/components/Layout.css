@@ -2,18 +2,19 @@
 .layout {
 
   }
-  
+
   .logo-search-container {
     display: flex;
     align-items: center;
     justify-content: center; /* 가로 중앙 정렬 */
-    margin-bottom: 30px;
+    height: 100px;
+    background-color: #f7f7f7;
   }
-  
+
   .logo-search-container img {
     max-width: 100px; /* 로고 이미지 너비 제한 (선택 사항) */
   }
-  
+
   .logo1 {
     display: block; /* 이미지를 블록 요소로 설정 (가로 중앙 정렬을 위해 필요) */
     margin: 0 auto; /* 가로 중앙 정렬 */
@@ -29,14 +30,14 @@
 .layout3 {
   /* 필요한 스타일을 추가합니다. */
 }
-  
+
   .button-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
   }
-  
+
   /* 원 형태 버튼에 대한 스타일을 추가합니다. */
   .button {
     width: 50px;

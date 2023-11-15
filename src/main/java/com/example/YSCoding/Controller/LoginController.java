@@ -35,11 +35,10 @@ public class LoginController {
 
         String resultId = loginService.getLoginResultId();
 
-
         System.out.println("로그인 결과: " + resultId);
 
 //        loginBox(result);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(resultId);
     }
 
 

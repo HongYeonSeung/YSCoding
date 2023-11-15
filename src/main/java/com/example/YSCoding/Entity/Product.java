@@ -39,5 +39,7 @@ public class Product {
     @Column
     private LocalDateTime registrationTime = LocalDateTime.now();
 
-    // 생성자, getter, setter 등 필요한 메서드 추가
+    @Column
+    private LocalDateTime timeAfter24Hours;
+
 }

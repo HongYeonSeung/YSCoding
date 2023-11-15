@@ -6,7 +6,7 @@ function Layout1() {
   return (
     <div className="layout1">
         <div className="img-box">
-      <img src="/banner1.png"/>
+            <img src="/banner1.png"/>
         </div>
     </div>
   );
