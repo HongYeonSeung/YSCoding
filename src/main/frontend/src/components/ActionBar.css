@@ -50,6 +50,25 @@
 
 .logged-in-user {
     font-size: 0.9rem;
-    margin-left: 10px; /* 변경: 로그인 아이디 좌측 여백 조정 */
+    margin: 20px;
     color: #000000;
+}
+
+.action-bar-div {
+    display: flex;
+    align-items: center;
+}
+
+.action-bar-a {
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.action-bar-a:hover {
+    background-color: #e74c3c;
 }

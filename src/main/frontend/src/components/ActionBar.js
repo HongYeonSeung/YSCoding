@@ -33,13 +33,14 @@ function ActionBar() {
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
                         {loginId === "" && <Link to="/login">로그인</Link>}
-                        <Link to="/signup">회원가입</Link>
+                        {loginId === "" &&  <Link to="/signup">회원가입</Link>}
+
                         <Link to="/myPage">마이페이지</Link>
                     </div>
                     {loginId && (
-                        <div>
-                        <p className="logged-in-user">현재 로그인한 아이디: {loginId}</p>
-                            <a href="/" onClick={handleLogoutClick}>로그아웃</a>
+                        <div className="action-bar-div">
+                        <p className="logged-in-user">{loginId} 님 연성옥션에 오신걸 환영합니다!</p>
+                            <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
                         </div>
                     )}
 

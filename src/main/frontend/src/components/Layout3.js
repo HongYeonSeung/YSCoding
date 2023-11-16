@@ -39,7 +39,7 @@ function Layout3() {
                                 <div className="product_mon">현재 입찰가 : ￦{product.startingPrice}</div>
                                 <div className="product_link_div">
                                     <Link to={`/product/${product.id}`} className="product_link">
-                                        상세보기
+                                        입찰하기
                                     </Link>
                                 </div>
                             </div>

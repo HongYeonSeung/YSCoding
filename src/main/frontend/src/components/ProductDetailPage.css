@@ -1,30 +1,20 @@
-.product-detail-container .background-container {
-    width: 100%;
-    height: 100px;
-    background-color: #1cc7ff; /* 상단 배경색 설정 */
-    position: relative;
-    z-index: 1; /* 다른 요소들보다 앞에 표시되도록 설정 */
-}
-
+/* ProductDetailPage.css */
 .product-detail-container {
     display: flex;
     justify-content: space-between;
     padding: 140px;
     position: relative;
-    z-index: 0; /* 기본값으로 설정 */
 }
 
 .product-detail-container::before {
-    content: ""; /* 가상 요소 생성 */
-    position: absolute; /* 절대 위치로 설정하여 이미지 위에 겹칩니다 */
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* 이미지와 동일한 너비 */
-    height: 100px; /* 원하는 높이 (상단에 배경색을 넣으려면 높이 조절) */
-    background-color: #1cc7ff; /* 배경색 설정 */
-}
+    width: 100%;
+    height: 100px;
 
-/* 나머지는 이전과 동일하게 유지 */
+}
 
 .product-detail-container .left-section {
     width: 50%;
@@ -36,42 +26,42 @@
 .product-detail-container .large-rectangle {
     width: 700px;
     height: 500px;
-    border: 3px solid #0056b3;
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: -70px;
+    border-radius: 10px; /* Added border-radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added box shadow for depth */
+
+    /* Gradient background for a subtle effect */
+    background: linear-gradient(to right, #61dafb, #1cc7ff);
+
+    /* Transition for a smooth hover effect */
+    transition: transform 0.3s ease-in-out;
 }
 
-.product-detail-container .large-rectangle img{
+.product-detail-container .large-rectangle img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* Added border-radius for rounded corners */
+}
+
+/* Hover effect to scale up the image slightly on hover */
+.product-detail-container .large-rectangle:hover {
+    transform: scale(1.05);
+}
+
+.product-detail-container .large-rectangle img {
     max-height: 500px;
     max-width: 95%;
-    object-fit: cover; /* 변경: 이미지 비율 유지하며 조절 */}
-
-.product-detail-container .product-image {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
-.product-detail-container .placeholder-text {
-    font-size: 14px;
-    color: #999;
-}
-
-.product-detail-container .image-upload-button {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    bottom: 10px;
-}
-
 .product-detail-container .right-section {
-    width: 45%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,17 +69,7 @@
 
 .product-detail-container .product-info {
     margin-bottom: 10px;
-    position: relative;
-}
-.product-detail-container .product-info::before {
-    content: "";
-    position: absolute;
-    top: 40%;
-    left: 0;
-    width: 300%;
-    height: 2px;
-    background-color: black;
-    z-index: -1; /* 선이 텍스트 뒤에 나타나도록 설정 */
+    padding-left: 20px; /* Adjusted: Added padding to create space between image and text */
 }
 
 .product-detail-container .product-info h2 {
@@ -102,20 +82,69 @@
     margin: 0;
     font-size: 18px;
 }
+
 .product-detail-container .button-container {
-    margin-left: -20px;
-    display: flex;
-    flex-direction: column;
+    margin-left: 20px; /* Adjusted: Reduced margin-left */
 }
 
 .product-detail-container .button-container button {
-    margin-bottom: 5px; /* 버튼 간격을 더 작은 값으로 조절 */
-}
-
-.product-detail-container .button-container button {
-    background-color: #1cc7ff;
-    color: #fff;
-    padding: 10px;
-    border: none;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.product-detail-container .button-container button.blue {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+.product-detail-container .button-container button.blue:hover {
+    background-color: #2980b9;
+}
+
+.right-section .product-info .list{
+    margin: 10px;
+}
+
+.product-detail-container .product-info .list {
+    font-size: 30px;
+    margin: 50px 0 0 0;
+    border-bottom: 3px solid #CCC; /* 밑줄 스타일과 색상을 조절할 수 있습니다. */
+    padding-bottom: 0px; /* 밑줄과 텍스트 간격을 조절할 수 있습니다. */
+}
+
+
+
+.product-detail-container .product-info .list:nth-child(2) {
+    font-size: 16px;
+    border: none;
+}
+
+
+.product-detail-container .product-info .list:nth-child(3) {
+    font-size: 16px;
+    width: 500px;
+    height: 200px;
+    background-color: white;
+    /*border: 3px solid #1cc7ff;*/
+    border: none;
+}
+.product-detail-container .product-info .list:nth-child(4) {
+    margin: 0 0 0 20%;
+    font-size: 40px;
+}
+
+
+.product-detail-container .product-info .list:last-child{
+    margin: 20px 0 30px 230px;
+    border-bottom: 3px solid red;
+    padding-bottom: 0px;
+    font-size: 25px;
 }
