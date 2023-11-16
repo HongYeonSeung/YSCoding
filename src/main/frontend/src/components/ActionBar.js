@@ -7,7 +7,7 @@ import { useUser } from './UserContext';
 
 function ActionBar() {
     const [time, setTime] = useState(new Date());
-    const { loginId } = useUser();
+    const { loginId } = useUser("");
 
     const handleLogoutClick = () => {
         // 로그아웃 버튼을 클릭했을 때
@@ -32,8 +32,8 @@ function ActionBar() {
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
-                        {loginId === "" && <Link to="/login">로그인</Link>}
-                        {loginId === "" &&  <Link to="/signup">회원가입</Link>}
+                        {loginId == "" && <Link to="/login">로그인</Link>}
+                        {loginId == "" &&  <Link to="/signup">회원가입</Link>}
 
                         <Link to="/myPage">마이페이지</Link>
                     </div>
