@@ -10,6 +10,7 @@ function ActionBar() {
     const [time, setTime] = useState(new Date());
     const { loginId } = useUser("");
 
+    const [point, setPoint ] = useState();
     const handleLogoutClick = () => {
         // 로그아웃 버튼을 클릭했을 때
         localStorage.setItem('loginId','');
@@ -21,11 +22,20 @@ function ActionBar() {
     };
 
     useEffect(() => {
+        axios.post('/api/point', { loginId })
+            .then(response => {
+                setPoint(response.data);
+                console.log(response.data,"리스폰데이터")
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        console.log(point)
         const id = setInterval(() => {
             setTime(new Date());
         }, 1000);
         return () => clearInterval(id);
-    }, []);
+    }, [loginId]);
 
     return (
         <div className="action-bar-main">
@@ -47,7 +57,11 @@ function ActionBar() {
                         <div className="action-bar-div">
                         <p className="logged-in-user">{loginId} 님 연성옥션에 오신걸 환영합니다!</p>
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
+                            <div>
+                                포인트 량 : {point}
+                            </div>
                         </div>
+
                     )}
 
                 </div>

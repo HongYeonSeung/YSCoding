@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -24,6 +25,18 @@ public class LoginService {
 
     public void getLogoutResultId() {
         loginResultId = null;
+    }
+
+    public int getPoint() {
+        if (loginResultId != null) {
+            Optional<Integer> userPoint = loginRepository.findPointByName(loginResultId);
+
+            // 만약 포인트를 찾을 수 있다면 해당 포인트를 반환, 찾을 수 없다면 기본값(여기서는 0) 반환
+            return userPoint.orElse(-1);
+        } else {
+            // 로그인되지 않은 상태에서는 -1 또는 다른 값을 반환하거나 예외 처리를 수행할 수 있습니다.
+            return -1;
+        }
     }
 
     public void setLoginResultId(String loginResultId) {
