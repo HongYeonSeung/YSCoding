@@ -35,11 +35,17 @@ const Login = () => {
             // 로그인 실패 시 처리
             // console.error('로그인 실패:', message);
             alert('로그인에 실패하였습니다'); // 백엔드에서의 실패 메시지를 사용하여 알림창을 띄웁니다.
-          } else {
+          }
+          else if (message == ''){
+            // 로그인 실패 시 처리
+            // console.error('로그인 실패:', message);
+            alert('로그인에 실패하였습니다'); // 백엔드에서의 실패
+          }
+          else {
             // 로그인 성공 시 처리
             // console.log('로그인 성공');
             setResponseData(response.data);
-            console.log(response.data)
+            console.log("로그인 결과",response.data)
             handleLogin(); // 로그인 후의 작업을 수행
 
           }

@@ -22,6 +22,10 @@ public class LoginService {
         return loginResultId;
     }
 
+    public void getLogoutResultId() {
+        loginResultId = null;
+    }
+
     public void setLoginResultId(String loginResultId) {
         this.loginResultId = loginResultId;
     }

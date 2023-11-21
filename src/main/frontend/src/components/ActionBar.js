@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './ActionBar.css';
 import { useState, useEffect } from 'react';
 import { useUser } from './UserContext';
+import axios from "axios";
 
 function ActionBar() {
     const [time, setTime] = useState(new Date());
@@ -12,6 +13,11 @@ function ActionBar() {
     const handleLogoutClick = () => {
         // 로그아웃 버튼을 클릭했을 때
         localStorage.setItem('loginId','');
+
+        axios.post('/api/logout')
+            .then()
+            .catch()
+
     };
 
     useEffect(() => {

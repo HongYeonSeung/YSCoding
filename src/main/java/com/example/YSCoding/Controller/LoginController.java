@@ -30,16 +30,19 @@ public class LoginController {
 
         System.out.println("받은 이름 데이터: " + memberName); // 이름을 로그로 출력
         System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
-
-        String result = loginService.LoginFind(memberName, memberPassword);
-
+        loginService.LoginFind(memberName, memberPassword);
         String resultId = loginService.getLoginResultId();
-
         System.out.println("로그인 결과: " + resultId);
 
 //        loginBox(result);
         return ResponseEntity.ok(resultId);
     }
+
+    @PostMapping("/logout") // "/api/submitData"로 매핑
+    public void logout(){
+        loginService.getLogoutResultId();
+    }
+
 
 
 }

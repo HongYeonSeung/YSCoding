@@ -49,7 +49,7 @@
 }
 
 .logged-in-user {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin: 20px;
     color: #000000;
 }
@@ -60,15 +60,18 @@
 }
 
 .action-bar-a {
+    background-color: #007bff;
     text-align: center;
     color: #ffffff;
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
 .action-bar-a:hover {
     background-color: #e74c3c;
+    color: black;
+
 }
