@@ -15,6 +15,7 @@ public class SignupDTO {
     private String name;
     private String birthdate;
     private String phoneNumber;
+    private int point = 0;
 
     @Override
     public String toString() {

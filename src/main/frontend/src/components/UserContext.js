@@ -4,24 +4,23 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const storedLoginId = localStorage.getItem('loginId');
-    const [loginId, setLoginId] = useState(storedLoginId || '');
+    const storedUserData = JSON.parse(localStorage.getItem('userData')) || { memberName: '', point: 0 };
+    const [userData, setUserData] = useState(storedUserData);
 
     const setResponseData = (data) => {
-        localStorage.setItem('loginId', data);
-        setLoginId(data);
+        localStorage.setItem('userData', JSON.stringify(data));
+        setUserData(data);
     };
 
     useEffect(() => {
-        // 예를 들어, 초기 로그인 상태를 설정하려면 여기서 작업할 수 있습니다.
-        // 예: storedLoginId 가 없을 경우, 초기 로그인 상태를 설정한다.
-        // if (!storedLoginId) {
-        //   setResponseData("initialLoginId");
-        // }
-    }, []); // 한 번만 실행되도록 []를 전달
+        // 초기 로그인 상태 설정
+        if (!storedUserData.memberName) {
+            setResponseData({ memberName: "initialLoginName", point: 0 });
+        }
+    }, []);
 
     return (
-        <UserContext.Provider value={{ loginId, setResponseData }}>
+        <UserContext.Provider value={{ userData, setResponseData }}>
             {children}
         </UserContext.Provider>
     );

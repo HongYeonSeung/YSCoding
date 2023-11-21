@@ -30,4 +30,7 @@ public class Signup {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "point")
+    private String point;
 }
