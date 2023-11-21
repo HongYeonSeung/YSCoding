@@ -63,7 +63,7 @@ const Login = () => {
 
   return (
       <UserProvider>
-        <div className='login_box' style={{ backgroundColor: '#007bff' }}>
+        <div className='login_box' style={{ backgroundColor: '#fff' }}>
           <div className='login_box_main'>
             <div className='login-box-white'>
               <form onSubmit={handleSubmit}>

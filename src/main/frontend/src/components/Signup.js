@@ -50,7 +50,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container" style={{ backgroundColor: '#007bff' }}>
+    <div className="signup-container" style={{ backgroundColor: '#fff' }}>
       <div className="signup-container">
       <div className="signup-box">
         <h2>회원가입</h2>

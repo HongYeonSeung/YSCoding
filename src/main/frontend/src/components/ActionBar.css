@@ -28,11 +28,12 @@
 .time {
     font-size: 1rem;
     margin-bottom: 5px; /* 변경: 시간과 로그인 아이디 간 여백 추가 */
-    color: #ffffff; /* 변경: 시간 글자색 변경 */
+    color: black; /* 변경: 시간 글자색 변경 */
 }
 
 .links {
     display: flex;
+    margin-top: 10px;
     align-items: center;
 }
 
