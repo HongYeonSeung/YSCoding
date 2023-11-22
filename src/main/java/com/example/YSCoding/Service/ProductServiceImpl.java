@@ -1,19 +1,16 @@
 package com.example.YSCoding.Service;
 
-
 import com.example.YSCoding.Dto.ProductDTO;
 import com.example.YSCoding.Entity.Product;
 import com.example.YSCoding.Repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,7 +19,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private FileStorageService fileStorageService;
-
 
     @Override
     public Product createProduct(ProductDTO productDTO) {
@@ -42,14 +38,12 @@ public class ProductServiceImpl implements ProductService {
         // 24시간을 더한 값을 설정
         calculateTimeAfter24Hours(product);
 
-
-
         return productRepository.save(product);
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
 

@@ -5,21 +5,27 @@ import { Link } from 'react-router-dom';
 
 function Layout3() {
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+    const [totalPages, setTotalPages] = useState(0); // 총 페이지 수를 저장하기 위한 상태 추가
 
     useEffect(() => {
-        // 서버로부터 상품 목록을 가져오는 함수
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('/api/products'); // 백엔드에서 상품 목록을 제공하는 API 엔드포인트
-                setProducts(response.data);
+                const response = await axios.get(`/api/products?page=${currentPage - 1}`);
+                setProducts(response.data.content);
+                setTotalPages(response.data.totalPages); // 총 페이지 수를 상태에 저장
             } catch (error) {
                 console.error('상품 목록을 불러오는 중 에러 발생:', error);
             }
         };
 
-        fetchProducts(); // 함수 호출
+        fetchProducts();
+    }, [currentPage]); // currentPage가 변경될 때마다 useEffect를 실행
 
-    }, []); // useEffect를 한 번만 실행하도록 빈 배열을 두 번째 인자로 전달
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
+
 
     return (
         <div className="layout3">
@@ -46,6 +52,11 @@ function Layout3() {
                         </div>
                     ))}
                 </div>
+                {[...Array(totalPages).keys()].map((page, index) => ( // totalPages 상태 사용
+                    <button key={index} onClick={() => handlePageChange(page + 1)}>
+                        {page + 1}
+                    </button>
+                ))}
             </div>
         </div>
     );

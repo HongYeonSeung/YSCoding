@@ -4,11 +4,13 @@ import com.example.YSCoding.Dto.ProductDTO;
 import com.example.YSCoding.Entity.Product;
 import com.example.YSCoding.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -31,9 +33,9 @@ public class ProductController {
 
     // 상품 목록 조회 API
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<Page<Product>> getAllProducts(@PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
-            List<Product> products = productService.getAllProducts();
+            Page<Product> products = productService.getAllProducts(pageable);
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             e.printStackTrace();
