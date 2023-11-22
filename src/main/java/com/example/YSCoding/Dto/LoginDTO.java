@@ -10,5 +10,5 @@ import lombok.*;
 public class LoginDTO {
     private String memberName;
     private String memberPassword;
-
+    private int point;  // 추가
 }

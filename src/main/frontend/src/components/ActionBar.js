@@ -8,17 +8,14 @@ import axios from "axios";
 
 function ActionBar() {
     const [time, setTime] = useState(new Date());
-    const { loginId } = useUser("");
+    const { userData, setResponseData } = useUser();
 
     const [point, setPoint ] = useState();
     const handleLogoutClick = () => {
-        // 로그아웃 버튼을 클릭했을 때
-        localStorage.setItem('loginId','');
-
+        localStorage.setItem('loginId', '');
         axios.post('/api/logout')
             .then()
-            .catch()
-
+            .catch();
     };
 
     useEffect(() => {
@@ -48,14 +45,13 @@ function ActionBar() {
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
-                        {loginId == "" && <Link to="/login">로그인</Link>}
-                        {loginId == "" &&  <Link to="/signup">회원가입</Link>}
-
+                        {userData.memberName === "" && <Link to="/login">로그인</Link>}
+                        {userData.memberName === "" && <Link to="/signup">회원가입</Link>}
                         <Link to="/myPage">마이페이지</Link>
                     </div>
-                    {loginId && (
+                    {userData.memberName && (
                         <div className="action-bar-div">
-                        <p className="logged-in-user">{loginId} 님 연성옥션에 오신걸 환영합니다!</p>
+                            <p className="logged-in-user">{userData.memberName} 님 연성옥션에 오신걸 환영합니다! 포인트: {userData.point}</p>
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
                             <div>
                                 포인트 량 : {point}
@@ -63,7 +59,6 @@ function ActionBar() {
                         </div>
 
                     )}
-
                 </div>
             </div>
         </div>

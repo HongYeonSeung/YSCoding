@@ -32,7 +32,6 @@ public class LoginController {
         System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
         loginService.LoginFind(memberName, memberPassword);
         String resultId = loginService.getLoginResultId();
-
         System.out.println("로그인 결과: " + resultId);
 
 //        loginBox(result);
@@ -42,12 +41,6 @@ public class LoginController {
     @PostMapping("/logout") // "/api/submitData"로 매핑
     public void logout(){
         loginService.getLogoutResultId();
-    }
-
-    @PostMapping("/point")
-    public ResponseEntity<Integer> point() {
-        int userPoint = loginService.getPoint();
-        return ResponseEntity.ok(userPoint);
     }
 
 

@@ -15,8 +15,18 @@ public class SignupDTO {
     private String name;
     private String birthdate;
     private String phoneNumber;
-    private int point;
 
+    @Override
+    public String toString() {
+        return "SignupData{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", birthdate='" + birthdate + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
     //    toString 없어도 됨 이건 서비스쪽 내용같은데
 
 }
