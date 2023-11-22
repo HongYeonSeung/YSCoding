@@ -23,22 +23,18 @@
     align-items: center;
 }
 
+
 .product-detail-container .large-rectangle {
-    width: 700px;
+    width: 100%; /* 수정: 가로폭을 100%로 조정 */
     height: 500px;
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: -70px;
-    border-radius: 10px; /* Added border-radius for rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added box shadow for depth */
-
-    /* Gradient background for a subtle effect */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background: linear-gradient(to right, #61dafb, #1cc7ff);
-
-    /* Transition for a smooth hover effect */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -114,11 +110,11 @@
     margin: 10px;
 }
 
-.product-detail-container .product-info .list {
+.right-section .product-info .list {
     font-size: 30px;
-    margin: 50px 0 0 0;
-    border-bottom: 3px solid #CCC; /* 밑줄 스타일과 색상을 조절할 수 있습니다. */
-    padding-bottom: 0px; /* 밑줄과 텍스트 간격을 조절할 수 있습니다. */
+    margin: 20px 0; /* 수정: 간격 조절 */
+    border-bottom: 3px solid #CCC;
+    padding-bottom: 10px; /* 수정: 간격 조절 */
 }
 
 
@@ -130,14 +126,22 @@
 
 
 .product-detail-container .product-info .list:nth-child(3) {
-    font-size: 16px;
-    width: 500px;
+    width: 100%; /* 수정: 너비 조절 */
     height: 200px;
     background-color: white;
-    /*border: 3px solid #1cc7ff;*/
     border: none;
 }
 .product-detail-container .product-info .list:nth-child(4) {
+    margin: 0 0 0 20%;
+    font-size: 40px;
+}
+
+.product-detail-container .product-info .list:nth-child(5) {
+    margin: 0 0 0 20%;
+    font-size: 40px;
+}
+
+.product-detail-container .product-info .list:nth-child(6) {
     margin: 0 0 0 20%;
     font-size: 40px;
 }
@@ -150,11 +154,7 @@
     font-size: 25px;
 }
 
-.right-section .product-detail-container-button-container .bidding_form{
-    display: block;
-    margin: auto;
-    align-items: end;
-}
+
 
 .bidding_form_input{
     width: 150px;
@@ -207,4 +207,12 @@
     border: none;
     border-radius: 5px;
     transition: background-color 0s ease-in-out, color 0s ease-in-out;
+}
+
+
+
+.right-section .product-detail-container-button-container .bidding_form{
+    display: block;
+    margin: auto;
+    align-items: end;
 }

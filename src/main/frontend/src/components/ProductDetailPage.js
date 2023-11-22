@@ -84,21 +84,31 @@ function ProductDetailPage() {
     };
 
     const handleConfirmation = () => {
-        // 여기서 진짜로 보내야 할 로직을 수행
-        console.log('입찰 금액:', bidAmount,loginId);
 
-        axios.post('/api/ProductBuy', { bidAmount, loginId })
+        // 모달 닫기
+        setConfirmationModalOpen(false);
+
+
+        // 여기서 진짜로 보내야 할 로직을 수행
+        console.log('입찰 금액:', bidAmount, loginId, params.id);
+        const data = {
+            bidAmount:bidAmount,
+            loginId:loginId
+        }
+
+        axios.post(`/api/ProductBuy/${params.id}`,data)
             .then(response => {
                 // 성공적으로 처리된 경우에 할 일
                 console.log('응답 데이터:', response.data);
             })
             .catch(error => {
                 // 에러가 발생한 경우에 할 일
-                console.error('에러 발생:', error);
+                alert(error.response.data)
             });
-        
-        // 모달 닫기
-        setConfirmationModalOpen(false);
+
+
+        window.location.reload();//새로고침
+
     };
 
     const handleCancelConfirmation = () => {
@@ -132,6 +142,7 @@ function ProductDetailPage() {
                     <div className="list">상품 설명 : {product.content}</div>
                     <div className="list">시작 입찰가: {product.startingPrice}원</div>
                     <div className="list">현재 입찰가: {product.currentPrice}원</div>
+                    <div className="list">최고 입찰자 : {product.buyId}</div>
                     <div className="list">남은 시간 : <CountdownTimer endTime={product.timeAfter24Hours} /></div>
                 </div>
                 <div className="product-detail-container-button-container">
