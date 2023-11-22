@@ -39,8 +39,9 @@ public class Product {
     private String loginId;
 
     //구매자
-    @Column(nullable = false)
+    @Column
     private String buyId;
+
 
     //물건 설명
     @Column(nullable = false)

@@ -11,4 +11,7 @@ public interface ProductService {
 
     Product getProductById(Long id);
 
+    void placeBid(Long productId, Double bidAmount, String bidderId);
+
+
 }

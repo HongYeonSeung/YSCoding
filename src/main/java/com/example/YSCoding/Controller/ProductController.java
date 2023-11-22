@@ -2,6 +2,7 @@ package com.example.YSCoding.Controller;
 
 import com.example.YSCoding.Dto.ProductDTO;
 import com.example.YSCoding.Entity.Product;
+import com.example.YSCoding.Exception.InsufficientPointsException;
 import com.example.YSCoding.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
@@ -52,6 +55,45 @@ public class ProductController {
             return ResponseEntity.ok(product);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    // 상품 구매 API
+    @PostMapping("/ProductBuy/{id}")
+    public ResponseEntity<String> buyProduct(@PathVariable Long id, @RequestBody Map<String, String> bidData) {
+        try {
+            String bidAmount = bidData.get("bidAmount");
+            String loginId = bidData.get("loginId");
+            double bidAmountValue = Double.valueOf(bidAmount);
+
+            // 해당 상품의 정보 조회
+            Product product = productService.getProductById(id);
+
+            // 판매자와 입찰자의 아이디가 동일한 경우
+            if (product.getLoginId().equals(loginId)) {
+                return ResponseEntity.badRequest().body("자신이 등록한 상품에는 입찰할 수 없습니다.");
+            }
+
+            // 현재 입찰가보다 입찰금액이 적을 경우
+            if (bidAmountValue <= product.getCurrentPrice()) {
+                return ResponseEntity.badRequest().body("현재 입찰가보다 입찰할려는 금액이 작습니다");
+            }
+
+            // 상품 정보를 활용하여 필요한 처리 수행
+            System.out.println("상품 ID: " + product.getId());
+            System.out.println("상품 판매자 ID: " + product.getLoginId());
+            System.out.println("입찰 가격: " + bidAmount);
+            System.out.println("입찰자 ID: " + loginId);
+
+            productService.placeBid(id, bidAmountValue, loginId);
+
+            return ResponseEntity.ok("상품 구매가 성공적으로 완료되었습니다.");
+        } catch (InsufficientPointsException e) {
+            // 구매자의 포인트가 부족한 경우
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품 구매에 실패했습니다.");
         }
     }
 

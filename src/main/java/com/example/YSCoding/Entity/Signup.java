@@ -1,6 +1,7 @@
 package com.example.YSCoding.Entity;
 
 
+import com.example.YSCoding.Exception.InsufficientPointsException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,4 +34,12 @@ public class Signup {
 
     @Column(name = "point")
     private int point=1000;
+
+    public void deductPoints(double amount) {
+        if (this.point >= amount) {
+            this.point -= amount;
+        } else {
+            throw new InsufficientPointsException("포인트가 부족합니다.");
+        }
+    }
 }

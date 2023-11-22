@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ActionBar() {
     const [time, setTime] = useState(new Date());
-    const { loginId } = useUser("");
+    const { loginId } = useUser();
 
     const [point, setPoint ] = useState();
     const handleLogoutClick = () => {
@@ -42,7 +42,7 @@ function ActionBar() {
             <div className="action-bar">
                 <div className="logo">
                     <Link to="/">
-                        <img src="/logo3.png" alt="Logo" style={{ borderRadius: '20px' }} />
+                        <img src="/logo3.png" alt="Logo" style={{ margin: '10px 0 0 20px' }} />
                     </Link>
                 </div>
                 <div className="right-section">
