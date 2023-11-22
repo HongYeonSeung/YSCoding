@@ -42,7 +42,7 @@ function ActionBar() {
             <div className="action-bar">
                 <div className="logo">
                     <Link to="/">
-                        <img src="/logo3.png" alt="Logo" />
+                        <img src="/logo3.png" alt="Logo" style={{ borderRadius: '20px' }} />
                     </Link>
                 </div>
                 <div className="right-section">
