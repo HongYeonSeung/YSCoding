@@ -34,9 +34,11 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productDTO.getProductName());
         product.setCategory(productDTO.getCategory());
         product.setStartingPrice(productDTO.getStartingPrice());
+        product.setCurrentPrice(productDTO.getStartingPrice());//시작입찰가와 현재입찰가는 시작이 동일하기 떄문에 값을 시작가로 받아옴 
         product.setRegistrationTime(productDTO.getRegistrationTime());
         product.setContent(productDTO.getContent());
         product.setImagePath(imageName);
+        product.setBuyId(productDTO.getBuyId());
         product.setLoginId(productDTO.getLoginId());
 
         // 24시간을 더한 값을 설정

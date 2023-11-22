@@ -48,18 +48,16 @@ function ActionBar() {
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
-                        {loginId == "" && <Link to="/login">로그인</Link>}
-                        {loginId == "" &&  <Link to="/signup">회원가입</Link>}
-
-                        <Link to="/myPage">마이페이지</Link>
+                        {loginId === "" && <Link to="/login">로그인</Link>}
+                        {loginId === "" &&  <Link to="/signup">회원가입</Link>}
+                        {loginId !== "" && <Link to="/myPage">마이페이지</Link>}
+                        {loginId !== "" && <div className="pointClass">보유 포인트 : {point}</div>}
                     </div>
                     {loginId && (
                         <div className="action-bar-div">
                         <p className="logged-in-user">{loginId} 님 연성옥션에 오신걸 환영합니다!</p>
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
-                            <div>
-                                포인트 량 : {point}
-                            </div>
+
                         </div>
 
                     )}

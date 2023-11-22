@@ -55,8 +55,6 @@ public class LoginService {
 
             }
         }
-
-
         return "-1"; // 해당 아이디를 찾을 수 없거나 패스워드가 일치하지 않음
     }
 }

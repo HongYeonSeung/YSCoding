@@ -36,7 +36,8 @@ function Layout3() {
                                 </div>
                                 <p className="product_title"> {product.productName}</p>
                                 <p className="product_des">{product.content}</p>
-                                <div className="product_mon">현재 입찰가 : ￦{product.startingPrice}</div>
+                                <div className="product_mon">시작 입찰가 : ￦{product.startingPrice}</div>
+                                <div className="product_mon2">현재 입찰가 : ￦{product.currentPrice}</div>
                                 <div className="product_link_div">
                                     <Link to={`/product/${product.id}`} className="product_link">
                                         입찰하기

@@ -13,6 +13,7 @@ import ProductPage from "./components/ProductPage";
 import ProductCreate from "./components/ProductCreate";
 import MyPage from "./components/MyPage";
 import ProductDetailPage from "./components/ProductDetailPage";
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
@@ -34,14 +35,13 @@ const App = () => {
               <Route path="/" element={<Layout />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/myPage" element={<MyPage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path='*' element={<div className='error'>에러 페이지</div>} />
               <Route path="/category1" component={ProductPage} />
               <Route path="/" component={Layout2} />
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
-
+              <Route path="/myPage" element={<MyPage />} />
             </Routes>
 
           <hr></hr>

@@ -1,5 +1,6 @@
 /* src/components/SearchBar.css */
 .search-bar-container {
+
   display: flex;
   align-items: center;
   width: 500px;
@@ -12,9 +13,13 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 5px;
+  font-family: "Maplestory Bold", sans-serif;
+  font-size: 1rem;
 }
 
 .search-bar-button {
+  font-family: "Maplestory Bold", sans-serif;
+  font-size: 1rem;
   padding: 10px;
   background-color: #007bff;
   color: white;

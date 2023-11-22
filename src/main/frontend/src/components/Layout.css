@@ -51,6 +51,8 @@
     color: white;
   }
   .register-button {
+    font-family: "Maplestory Bold", sans-serif;
+    font-size: 1rem;
     margin-left: 10px; /* 검색창에서 오른쪽으로 일정한 간격을 둡니다. */
     padding: 10px 20px; /* 버튼 내부 여백 설정 (원하는 크기로 조절) */
     background-color: #1cc7ff; /* 배경색 (원하는 색상으로 변경 가능) */

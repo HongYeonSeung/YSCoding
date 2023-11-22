@@ -22,6 +22,10 @@ public class Product {
     @Column(nullable = false)
     private double startingPrice;
 
+    //현재가격
+    @Column(nullable = false)
+    private double currentPrice;
+
     //이미지 파일이름 
     @Column(nullable = false)
     private String imagePath;
@@ -33,6 +37,10 @@ public class Product {
     //등록자
     @Column(nullable = false)
     private String loginId;
+
+    //구매자
+    @Column(nullable = false)
+    private String buyId;
 
     //물건 설명
     @Column(nullable = false)
