@@ -97,16 +97,16 @@ public class ProductServiceImpl implements ProductService {
 
             // 이전 입찰자 포인트 롤백
             Signup previousBidder = signupRepository.findByUsername(previousBidderId);
-            if (previousBidder != null) {
-                int previousBidAmountInt = (int) previousBidAmount; // double을 int로 변환
-                previousBidder.setPoint(previousBidder.getPoint() + previousBidAmountInt);
-                signupRepository.save(previousBidder);
-            }
+            int previousBidAmountInt = (int) previousBidAmount; // double을 int로 변환
+            previousBidder.setPoint(previousBidder.getPoint() + previousBidAmountInt);
+            signupRepository.save(previousBidder);
+
             // 엔티티 저장
             productRepository.save(product);
         } else {
             throw new InsufficientPointsException("구매자의 포인트가 부족합니다.");
         }
+
     }
 
     // 구매자의 포인트를 확인하는 메서드

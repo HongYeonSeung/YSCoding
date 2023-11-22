@@ -70,12 +70,16 @@ function ProductDetailPage() {
     const handleBidClick = (event) => {
         event.preventDefault();
 
-        if (loginId !== null) {
-            alert("로그인 후 입찰해 주세요.");
-        } else {
-            // 모달 열기
-            setConfirmationModalOpen(true);
-        }
+
+        // 여기서 bidAmount 변수에 입력된 값이 있습니다.
+
+
+        // 모달 열기
+        setConfirmationModalOpen(true);
+
+        // 추가로 할 일을 여기에 작성하십시오.
+
+
 
     };
 
@@ -124,14 +128,6 @@ function ProductDetailPage() {
         }
     };
 
-    //가격에 콤마 붙히기 1,000,000원 이런식으로
-    const formatCurrency = (amount) => {
-        if (amount != null) {
-            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
-        return '';
-    };
-
     return (
         <div className="product-detail-container">
             <div className="left-section">
@@ -141,13 +137,12 @@ function ProductDetailPage() {
             </div>
             <div className="right-section">
                 <div className="product-info">
-                    <div className="category_text_list">카테고리 > {product.category}</div>
                     <h2>상품 이름: {product.productName}</h2>
                     <div className="list">판매자 ID : {product.loginId}</div>
                     <div className="list">상품 설명 : {product.content}</div>
-                    <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
-                    <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
-                    <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>
+                    <div className="list">시작 입찰가: {product.startingPrice}원</div>
+                    <div className="list">현재 입찰가: {product.currentPrice}원</div>
+                    <div className="list">최고 입찰자 : {product.buyId}</div>
                     <div className="list">남은 시간 : <CountdownTimer endTime={product.timeAfter24Hours} /></div>
                 </div>
                 <div className="product-detail-container-button-container">
