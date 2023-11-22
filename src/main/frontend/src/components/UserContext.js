@@ -5,12 +5,10 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const storedLoginId = localStorage.getItem('loginId');
-
     const [loginId, setLoginId] = useState(storedLoginId || '');
 
     const setResponseData = (data) => {
         localStorage.setItem('loginId', data);
-
         setLoginId(data);
     };
 
