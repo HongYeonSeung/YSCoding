@@ -113,45 +113,45 @@
 .right-section .product-info .list {
     font-size: 30px;
     margin: 20px 0; /* 수정: 간격 조절 */
-    border-bottom: 3px solid #CCC;
+    /*border-bottom: 3px solid #CCC;*/
     padding-bottom: 10px; /* 수정: 간격 조절 */
 }
 
 
+.product-detail-container .product-info .category_text_list {
+    font-size: 16px;
+    color: #CCC;
+    margin-bottom:10px ;
+}
 
-.product-detail-container .product-info .list:nth-child(2) {
+.product-detail-container .product-info .list:nth-child(3) {
     font-size: 16px;
     border: none;
 }
 
 
-.product-detail-container .product-info .list:nth-child(3) {
+.product-detail-container .product-info .list:nth-child(4) {
     width: 100%; /* 수정: 너비 조절 */
     height: 200px;
     background-color: white;
     border: none;
+    font-size: 18px;
 }
-.product-detail-container .product-info .list:nth-child(4) {
-    margin: 0 0 0 20%;
-    font-size: 40px;
+.right-section .product-info .list:nth-child(5),
+.right-section .product-info .list:nth-child(6),
+.right-section .product-info .list:nth-child(7),
+.right-section .product-info .list:nth-child(8) {
+    margin: 0 0 10px 0;
+    font-size: 30px;
+    text-align: end;
 }
-
-.product-detail-container .product-info .list:nth-child(5) {
-    margin: 0 0 0 20%;
-    font-size: 40px;
-}
-
-.product-detail-container .product-info .list:nth-child(6) {
-    margin: 0 0 0 20%;
-    font-size: 40px;
-}
-
 
 .product-detail-container .product-info .list:last-child{
-    margin: 20px 0 30px 230px;
-    border-bottom: 3px solid red;
-    padding-bottom: 0px;
-    font-size: 25px;
+    /*!*border-bottom: 3px solid red;*!*/
+    /*padding-bottom: 0px;*/
+    /*font-size: 25px;*/
+    /*text-align: end;*/
+    color: red;
 }
 
 
