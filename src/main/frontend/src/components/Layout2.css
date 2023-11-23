@@ -10,7 +10,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  
   .button {
     width: 50px;
     height: 50px;
@@ -25,4 +24,8 @@
   .category-text {
     font-size: 30px; /* 원하는 크기로 조절 */
   }
-  
+
+  .round-button img{
+    width: 130px;
+    height: 130px;
+  }
