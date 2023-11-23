@@ -19,6 +19,7 @@ function Layout() {
               {loginId !== "" &&<button className="register-button">물품등록</button>} {/* 물품등록 버튼 추가 */}
           </Link>
       </div>
+
        {/* 물품등록 버튼을 원하는 위치에 스타일로 배치 가능 */}
       <Layout1 /> {/* Layout1 컴포넌트를 추가합니다. */}
       <Layout2 /> {/* Layout2 컴포넌트도 추가합니다. */}
