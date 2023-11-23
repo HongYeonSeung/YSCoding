@@ -27,6 +27,20 @@ function Layout3() {
     };
 
 
+    //상품설명 글자제한 밑 ... 붙히기
+    const truncateDescription = (description, maxLength) => {
+        if (description.length > maxLength) {
+            return `${description.substring(0, maxLength)}...`;
+        }
+        return description;
+    };
+
+    //가격에 콤마 붙히기 1,000,000원 이런식으로
+    const formatCurrency = (amount) => {
+        return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+
+
     return (
         <div className="layout3">
             <div className="popular-products">
@@ -41,9 +55,9 @@ function Layout3() {
                                     <img src={`/api/images/${product.imagePath}`} className="product_img" alt={product.productName}/>
                                 </div>
                                 <p className="product_title"> {product.productName}</p>
-                                <p className="product_des">{product.content}</p>
-                                <div className="product_mon">시작 입찰가 : ￦{product.startingPrice}</div>
-                                <div className="product_mon2">현재 입찰가 : ￦{product.currentPrice}</div>
+                                <p className="product_des">{truncateDescription(product.content, 30)}</p>
+                                <div className="product_mon">시작 입찰가 : {formatCurrency(product.startingPrice)}원</div>
+                                <div className="product_mon2">현재 입찰가 : {formatCurrency(product.currentPrice)}원</div>
                                 <div className="product_link_div">
                                     <Link to={`/product/${product.id}`} className="product_link">
                                         입찰하기

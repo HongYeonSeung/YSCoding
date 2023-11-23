@@ -19,6 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* 변경: 가운데 정렬 */
+
 }
 
 .product {
@@ -40,7 +41,7 @@
     max-width: 90%;
     border-radius: 20px;
     object-fit: cover; /* 변경: 이미지 비율 유지하며 조절 */
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .product_content {
@@ -48,14 +49,16 @@
 }
 
 .product_title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 8px;
 }
 
 .product_des {
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    align-items: center;
+    text-align: center;
+    margin: 0 20px 10px 20px;
 }
 
 .product_mon {

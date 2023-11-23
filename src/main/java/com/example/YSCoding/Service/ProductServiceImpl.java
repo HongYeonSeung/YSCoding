@@ -3,11 +3,15 @@ package com.example.YSCoding.Service;
 
 import com.example.YSCoding.Dto.ProductDTO;
 import com.example.YSCoding.Entity.Product;
+import com.example.YSCoding.Entity.Signup;
+import com.example.YSCoding.Exception.InsufficientPointsException;
 import com.example.YSCoding.Repository.ProductRepository;
+import com.example.YSCoding.Repository.SignupRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +24,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private FileStorageService fileStorageService;
+
+
+    @Autowired
+    private SignupRepository signupRepository;  // SignupRepository 주입
+
+    @Autowired
+    private PointDeductionService pointDeductionService;
 
 
     @Override
@@ -66,4 +77,43 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    @Override
+    public void placeBid(Long productId, Double bidAmount, String bidderId) {
+        // 여기에 입찰과 관련된 비즈니스 로직을 구현
+        Product product = getProductById(productId);
+
+        // 예를 들어, 현재 입찰가를 업데이트하고 입찰자 아이디를 설정하는 등의 로직을 수행
+        double previousBidAmount = product.getCurrentPrice(); // 현재 입찰가를 저장
+        String previousBidderId = product.getBuyId(); // 현재 입찰자를 저장
+
+        product.setCurrentPrice(bidAmount);
+        product.setBuyId(bidderId);
+
+        // 구매자의 포인트 확인
+        boolean hasEnoughPoints = checkBuyerPoints(bidderId, bidAmount);
+        if (hasEnoughPoints) {
+            //구매자 포인트 차감
+            pointDeductionService.deductPoints(bidderId, bidAmount);
+
+            // 이전 입찰자 포인트 롤백
+            Signup previousBidder = signupRepository.findByUsername(previousBidderId);
+            if (previousBidder != null) {
+                int previousBidAmountInt = (int) previousBidAmount; // double을 int로 변환
+                previousBidder.setPoint(previousBidder.getPoint() + previousBidAmountInt);
+                signupRepository.save(previousBidder);
+            }
+            // 엔티티 저장
+            productRepository.save(product);
+        } else {
+            throw new InsufficientPointsException("구매자의 포인트가 부족합니다.");
+        }
+    }
+
+    // 구매자의 포인트를 확인하는 메서드
+    private boolean checkBuyerPoints(String buyerId, Double bidAmount) {
+        Signup buyer = signupRepository.findByUsername(buyerId);
+
+        // 구매자의 포인트가 입찰 금액보다 크거나 같은지 확인
+        return buyer != null && buyer.getPoint() >= bidAmount;
+    }
 }
