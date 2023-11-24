@@ -92,18 +92,19 @@ function ProductDetailPage() {
             loginId:loginId
         }
 
-        axios.post(`/api/ProductBuy/${params.id}`,data)
+        axios.post(`/api/ProductBuy/${params.id}`, data)
             .then(response => {
                 // 성공적으로 처리된 경우에 할 일
                 console.log('응답 데이터:', response.data);
             })
             .catch(error => {
                 // 에러가 발생한 경우에 할 일
-                alert(error.response.data)
+                alert(error.response.data);
+            })
+            .finally(() => {
+                // 새로고침
+                window.location.reload();
             });
-
-
-        window.location.reload();//새로고침
 
     };
 
