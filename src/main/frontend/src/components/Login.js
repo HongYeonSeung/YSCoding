@@ -44,7 +44,7 @@ const Login = () => {
           else {
             // 로그인 성공 시 처리
             // console.log('로그인 성공');
-            setResponseData(response.data);
+              setResponseData({ loginId: response.data.name, username: response.data.username });
             console.log("로그인 결과",response.data)
             handleLogin(); // 로그인 후의 작업을 수행
 

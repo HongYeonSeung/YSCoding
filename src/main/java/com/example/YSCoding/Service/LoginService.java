@@ -6,7 +6,9 @@ import com.example.YSCoding.Repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -44,17 +46,17 @@ public class LoginService {
     }
 
 
-    public String LoginFind(String username, String password) {
+    public Map<String, String> LoginFind(String username, String password) {
         List<Signup> usersWithSameUsername = loginRepository.findAllByUsername(username);
 
         for (Signup user : usersWithSameUsername) {
             if (user.getPassword().equals(password)) {
-                setLoginResultId(user.getName());
-                System.out.println(getLoginResultId());
-                return user.getName(); // 로그인 성공시 아이디 리턴
-
+                Map<String, String> result = new HashMap<>();
+                result.put("username", user.getUsername());
+                result.put("name", user.getName());
+                return result;  // 로그인 성공시 아이디와 이름을 모두 리턴
             }
         }
-        return "-1"; // 해당 아이디를 찾을 수 없거나 패스워드가 일치하지 않음
+        return null;  // 해당 아이디를 찾을 수 없거나 패스워드가 일치하지 않음
     }
 }

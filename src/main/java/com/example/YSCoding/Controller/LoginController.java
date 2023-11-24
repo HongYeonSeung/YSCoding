@@ -24,23 +24,29 @@ public class LoginController {
     }
 
     @PostMapping("/login") // "/api/submitData"로 매핑
-    public ResponseEntity<String> login(@RequestBody Map<String, String> requestData) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> requestData) {
         String memberName = requestData.get("memberName"); // 이름 추출
         String memberPassword = requestData.get("memberPassword");
 
         System.out.println("받은 이름 데이터: " + memberName); // 이름을 로그로 출력
         System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
-        loginService.LoginFind(memberName, memberPassword);
-        String resultId = loginService.getLoginResultId();
+        Map<String, String> result = loginService.LoginFind(memberName, memberPassword);
+        String resultId = result.get("name");
+
         System.out.println("로그인 결과: " + resultId);
 
-//        loginBox(result);
-        return ResponseEntity.ok(resultId);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/logout") // "/api/submitData"로 매핑
     public void logout(){
         loginService.getLogoutResultId();
+    }
+
+    @PostMapping("/point")
+    public ResponseEntity<Integer> point() {
+        int userPoint = loginService.getPoint();
+        return ResponseEntity.ok(userPoint);
     }
 
 
