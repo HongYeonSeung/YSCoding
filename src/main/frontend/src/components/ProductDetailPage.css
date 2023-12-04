@@ -56,16 +56,18 @@
     object-fit: cover;
 }
 .product-detail-container .right-section {
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center; /* 내용물을 가로 중앙에 정렬합니다. */
+    align-items: start; /* 내용물을 가로 중앙에 정렬합니다. */
 }
 
 .product-detail-container .product-info {
+    width: 90%;
+    height: 100%;
     margin-bottom: 10px;
-    padding-left: 20px; /* Adjusted: Added padding to create space between image and text */
+    padding-left: 80px;
 }
 
 .product-detail-container .product-info h2 {

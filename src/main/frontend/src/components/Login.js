@@ -7,12 +7,15 @@ import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 �
 const Login = () => {
   const { loginId } = useUser();
 
+  const [token, setToken] = useState('');
   const navigate = useNavigate();
   const { setResponseData } = useUser();
   const [data, setData] = useState({
     memberName: '',
     memberPassword: '',
   });
+
+
 
     const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -56,8 +59,18 @@ const Login = () => {
         });
   };
 
-  const handleLogin = () => {
-    // 로그인 로직을 구현합니다. 예를 들어, API 호출 또는 상태 관리와 같은 작업을 수행합니다.
+    // 로그인 후 작업을 수행 and 토큰 생성 요청
+  const handleLogin = async () => {
+      console.log(data.memberName); //id임 이름아님
+      try {
+          const response = await axios.get(`/api/generateToken/${data.memberName}`);
+
+          // 토큰 저장 (예: localStorage에 저장)
+          localStorage.setItem('token', response.data);
+          console.log(localStorage.getItem('token'))
+      } catch (error) {
+          console.error('Error generating token:', error);
+      }
     navigate('/');
   };
 

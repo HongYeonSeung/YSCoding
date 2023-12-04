@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import './Signup.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import DaumPostcode from "react-daum-postcode"; //추가
+import PopupDom from './PopupDom';
+import PopupPostCode from './PopupPostCode';
+
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -9,14 +13,32 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState(''); // 아이디 필드 추가
   const [name, setName] = useState('');
+  const [daumMap, setDaumMap] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [error, setError] = useState('');
 
 
+  // 팝업창 상태 관리
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
+  // 팝업창 열기
+  const openPostCode = () => {
+    setIsPopupOpen(true)
+  }
+
+  // 팝업창 닫기
+  const closePostCode = () => {
+    setIsPopupOpen(false)
+  }
+
+
   const navigate = useNavigate();
 
+  const completeHandler = (data:any) =>{
+    console.log(data);
+  }
   const handleSignup = () => {
     if (password === confirmPassword) {
       // 비밀번호가 일치할 때 회원가입 로직을 구현하거나 API 호출을 수행합니다.
@@ -27,6 +49,7 @@ const Signup = () => {
         name,
         birthdate,
         phoneNumber,
+        daumMap,
       };
 
 
@@ -118,6 +141,29 @@ const Signup = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
+          </div>
+          <div>
+            <label htmlFor="daumMap">주소</label>
+            <input
+                type="text"  // 타입을 text로 설정
+                id="daumMap"
+                value={daumMap}
+                onChange={(e) => setDaumMap(e.target.value)}
+                disabled  // 비활성화 속성 추가
+            />
+          </div>
+          <button type='button' onClick={openPostCode}>우편번호 검색</button>
+          <div id='popupDom'>
+            {isPopupOpen && (
+                <PopupDom>
+                  <PopupPostCode onClose={closePostCode} />
+                </PopupDom>
+            )}
+          </div>
+
+
+          <div>
+
           </div>
           <button type="button" onClick={handleSignup}>
             회원가입

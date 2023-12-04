@@ -70,7 +70,7 @@ function ProductDetailPage() {
     const handleBidClick = (event) => {
         event.preventDefault();
 
-        if (loginId !== null) {
+        if (loginId == null) {
             alert("로그인 후 입찰해 주세요.");
         } else {
             // 모달 열기

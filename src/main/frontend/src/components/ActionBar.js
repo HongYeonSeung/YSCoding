@@ -57,9 +57,7 @@ function ActionBar() {
                         <div className="action-bar-div">
                         <p className="logged-in-user">{loginId} 님 연성옥션에 오신걸 환영합니다!</p>
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
-
                         </div>
-
                     )}
 
                 </div>
