@@ -5,6 +5,7 @@ import com.example.YSCoding.Entity.Signup;
 import com.example.YSCoding.Repository.SignupRepository;
 import com.example.YSCoding.Service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,13 +25,12 @@ public class SignupController {
 
     @PostMapping("/signupData")
     public ResponseEntity<String> submitData(@RequestBody Signup data) {
-        // 여기에서 SignupData 객체를 사용하여 데이터 처리를 수행하고 데이터베이스에 저장할 수 있습니다.
-        // 데이터 처리 예시 - 로그로 출력
-        System.out.println("받은 데이터: " + data);
-
-        signupService.saveSignup(data); // 데이터베이스에 저장
-
-        // 데이터 처리가 성공하면 성공 응답 반환
-        return ResponseEntity.ok("데이터를 성공적으로 받았습니다.");
+        try {
+            String resultMessage = signupService.saveSignup(data);
+            return ResponseEntity.ok(resultMessage);
+        } catch (Exception e) {
+            // 예외가 발생한 경우 에러 응답 반환
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
     }
 }

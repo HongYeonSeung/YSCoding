@@ -13,8 +13,28 @@ public class SignupService {
     public SignupService(SignupRepository signupRepository) {
         this.signupRepository = signupRepository;
     }
+    public String saveSignup(Signup signup) {
+        if (!isUsernameAvailable(signup.getUsername())) {
+            System.out.println("에러4");
 
-    public void saveSignup(Signup signup) {
-        signupRepository.save(signup);
+            return "이미 존재하는 사용자명입니다.";
+        } else if (!isEmailAvailable(signup.getEmail())) {
+            System.out.println("에러3");
+
+            return "이미 존재하는 이메일입니다.";
+        } else {
+            signupRepository.save(signup);
+            System.out.println(signup.getUsername()+"에러2");
+
+            return "회원가입이 성공적으로 완료되었습니다.";
+        }
+    }
+
+    private boolean isUsernameAvailable(String username) {
+        return signupRepository.findByUsername(username) == null;
+    }
+
+    private boolean isEmailAvailable(String email) {
+        return signupRepository.findByEmail(email) == null;
     }
 }

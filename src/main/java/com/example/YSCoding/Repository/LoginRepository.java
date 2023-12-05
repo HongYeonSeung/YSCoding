@@ -12,7 +12,6 @@ public interface LoginRepository extends JpaRepository<Signup, Long> {
     List<Signup> findAllByUsername(String username);
 
     // 예시: 사용자 아이디로 포인트를 찾는 메서드
-    @Query("SELECT u.point FROM Signup u WHERE u.name = :name")
-    Optional<Integer> findPointByName(@Param("name") String name);
-
+    @Query("SELECT u.point FROM Signup u WHERE u.username = :username")
+    Optional<Integer> findPointByUsername(@Param("username") String username);
 }
