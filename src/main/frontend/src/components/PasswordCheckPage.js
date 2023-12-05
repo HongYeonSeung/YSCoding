@@ -1,13 +1,40 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import React, { useState, useEffect } from 'react';
+>>>>>>> c4c0d55 (내정보 업데이트까지 완료. 비밀번호 변경 만들기 전)
 import axios from 'axios';
 import { useUser } from './UserContext'; // UserContext를 import
 import EditProfilePage from './EditProfilePage'; // EditProfilePage를 import
 
 const PasswordCheckPage = () => {
+<<<<<<< HEAD
     const { username } = useUser(); // 로그인된 사용자의 ID를 불러옴
     const [password, setPassword] = useState(''); // 비밀번호를 state로 관리
     const [showEditProfile, setShowEditProfile] = useState(false); // EditProfilePage를 표시할지 결정하는 state
 
+=======
+    const [token, setToken] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+    const [username, setUsername] = useState(''); // 사용자 이름을 state로 관리
+    const [password, setPassword] = useState(''); // 비밀번호를 state로 관리
+    const [showEditProfile, setShowEditProfile] = useState(false); // EditProfilePage를 표시할지 결정하는 state
+
+    // 토큰으로 아이디 검증
+    useEffect(() => {
+        const fetchUsername = async () => {
+            try {
+                const response = await axios.get(`api/getUsernameFromToken/${token}`);
+                setUsername(response.data);
+                console.log("ddddddddd" , response.data);
+            } catch (error) {
+                console.error('토큰 생성 중 오류 발생:', error);
+            }
+        };
+
+        fetchUsername();
+    }, [token]);
+
+>>>>>>> c4c0d55 (내정보 업데이트까지 완료. 비밀번호 변경 만들기 전)
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -24,9 +51,15 @@ const PasswordCheckPage = () => {
 
     return (
         <div>
+<<<<<<< HEAD
             <h2>비밀번호 확인</h2>
             {!showEditProfile ? ( // showEditProfile가 false이면 비밀번호 확인 폼을 표시
                 <form onSubmit={handleSubmit}>
+=======
+            {!showEditProfile ? ( // showEditProfile가 false이면 비밀번호 확인 폼을 표시
+                <form onSubmit={handleSubmit}>
+                    <h2>비밀번호 확인</h2>
+>>>>>>> c4c0d55 (내정보 업데이트까지 완료. 비밀번호 변경 만들기 전)
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit">확인</button>
                 </form>

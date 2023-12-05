@@ -13,8 +13,8 @@ import java.nio.file.StandardCopyOption;
 public class FileStorageService {
 
     //홍연승 C:\Users\fover\Desktop\YSCoding\src\main\java\com\example\YSCoding\img
-    // 최영 D:\\YSCoding-master\\image
-    private String uploadDir = "C:\\Users\\fover\\Desktop\\YSCoding\\src\\main\\java\\com\\example\\YSCoding\\img"; // 실제 파일을 저장할 경로
+    // 최영 C:\Users\choiy\Desktop\YSCoding\src\main\java\com\example\YSCoding\img
+    private String uploadDir = "C:\\Users\\choiy\\Desktop\\YSCoding\\src\\main\\java\\com\\example\\YSCoding\\img"; // 실제 파일을 저장할 경로
 
     public String saveImage(MultipartFile file) {
         try {

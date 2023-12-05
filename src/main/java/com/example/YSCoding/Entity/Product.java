@@ -41,8 +41,7 @@ public class Product {
     //구매자
     @Column
     private String buyId;
-
-
+    
     //물건 설명
     @Column(nullable = false)
     private String content;

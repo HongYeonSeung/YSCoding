@@ -1,50 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-import  './MyPage.css';
-import axios from "axios";
+import './MyPage.css';
+import PasswordCheckPage from './PasswordCheckPage'; // PasswordCheckPage를 import
+import EditProfilePage from './EditProfilePage'; // EditProfilePage를 import
 
 const MyPage = () => {
-    const [token, setToken] = useState('');
-    const [data, setData] = useState('');
-    const username = "test";
+    const [showEditProfile, setShowEditProfile] = useState(false); // EditProfilePage를 표시할지 결정하는 state
 
-
-    // 토큰으로 아이디 검증
-    const generateToken = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get(`api/getUsernameFromToken/${token}`);
-            console.log(response.data);
-        } catch (error) {
-            console.error('토큰 생성 중 오류 발생:', error);
-        }
+    const handlePasswordCheckSuccess = () => {
+        setShowEditProfile(true); // 비밀번호 확인이 성공하면 EditProfilePage를 표시
     };
 
-
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get('/someProtectedEndpoint', {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             });
-    //             setData(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //         }
-    //     };
-    //
-    //     fetchData();
-    // }, [token]);
-
     return (
-        <div>
-            <button onClick={generateToken}>Generate Token</button>
-            {/*<p>Token: {token}</p>*/}
-            {/*<p>Data: {data}</p>*/}
-
+        <div className="myPage_main">
+            <h1>마이페이지</h1>
+            {!showEditProfile ? ( // showEditProfile가 false이면 PasswordCheckPage를 표시
+                <PasswordCheckPage onSuccess={handlePasswordCheckSuccess} /> // 비밀번호 확인이 성공하면 handlePasswordCheckSuccess 함수를 호출
+            ) : (
+                <EditProfilePage /> // showEditProfile가 true이면 EditProfilePage를 표시
+            )}
         </div>
     );
 }
