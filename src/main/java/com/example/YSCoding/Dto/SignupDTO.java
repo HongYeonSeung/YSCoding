@@ -11,22 +11,10 @@ import lombok.*;
 public class SignupDTO {
     private String email;
     private String password;
-    private String username;
-    private String name;
+    private String username; //id
+    private String name; //이름
     private String birthdate;
     private String phoneNumber;
-
-    @Override
-    public String toString() {
-        return "SignupData{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", birthdate='" + birthdate + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
-    }
-    //    toString 없어도 됨 이건 서비스쪽 내용같은데
+    private int point;
 
 }

@@ -24,4 +24,10 @@ public class JwtController {
         System.out.println(token);
         return JwtUtil.getUsernameFromToken(token);
     }
+
+    @GetMapping("/validateToken/{token}")
+    public String validateToken(@PathVariable String token) {
+        System.out.println(token);
+        return JwtUtil.validateToken(token) ? "Valid Token" : "Invalid Token";
+    }
 }

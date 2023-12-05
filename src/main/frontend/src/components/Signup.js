@@ -49,16 +49,23 @@ const Signup = () => {
         name,
         birthdate,
         phoneNumber,
-        daumMap,
       };
 
 
       axios.post('/api/signupData', userData)
           .then((response) => {
             // 회원가입 성공 처리
-            console.log('회원가입이 성공적으로 완료되었습니다.');
-            alert("회원가입 완료")
-            navigate('/login');
+            // console.log('회원가입이 성공적으로 완료되었습니다.');
+            if(response.data === "회원가입이 성공적으로 완료되었습니다."){
+              alert("회원가입 완료")
+              navigate('/login');
+            }else if(response.data === "이미 존재하는 사용자명입니다."){
+              alert("이미 존재하는 사용자명입니다.")
+
+            }else if(response.data === "이미 존재하는 이메일입니다."){
+              alert("이미 존재하는 이메일입니다.")
+            }
+
           })
           .catch((error) => {
             // 에러 처리
@@ -142,28 +149,25 @@ const Signup = () => {
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>
+          {/*<div>*/}
+          {/*  <label htmlFor="daumMap">주소</label>*/}
+          {/*  <input*/}
+          {/*      type="text"  // 타입을 text로 설정*/}
+          {/*      id="daumMap"*/}
+          {/*      value={daumMap}*/}
+          {/*      onChange={(e) => setDaumMap(e.target.value)}*/}
+          {/*      disabled  // 비활성화 속성 추가*/}
+          {/*  />*/}
+          {/*</div>*/}
+          {/*<button type='button' onClick={openPostCode}>우편번호 검색</button>*/}
+          {/*<div id='popupDom'>*/}
+          {/*  {isPopupOpen && (*/}
+          {/*      <PopupDom>*/}
+          {/*        <PopupPostCode onClose={closePostCode} />*/}
+          {/*      </PopupDom>*/}
+          {/*  )}*/}
+          {/*</div>*/}
           <div>
-            <label htmlFor="daumMap">주소</label>
-            <input
-                type="text"  // 타입을 text로 설정
-                id="daumMap"
-                value={daumMap}
-                onChange={(e) => setDaumMap(e.target.value)}
-                disabled  // 비활성화 속성 추가
-            />
-          </div>
-          <button type='button' onClick={openPostCode}>우편번호 검색</button>
-          <div id='popupDom'>
-            {isPopupOpen && (
-                <PopupDom>
-                  <PopupPostCode onClose={closePostCode} />
-                </PopupDom>
-            )}
-          </div>
-
-
-          <div>
-
           </div>
           <button type="button" onClick={handleSignup}>
             회원가입

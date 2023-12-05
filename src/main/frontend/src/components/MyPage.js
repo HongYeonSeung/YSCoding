@@ -9,10 +9,17 @@ const MyPage = () => {
     const username = "test";
 
 
-    // // 토큰 생성 요청
-    const generateToken = () =>{
+    // 토큰으로 아이디 검증
+    const generateToken = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`api/getUsernameFromToken/${token}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error('토큰 생성 중 오류 발생:', error);
+        }
+    };
 
-    }
 
     //
     // useEffect(() => {
