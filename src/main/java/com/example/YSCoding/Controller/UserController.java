@@ -4,6 +4,7 @@ import com.example.YSCoding.Dto.SignupDTO;
 import com.example.YSCoding.Entity.Signup;
 import com.example.YSCoding.Repository.SignupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/api/update-user-info")
-    public SignupDTO updateUserInfo(@RequestBody SignupDTO requestDto) {
+    public ResponseEntity<?> updateUserInfo(@RequestBody SignupDTO requestDto) {
         String username = requestDto.getUsername(); // 로그인된 사용자의 ID를 가져옴
 
         Signup user = signupRepository.findByUsername(username); // 데이터베이스에서 사용자를 찾음
@@ -63,12 +64,16 @@ public class UserController {
             user.setName(requestDto.getName());
             user.setBirthdate(requestDto.getBirthdate());
             user.setPhoneNumber(requestDto.getPhoneNumber());
+            if (requestDto.getPassword() != null && !requestDto.getPassword().isEmpty()) {
+                user.setPassword(requestDto.getPassword()); // 새로운 비밀번호가 제공되면 업데이트
+            }
 
             signupRepository.save(user); // 변경된 사용자 정보를 데이터베이스에 저장
 
-            return requestDto; // 업데이트된 사용자 정보 DTO 반환
+            return ResponseEntity.ok().body("사용자 정보가 성공적으로 업데이트되었습니다.");
         } else {
-            return null; // 해당 아이디를 찾을 수 없음
+            return ResponseEntity.badRequest().body("해당 아이디를 찾을 수 없습니다.");
         }
     }
+
 }

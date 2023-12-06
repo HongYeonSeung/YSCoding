@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const EditProfilePage = () => {
     const [userDto, setUserDto] = useState(null);
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [token, setToken] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const EditProfilePage = () => {
             }
         };
         fetchUserInfo();
-    }, []);
+    }, [token]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -29,8 +31,16 @@ const EditProfilePage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (password && password !== confirmPassword) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
         try {
-            await axios.post(`api/update-user-info`, userDto);
+            const updateData = {
+                ...userDto,
+                ...(password && { password }) // 비밀번호가 입력되었다면 업데이트 데이터에 포함
+            };
+            await axios.post(`api/update-user-info`, updateData);
             alert('사용자 정보가 성공적으로 업데이트되었습니다.');
             navigate('/');
         } catch (error) {
@@ -46,8 +56,12 @@ const EditProfilePage = () => {
         <div>
             <h1>정보 수정 페이지</h1>
             <form onSubmit={handleSubmit}>
-                사용자 이름:
+                사용자 ID:
                 <input type="text" name="username" value={userDto.username} disabled />
+                비밀번호:
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                비밀번호 확인:
+                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 이메일:
                 <input type="email" name="email" value={userDto.email} onChange={handleInputChange} />
                 이름:

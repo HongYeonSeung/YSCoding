@@ -39,9 +39,10 @@ const PasswordCheckPage = () => {
 
     return (
         <div>
-            <h2>비밀번호 확인</h2>
+
             {!showEditProfile ? ( // showEditProfile가 false이면 비밀번호 확인 폼을 표시
                 <form onSubmit={handleSubmit}>
+                    <h2>비밀번호 확인</h2>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit">확인</button>
                 </form>
