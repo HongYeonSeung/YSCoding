@@ -4,12 +4,13 @@ import { useUser } from './UserContext'; // UserContext를 import
 import EditProfilePage from './EditProfilePage'; // EditProfilePage를 import
 
 const PasswordCheckPage = () => {
-    const [token, setToken] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+
     const [username, setUsername] = useState(''); // 사용자 이름을 state로 관리
     const [password, setPassword] = useState(''); // 비밀번호를 state로 관리
     const [showEditProfile, setShowEditProfile] = useState(false); // EditProfilePage를 표시할지 결정하는 state
 
     // 토큰으로 아이디 검증
+    const [token, setToken] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
     useEffect(() => {
         const fetchUsername = async () => {
             try {

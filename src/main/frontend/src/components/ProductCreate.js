@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useState,useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import './ProductCreate.css';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
-import { useUser } from './UserContext';
+
 
 function ProductCreate() {
     const navigate = useNavigate();
@@ -15,7 +14,23 @@ function ProductCreate() {
         category:'',
         content:'',
     });
-    const { loginId } = useUser();
+
+    // 토큰으로 아이디 검증
+    const [loginId,setloginId] = useState();
+    const [token] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+    useEffect(() => {
+        const tokenToLogin = async () => {
+            try {
+                if (token) {  // 토큰이 존재하는 경우에만 실행
+                    const response = await axios.get(`api/getUsernameFromToken/${token}`);
+                    setloginId(response.data);
+                }
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+        tokenToLogin();
+    }, [token]);
 
 
     const handleInputChange = (e) => {

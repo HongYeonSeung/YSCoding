@@ -44,11 +44,28 @@ const CountdownTimer = ({ endTime }) => {
 
 function ProductDetailPage() {
     const navigate = useNavigate();
-    const { loginId } = useUser("");
     const params = useParams();
     const [product, setProduct] = useState({});
     const [bidAmount, setBidAmount] = useState('');
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
+
+
+    // 토큰으로 아이디 검증
+    const [loginId,setloginId] = useState();
+    const [token] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+    useEffect(() => {
+        const tokenToLogin = async () => {
+            try {
+                if (token) {  // 토큰이 존재하는 경우에만 실행
+                    const response = await axios.get(`/api/getUsernameFromToken/${token}`);
+                    setloginId(response.data);
+                }
+            } catch (error) {
+                console.error('토큰 아이디 검증 에러:', error);
+            }
+        };
+        tokenToLogin();
+    }, [token]);
 
 
 
@@ -92,19 +109,19 @@ function ProductDetailPage() {
             loginId:loginId
         }
 
-        axios.post(`/api/ProductBuy/${params.id}`,data)
+        axios.post(`/api/ProductBuy/${params.id}`, data)
             .then(response => {
                 // 성공적으로 처리된 경우에 할 일
                 console.log('응답 데이터:', response.data);
             })
             .catch(error => {
                 // 에러가 발생한 경우에 할 일
-                alert(error.response.data)
+                alert(error.response.data);
+            })
+            .finally(() => {
+                // 새로고침
+                window.location.reload();
             });
-
-
-        window.location.reload();//새로고침
-
     };
 
     const handleCancelConfirmation = () => {
