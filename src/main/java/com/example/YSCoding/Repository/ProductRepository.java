@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>  {
 
-    Product findAllByLoginId(String username);
+    List<Product> findAllByLoginId(String username);
 }

@@ -92,8 +92,9 @@ public class UserController {
         Signup user = signupRepository.findByUsername(username); // 데이터베이스에서 사용자를 찾음
 
         if (user != null) { // 사용자가 존재하면
-            Product userProducts = productRepository.findAllByLoginId(username); // 사용자의 모든 상품을 찾음
-            productRepository.delete(userProducts); // 사용자의 모든 상품을 삭제
+            List<Product> userProducts = productRepository.findAllByLoginId(username); // 사용자의 모든 상품을 찾음
+            // 각 상품을 삭제
+            productRepository.deleteAll(userProducts);
             signupRepository.delete(user); // 사용자를 데이터베이스에서 삭제
 
             return ResponseEntity.ok().body("계정이 성공적으로 삭제되었습니다.");
