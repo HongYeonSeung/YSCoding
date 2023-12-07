@@ -52,6 +52,22 @@ const EditProfilePage = () => {
         return <div>Loading...</div>;
     }
 
+    // 회원탈퇴
+    const handleDeleteAccount = async () => {
+        if (window.confirm('정말로 계정을 삭제하시겠습니까?')) {
+            try {
+                await axios.post(`api/delete-user`, { username: userDto.username });
+                alert('계정이 성공적으로 삭제되었습니다.');
+                // 로그아웃 처리 및 로그인 페이지로 이동 등의 로직 추가
+                localStorage.removeItem('token'); // 로그아웃 처리
+                navigate('/', { replace: true }); // 메인 페이지로 이동
+                window.location.reload(); // 페이지 새로고침
+            } catch (error) {
+                console.error('Error deleting account:', error);
+            }
+        }
+    };
+
     return (
         <div>
             <h1>정보 수정 페이지</h1>
@@ -71,6 +87,7 @@ const EditProfilePage = () => {
                 전화번호:
                 <input type="tel" name="phoneNumber" value={userDto.phoneNumber} onChange={handleInputChange} />
                 <button type="submit">수정 완료</button>
+                <button type="button" onClick={handleDeleteAccount}>회원 탈퇴</button>
             </form>
         </div>
     );

@@ -20,7 +20,7 @@ public class ImageController {
 
     @GetMapping("/{imageName}")
     public ResponseEntity<Resource> getImage(@PathVariable String imageName) throws IOException {
-        Path imagePath = Paths.get("C:\\Users\\fover\\Desktop\\YSCoding\\src\\main\\java\\com\\example\\YSCoding\\img\\" + imageName);
+        Path imagePath = Paths.get("C:\\Users\\choiy\\Desktop\\YSCoding\\src\\main\\java\\com\\example\\YSCoding\\img\\" + imageName);
 
         try {
             Resource resource = new UrlResource(imagePath.toUri());
