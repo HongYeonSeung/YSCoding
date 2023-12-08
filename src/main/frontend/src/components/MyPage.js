@@ -13,7 +13,7 @@ const MyPage = () => {
 
     return (
         <div className="myPage_main">
-            <h1>마이페이지</h1>
+            {/*<h1>마이페이지</h1>*/}
             {!showEditProfile ? ( // showEditProfile가 false이면 PasswordCheckPage를 표시
                 <PasswordCheckPage onSuccess={handlePasswordCheckSuccess} /> // 비밀번호 확인이 성공하면 handlePasswordCheckSuccess 함수를 호출
             ) : (
