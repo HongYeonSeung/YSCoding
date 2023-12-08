@@ -11,7 +11,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Layout2 from "./components/Layout2";
 import ProductPage from "./components/ProductPage";
 import ProductCreate from "./components/ProductCreate";
-import MyPage from "./components/MyPage";
+import ProfilePage from "./components/ProfilePage";
 import ProductDetailPage from "./components/ProductDetailPage";
 import PrivateRoute from './components/PrivateRoute';
 
@@ -41,7 +41,7 @@ const App = () => {
               <Route path="/" component={Layout2} />
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
-              <Route path="/myPage" element={<MyPage />} />
+              <Route path="/ProfilePage" element={<ProfilePage />} />
             </Routes>
 
           <hr></hr>

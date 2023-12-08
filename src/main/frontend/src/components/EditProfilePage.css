@@ -1,4 +1,4 @@
-/* EditProfilePage.css 파일 */
+/* EditProfilePage.css */
 
 .edit-profile-container {
     display: flex;
@@ -9,38 +9,36 @@
     flex-direction: column;
 }
 
-.edit-profile-box {
+.edit-profile-form {
     text-align: center;
     padding: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
-    width: 350px; /* 필요에 따라 너비 조정 */
-    height: 800px; /* 필요에 따라 높이 조정 */
+    width: 350px;
+    height: 800px;
     border-radius: 10px;
 }
 
-.edit-profile-container h1 {
+.edit-profile-form h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.edit-profile-container form {
+.edit-profile-form form {
     width: 300px;
     margin: 0 auto;
-    color:  #ccc; /* 예시: 글자 색상을 어두운 회색으로 변경 */
-    padding: 20px;
 }
 
-.edit-profile-contaner label {
+.edit-profile-form label {
     position: relative;
     font-size: 12pt;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
-.edit-profile-container input {
+.edit-profile-form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -48,7 +46,7 @@
     border-radius: 4px;
 }
 
-.edit-profile-container button {
+.edit-profile-form button {
     width: 200px;
     margin-top: 20px;
     padding: 0.5rem;
@@ -63,7 +61,7 @@
     transition: 0.5s;
 }
 
-.edit-profile-container button:hover {
+.edit-profile-form button:hover {
     background: #007bff;
     outline: 0;
     color: #000;

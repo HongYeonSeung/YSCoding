@@ -72,7 +72,7 @@ function ActionBar() {
                     <div className="links">
                         {!loginId && <Link to="/login">로그인</Link>}
                         {!loginId &&  <Link to="/signup">회원가입</Link>}
-                        {loginId && <Link to="/myPage">마이페이지</Link>}
+                        {loginId && <Link to="/ProfilePage">내정보</Link>}
                         {loginId && <div className="pointClass">보유 포인트 : {point}</div>}
                     </div>
                     {loginId && (

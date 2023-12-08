@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import './EditProfilePage.css';
 
 const EditProfilePage = () => {
@@ -10,7 +10,7 @@ const EditProfilePage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [token, setToken] = useState(localStorage.getItem('token'));
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -21,6 +21,8 @@ const EditProfilePage = () => {
                 setUserDto(userInfoResponse.data);
             } catch (error) {
                 console.error('Error fetching user info:', error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchUserInfo();
@@ -30,6 +32,8 @@ const EditProfilePage = () => {
         const { name, value } = event.target;
         setUserDto({ ...userDto, [name]: value });
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -64,35 +68,47 @@ const EditProfilePage = () => {
         }
     };
 
-    if (!userDto) {
-        return <div>Loading...</div>;
+    if (loading) {
+        return <p>로딩 중...</p>;
     }
 
     return (
         <div className="edit-profile-container">
-            <div className="edit-profile-box">
-                <h1>정보 수정 페이지</h1>
-                <form onSubmit={handleSubmit}>
-                    사용자 ID
-                    <input type="text" name="username" value={userDto.username} disabled />
-                    비밀번호
+            <h1>정보 수정 페이지</h1>
+            <form className="edit-profile-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="username">사용자 ID</label>
+                    <input type="text" name="username" value={userDto?.username} disabled />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">비밀번호</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    비밀번호 확인
+                </div>
+                <div className="form-group">
+                    <label htmlFor="confirmPassword">비밀번호 확인</label>
                     <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                    이메일
-                    <input type="email" name="email" value={userDto.email} onChange={handleInputChange} />
-                    이름
-                    <input type="text" name="name" value={userDto.name} onChange={handleInputChange} />
-                    생년월일
-                    <input type="text" name="birthdate" value={userDto.birthdate} onChange={handleInputChange} />
-                    전화번호
-                    <input type="tel" name="phoneNumber" value={userDto.phoneNumber} onChange={handleInputChange} />
-                    <button type="submit">수정 완료</button>
-                    <button type="button" onClick={handleDeleteAccount}>회원 탈퇴</button>
-                </form>
-            </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">이메일</label>
+                    <input type="email" name="email" value={userDto?.email} onChange={handleInputChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">이름</label>
+                    <input type="text" name="name" value={userDto?.name} onChange={handleInputChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="birthdate">생년월일</label>
+                    <input type="text" name="birthdate" value={userDto?.birthdate} onChange={handleInputChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="phoneNumber">전화번호</label>
+                    <input type="tel" name="phoneNumber" value={userDto?.phoneNumber} onChange={handleInputChange} />
+                </div>
+                <button type="submit">수정 완료</button>
+                <button type="button" className="delete-button" onClick={handleDeleteAccount}>회원 탈퇴</button>
+            </form>
         </div>
     );
-};
+}
 
 export default EditProfilePage;

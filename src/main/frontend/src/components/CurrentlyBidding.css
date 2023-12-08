@@ -1,0 +1,41 @@
+/* CurrentlyBidding.css */
+
+.currently-bidding-container {
+    margin-top: 20px;
+}
+
+.product-list-horizontal {
+    display: flex;
+    overflow-x: auto;
+}
+
+.product-card {
+    margin-right: 20px;
+    flex: 0 0 auto;
+}
+
+.product-img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product-content {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.product-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #555;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #007bff;
+}

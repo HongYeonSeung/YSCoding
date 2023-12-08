@@ -1,0 +1,13 @@
+/* CurrentlySelling.css */
+.currently-selling-container {
+    margin-bottom: 20px; /* 선택적으로 마진을 추가할 수 있습니다. */
+}
+
+.product-list-horizontal {
+    display: flex;
+    overflow-x: auto; /* 가로 스크롤이 필요할 때 스크롤을 표시합니다. */
+}
+
+.product-list-horizontal::-webkit-scrollbar {
+    display: none; /* 가로 스크롤바를 숨깁니다. */
+}
