@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ActionBar from './components/ActionBar';
 import Layout from './components/Layout';
-import Login from './components/Login'; // Login 컴포넌트를 임포트합니다.
-import { UserProvider } from './components/UserContext';
+import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
-import Layout2 from "./components/Layout2";
-import ProductPage from "./components/ProductPage";
-import ProductCreate from "./components/ProductCreate";
-import ProfilePage from "./components/ProfilePage";
-import ProductDetailPage from "./components/ProductDetailPage";
-import PrivateRoute from './components/PrivateRoute';
+import Layout2 from './components/Layout2';
+import ProductPage from './components/ProductPage';
+import ProductCreate from './components/ProductCreate';
+import ProfilePage from './components/ProfilePage';
+import ProductDetailPage from './components/ProductDetailPage';
+import MyPage from './components/Mypage';
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
-
   useEffect(() => {
     console.log("화살표 함수 테스트");
     axios.get('/api/hello')
@@ -25,12 +24,11 @@ const App = () => {
         .catch(error => console.log(error));
   }, []);
 
+
   return (
       <Router>
-        <UserProvider>
         <div>
           <ActionBar />
-
             <Routes>
               <Route path="/" element={<Layout />} />
               <Route path="/login" element={<Login />} />
@@ -42,14 +40,13 @@ const App = () => {
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />} />
+              <Route path="/myPage" element={<MyPage/>} />
             </Routes>
 
           <hr></hr>
           백엔드 연동 테스트: {hello}
           {/* ProductCreate 컴포넌트 추가 */}
-
         </div>
-        </UserProvider>
       </Router>
   );
 }

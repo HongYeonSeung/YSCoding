@@ -2,6 +2,7 @@ package com.example.YSCoding.Service;
 
 
 import com.example.YSCoding.Dto.ProductDTO;
+import com.example.YSCoding.Entity.Bid;
 import com.example.YSCoding.Entity.Product;
 import com.example.YSCoding.Entity.Signup;
 import com.example.YSCoding.Exception.InsufficientPointsException;
@@ -11,7 +12,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -52,6 +52,8 @@ public class ProductServiceImpl implements ProductService {
 
         // 24시간을 더한 값을 설정
         calculateTimeAfter24Hours(product);
+        product.setBiddersCount(0);
+        product.setViews(0);
 
         return productRepository.save(product);
     }
@@ -102,6 +104,14 @@ public class ProductServiceImpl implements ProductService {
                 previousBidder.setPoint(previousBidder.getPoint() + previousBidAmountInt);
                 signupRepository.save(previousBidder);
             }
+
+            // Bid 엔터티 생성
+            Bid bid = new Bid();
+            bid.setBidderId(bidderId);
+            bid.setBidAmount(bidAmount);
+
+            // 입찰자 추가
+            product.addBid(bid);
             // 엔티티 저장
             productRepository.save(product);
         } else {

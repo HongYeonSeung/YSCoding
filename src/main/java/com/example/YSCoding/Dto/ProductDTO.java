@@ -1,5 +1,6 @@
 package com.example.YSCoding.Dto;
 
+import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +23,7 @@ public class ProductDTO {
     private String buyId;
     private LocalDateTime registrationTime;
     private LocalDateTime timeAfter24Hours;
+    private int views;
+    private int biddersCount;
     // 생성자, getter, setter 등 필요한 메서드 추가
 }

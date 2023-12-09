@@ -16,17 +16,9 @@ class CurrentlySelling extends React.Component {
                 views: 50,
                 imageUrl: '/images/product1.png', // 실제 이미지 URL로 교체하세요
             },
-            {
-                title: '롤렉스',
-                description: '이 상품은 판매 중인 상품입니다.',
-                startingPrice: 2550000,
-                currentPrice: 3300000,
-                bids: 5,
-                views: 30,
-                imageUrl: '/images/product2.png', // 실제 이미지 URL로 교체하세요
-            },
-            // 필요한 만큼 더 많은 상품을 추가하세요
         ];
+
+
 
         return (
             <div className="currently-selling-container">
