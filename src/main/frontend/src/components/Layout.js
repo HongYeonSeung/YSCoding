@@ -6,7 +6,6 @@ import Layout2 from './Layout2';
 import Layout3 from './Layout3';
 import './Layout.css'; // 스타일 파일을 임포트합니다.
 import { Link } from 'react-router-dom';
-import {useUser} from "./UserContext";
 import axios from "axios"; // Link 컴포넌트를 임포트합니다
 
 const Layout = () => {

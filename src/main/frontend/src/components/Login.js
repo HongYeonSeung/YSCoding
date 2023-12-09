@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import './Login.css';
 import axios from "axios";
-import { UserProvider, useUser } from './UserContext'; // UserProvider를 import
 import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
 
 const Login = () => {
-  const { loginId } = useUser();
-
   const [token, setToken] = useState('');
   const navigate = useNavigate();
-
     const [memberId, setMemberId] = useState();
     const [memberName, setMemberName] = useState();
-
-    const { setResponseData } = useUser();
   const [data, setData] = useState({
     memberName: '',
     memberPassword: '',
@@ -65,7 +59,6 @@ const Login = () => {
         }
     };
   return (
-      <UserProvider>
         <div className='login_box' style={{ backgroundColor: '#fff' }}>
           <div className='login_box_main'>
             <div className='login-box-white'>
@@ -102,7 +95,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-      </UserProvider>
   );
 }
 

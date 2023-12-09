@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useUser } from './UserContext'; // UserContext를 import
 import EditProfilePage from './EditProfilePage'; // EditProfilePage를 import
 import './PasswordCheckPage.css'; // PasswordCheckPage의 CSS 파일 import
 

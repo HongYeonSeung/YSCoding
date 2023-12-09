@@ -3,7 +3,6 @@ import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
 import './ProductDetailPage.css';
-import {useUser} from "./UserContext";
 import ConfirmationModal from './ConfirmationModal'; // 모달 컴포넌트 import
 
 
