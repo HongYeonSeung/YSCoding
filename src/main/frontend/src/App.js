@@ -15,8 +15,12 @@ import ProfilePage from './components/ProfilePage';
 import ProductDetailPage from './components/ProductDetailPage';
 import MyPage from './components/Mypage';
 
+import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults';
+
 const App = () => {
   const [hello, setHello] = useState('연동 X');
+
   useEffect(() => {
     console.log("화살표 함수 테스트");
     axios.get('/api/hello')
@@ -27,8 +31,10 @@ const App = () => {
 
   return (
       <Router>
+        <UserProvider>
         <div>
           <ActionBar />
+
             <Routes>
               <Route path="/" element={<Layout />} />
               <Route path="/login" element={<Login />} />
@@ -40,13 +46,17 @@ const App = () => {
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />} />
+
+              <Route path="/search/:keyword" element={<SearchResults />} />
               <Route path="/myPage" element={<MyPage/>} />
             </Routes>
 
           <hr></hr>
           백엔드 연동 테스트: {hello}
           {/* ProductCreate 컴포넌트 추가 */}
+
         </div>
+        </UserProvider>
       </Router>
   );
 }
