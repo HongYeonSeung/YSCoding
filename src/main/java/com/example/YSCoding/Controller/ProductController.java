@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -97,4 +98,10 @@ public class ProductController {
         }
     }
 
+    // 검색
+    @GetMapping("/search")
+    public ResponseEntity<Page<Product>> search(@RequestParam String keyword, @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Product> products = productService.search(keyword, pageable);
+        return ResponseEntity.ok(products);
+    }
 }

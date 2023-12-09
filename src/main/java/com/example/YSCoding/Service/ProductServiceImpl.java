@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -116,4 +117,17 @@ public class ProductServiceImpl implements ProductService {
         // 구매자의 포인트가 입찰 금액보다 크거나 같은지 확인
         return buyer != null && buyer.getPoint() >= bidAmount;
     }
+
+    // 문자가 한 개라도 같으면 검색
+//    @Override
+//    public Page<Product> search(String keyword, Pageable pageable) {
+//        return productRepository.findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(keyword, keyword, pageable);
+//    }
+
+    // 검색 기능
+    @Override
+    public Page<Product> search(String keyword, Pageable pageable) {
+        return productRepository.findByProductNameEqualsOrContentEquals(keyword, keyword, pageable);
+    }
+
 }

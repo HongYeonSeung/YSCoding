@@ -15,6 +15,9 @@ import ProfilePage from "./components/ProfilePage";
 import ProductDetailPage from "./components/ProductDetailPage";
 import PrivateRoute from './components/PrivateRoute';
 
+import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults';
+
 const App = () => {
   const [hello, setHello] = useState('연동 X');
 
@@ -42,6 +45,8 @@ const App = () => {
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />} />
+
+              <Route path="/search/:keyword" element={<SearchResults />} />
             </Routes>
 
           <hr></hr>
