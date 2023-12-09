@@ -31,7 +31,6 @@ const App = () => {
 
   return (
       <Router>
-        <UserProvider>
         <div>
           <ActionBar />
 
@@ -56,7 +55,6 @@ const App = () => {
           {/* ProductCreate 컴포넌트 추가 */}
 
         </div>
-        </UserProvider>
       </Router>
   );
 }

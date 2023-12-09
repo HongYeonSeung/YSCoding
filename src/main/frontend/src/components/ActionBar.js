@@ -3,6 +3,16 @@ import { Link } from 'react-router-dom';
 import './ActionBar.css';
 import axios from "axios";
 
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 function ActionBar() {
     const [time, setTime] = useState(new Date());
     const [loginId, setLoginId]= useState();
@@ -23,7 +33,6 @@ function ActionBar() {
             try {
                 const response = await axios.get(`/api/getUsernameFromToken/${token}`);
                 const username = response.data;
-                console.log("임시",username)
                 setLoginId(username);
             } catch (error) {
                 alert("토큰이 만료되었습니다, 다시 로그인 해주세요")
@@ -66,6 +75,7 @@ function ActionBar() {
                     <Link to="/">
                         <img src="/logo3.png" alt="Logo" style={{ margin: '10px 0 0 20px' }} />
                     </Link>
+
                 </div>
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>

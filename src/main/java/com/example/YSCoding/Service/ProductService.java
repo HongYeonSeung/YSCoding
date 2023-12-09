@@ -13,6 +13,12 @@ public interface ProductService {
 
     Product getProductById(Long id);
 
+    Product getProductView(Long id);
+
+    List<Product> getCurrentlySellingProducts(String username);
+
+    List<Product> getCurrentlyBiddingProducts(String username);
+
     void placeBid(Long productId, Double bidAmount, String bidderId);
 
     // 검색 기능

@@ -1,21 +1,38 @@
 // MyPage.js
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CurrentlySelling from './CurrentlySelling';
 import CurrentlyBidding from './CurrentlyBidding';
 import UnsuccessfulBids from './UnsuccessfulBids';
+import axios from "axios";
 
 const MyPage = () => {
+    // 토큰으로 아이디 검증
+    const [loginId,setloginId] = useState();
+    const [token] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+
+    useEffect(() => {
+        const tokenToLogin = async () => {
+            try {
+                if (token) {  // 토큰이 존재하는 경우에만 실행
+                    const response = await axios.get(`/api/getUsernameFromToken/${token}`);
+                    setloginId(response.data);
+                }
+            } catch (error) {
+                console.error('토큰 아이디 검증 에러:', error);
+            }
+        };
+        tokenToLogin();
+    }, []);
     return (
         <div>
             <h2>현재 판매중인 상품</h2>
-            <CurrentlySelling />
+            <CurrentlySelling LoginId={loginId}/>
 
             <h2>현재 입찰중인 상품</h2>
-            <CurrentlyBidding />
+            <CurrentlyBidding LoginId={loginId}/>
 
             <h2>유찰당한 상품</h2>
-            <UnsuccessfulBids />
+            <UnsuccessfulBids LoginId={loginId}/>
         </div>
     );
 }

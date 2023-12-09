@@ -58,6 +58,16 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    //조회수 늘리기
+    @GetMapping("/productsView/{id}")
+    public ResponseEntity<Product> getProductView(@PathVariable Long id) {
+        Product product = productService.getProductView(id);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     // 상품 구매 API
     @PostMapping("/ProductBuy/{id}")
@@ -98,10 +108,38 @@ public class ProductController {
         }
     }
 
-    // 검색
+
+        // 검색
     @GetMapping("/search")
     public ResponseEntity<Page<Product>> search(@RequestParam String keyword, @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Product> products = productService.search(keyword, pageable);
         return ResponseEntity.ok(products);
     }
+
+    @GetMapping("/currentlySellingProducts/{username}")
+    public ResponseEntity<List<Product>> getCurrentlySellingProducts(@PathVariable String username) {
+        List<Product> products = productService.getCurrentlySellingProducts(username);
+        if (!products.isEmpty()) {
+            return ResponseEntity.ok(products);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @GetMapping("/currentlyBiddingProducts/{username}")
+    public ResponseEntity<List<Product>> getCurrentlyBiddingProducts(@PathVariable String username) {
+        List<Product> products = productService.getCurrentlyBiddingProducts(username);
+        if (!products.isEmpty()) {
+            return ResponseEntity.ok(products);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
+    //마이페이지 상품조회쪽
+    //본인이 판매중인 상품
+
 }

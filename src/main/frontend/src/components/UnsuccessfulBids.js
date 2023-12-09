@@ -1,5 +1,5 @@
 // UnsuccessfulBids.js
-import React from 'react';
+import React,{useEffect, useState}  from 'react';
 import ProductCard from './ProductCard';
 import './UnsuccessfulBids.css';
 

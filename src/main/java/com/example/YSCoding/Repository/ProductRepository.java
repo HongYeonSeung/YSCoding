@@ -15,11 +15,15 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>  {
 
-    List<Product> findAllByLoginId(String username);
+    List<Product> findAllByLoginId(String loginId);
+
+    List<Product> findAllByBuyId(String loginId);
+
 
     // 문자가 한 개라도 같으면 검색
-//    Page<Product> findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(String keyword1, String keyword2, Pageable pageable);
+    Page<Product> findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(String keyword1, String keyword2, Pageable pageable);
 
-    Page<Product> findByProductNameEqualsOrContentEquals(String productName, String content, Pageable pageable);
+//    Page<Product> findByProductNameEqualsOrContentEquals(String productName, String content, Pageable pageable);
+
 
 }

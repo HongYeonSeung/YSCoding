@@ -52,6 +52,7 @@ function ProductDetailPage() {
     // 토큰으로 아이디 검증
     const [loginId,setloginId] = useState();
     const [token] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+
     useEffect(() => {
         const tokenToLogin = async () => {
             try {
@@ -64,7 +65,7 @@ function ProductDetailPage() {
             }
         };
         tokenToLogin();
-    }, [token]);
+    }, []);
 
 
     useEffect(() => {
@@ -74,13 +75,14 @@ function ProductDetailPage() {
                     return;
                 }
                 const response = await axios.get(`/api/products/${params.id}`);
+                await axios.get(`/api/productsView/${params.id}`);
                 setProduct(response.data);
             } catch (error) {
                 console.error('상품 상세 정보를 불러오는 중 에러 발생:', error);
             }
         };
         fetchProductDetails();
-    }, [params]);
+    }, []);
 
     const handleBidClick = (event) => {
         event.preventDefault();
@@ -115,6 +117,7 @@ function ProductDetailPage() {
             .catch(error => {
                 // 에러가 발생한 경우에 할 일
                 alert(error.response.data);
+
             })
             .finally(() => {
                 // 새로고침
@@ -160,6 +163,8 @@ function ProductDetailPage() {
                     <h2>상품 이름: {product.productName}</h2>
                     <div className="list">판매자 ID : {product.loginId}</div>
                     <div className="list">상품 설명 : {product.content}</div>
+                    <div className="list">조회수 : {product.views}</div>
+                    <div className="list">입찰 된 횟수 : {product.biddersCount}</div>
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
                     <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>

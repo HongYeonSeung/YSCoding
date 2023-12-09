@@ -68,8 +68,34 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
+//        Product product = productOptional.get();
+//        product.setViews(product.getViews() + 1); // 조회수 1 증가
+//        productRepository.save(product); // 업데이트된 상품 저장
+
         return productOptional.orElse(null); // 해당 ID에 해당하는 상품이 없을 경우 null 반환
     }
+
+    @Override
+    public Product getProductView(Long id){
+        Optional<Product> productOptional = productRepository.findById(id);
+        Product product = productOptional.get();
+        product.setViews(product.getViews() + 1); // 조회수 1 증가
+        productRepository.save(product); // 업데이트된 상품 저장
+        return productOptional.orElse(null); // 해당 ID에 해당하는 상품이 없을 경우 null 반환
+    }
+
+    //판매중인 상품
+    @Override
+    public List<Product> getCurrentlySellingProducts(String username) {
+        return productRepository.findAllByLoginId(username);
+    }
+
+    //입찰중신상품
+    @Override
+    public List<Product> getCurrentlyBiddingProducts(String username) {
+        return productRepository.findAllByBuyId(username);
+    }
+
 
     @Transactional
     private void calculateTimeAfter24Hours(Product product) {
@@ -129,15 +155,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // 문자가 한 개라도 같으면 검색
-//    @Override
-//    public Page<Product> search(String keyword, Pageable pageable) {
-//        return productRepository.findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(keyword, keyword, pageable);
-//    }
-
-    // 검색 기능
     @Override
     public Page<Product> search(String keyword, Pageable pageable) {
-        return productRepository.findByProductNameEqualsOrContentEquals(keyword, keyword, pageable);
+        return productRepository.findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(keyword, keyword, pageable);
     }
+
+    // 검색 기능
+//    @Override
+//    public Page<Product> search(String keyword, Pageable pageable) {
+//        return productRepository.findByProductNameEqualsOrContentEquals(keyword, keyword, pageable);
+//    }
 
 }
