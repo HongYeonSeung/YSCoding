@@ -16,9 +16,7 @@ function Layout1() {
                 autoplay={{ delay: 5000, disableOnInteraction: false }}
                 navigation
                 pagination={{ clickable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
-            >
+                onSwiper={(swiper) => console.log(swiper)}>
                 <SwiperSlide><img src="/banner1.png"/></SwiperSlide>
                 <SwiperSlide>Slide 2</SwiperSlide>
                 <SwiperSlide>Slide 3</SwiperSlide>

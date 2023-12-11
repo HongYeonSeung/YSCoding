@@ -98,7 +98,6 @@ function ProductCreate() {
                             name="image"
                             accept="image/*"
                             onChange={handleImageUpload}
-
                         />
                     </div>
                     <div className="product-details">

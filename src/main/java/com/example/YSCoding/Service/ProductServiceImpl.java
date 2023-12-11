@@ -132,7 +132,7 @@ public class ProductServiceImpl implements ProductService {
                 signupRepository.save(previousBidder);
             }
 
-            // Bid 엔터티 생성
+            // Bid 엔터티 z생성
             Bid bid = new Bid();
             bid.setBidderId(bidderId);
             bid.setBidAmount(bidAmount);

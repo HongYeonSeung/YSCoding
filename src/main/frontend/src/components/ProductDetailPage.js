@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
 import './ProductDetailPage.css';
-import ConfirmationModal from './ConfirmationModal'; // 모달 컴포넌트 import
-
+import ConfirmationModal from './ConfirmationModal';
 
 const CountdownTimer = ({ endTime }) => {
     const calculateTimeRemaining = () => {
@@ -29,10 +27,10 @@ const CountdownTimer = ({ endTime }) => {
         const id = setInterval(() => {
             const remaining = calculateTimeRemaining();
             setTimeRemaining(remaining);
-        }, 1000);
+        }, 100);
 
         return () => clearInterval(id);
-    }, [endTime]);
+    }, [endTime]); // endTime이 변경될 때마다 useEffect가 다시 실행됨
 
     return (
         <span>
@@ -47,26 +45,25 @@ function ProductDetailPage() {
     const [product, setProduct] = useState({});
     const [bidAmount, setBidAmount] = useState('');
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-
+    const [endTime, setEndTime] = useState(null);
 
     // 토큰으로 아이디 검증
-    const [loginId,setloginId] = useState();
-    const [token] = useState(localStorage.getItem('token')); // 로컬 스토리지에서 토큰을 가져옴
+    const [loginId, setLoginId] = useState();
+    const [token] = useState(localStorage.getItem('token'));
 
     useEffect(() => {
         const tokenToLogin = async () => {
             try {
-                if (token) {  // 토큰이 존재하는 경우에만 실행
+                if (token) {
                     const response = await axios.get(`/api/getUsernameFromToken/${token}`);
-                    setloginId(response.data);
+                    setLoginId(response.data);
                 }
             } catch (error) {
                 console.error('토큰 아이디 검증 에러:', error);
             }
         };
         tokenToLogin();
-    }, []);
-
+    }, [token]);
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -74,50 +71,52 @@ function ProductDetailPage() {
                 if (!params.id) {
                     return;
                 }
+
                 const response = await axios.get(`/api/products/${params.id}`);
                 await axios.get(`/api/productsView/${params.id}`);
                 setProduct(response.data);
+
+                // endTime 설정
+                setEndTime(response.data.timeAfter24Hours);
             } catch (error) {
                 console.error('상품 상세 정보를 불러오는 중 에러 발생:', error);
             }
         };
+
         fetchProductDetails();
-    }, []);
+    }, [params.id]);
 
     const handleBidClick = (event) => {
         event.preventDefault();
 
         if (loginId == null) {
-            alert("로그인 후 입찰해 주세요.");
+            alert('로그인 후 입찰해 주세요.');
         } else {
             // 모달 열기
             setConfirmationModalOpen(true);
         }
-
     };
 
     const handleConfirmation = () => {
-
         // 모달 닫기
         setConfirmationModalOpen(false);
-
 
         // 여기서 진짜로 보내야 할 로직을 수행
         console.log('입찰 금액:', bidAmount, loginId, params.id);
         const data = {
-            bidAmount:bidAmount,
-            loginId:loginId
-        }
+            bidAmount: bidAmount,
+            loginId: loginId,
+        };
 
-        axios.post(`/api/ProductBuy/${params.id}`, data)
-            .then(response => {
+        axios
+            .post(`/api/ProductBuy/${params.id}`, data)
+            .then((response) => {
                 // 성공적으로 처리된 경우에 할 일
                 console.log('응답 데이터:', response.data);
             })
-            .catch(error => {
+            .catch((error) => {
                 // 에러가 발생한 경우에 할 일
                 alert(error.response.data);
-
             })
             .finally(() => {
                 // 새로고침
@@ -131,7 +130,6 @@ function ProductDetailPage() {
         window.location.reload();
     };
 
-
     const handleInputChange = (event) => {
         // 입력값이 숫자인지 확인하는 정규표현식
         const regex = /^[0-9\b]+$/;
@@ -142,7 +140,6 @@ function ProductDetailPage() {
         }
     };
 
-    //가격에 콤마 붙히기 1,000,000원 이런식으로
     const formatCurrency = (amount) => {
         if (amount != null) {
             return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -168,7 +165,7 @@ function ProductDetailPage() {
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
                     <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>
-                    <div className="list">남은 시간 : <CountdownTimer endTime={product.timeAfter24Hours} /></div>
+                    <div className="list">남은 시간 : <CountdownTimer endTime={endTime} /></div>
                 </div>
                 <div className="product-detail-container-button-container">
                     <form className='bidding_form'>

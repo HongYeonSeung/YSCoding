@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import './ActionBar.css';
 import axios from "axios";
 
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import {Navigation, Pagination, Scrollbar, A11y} from 'swiper/modules';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,7 +15,7 @@ import 'swiper/css/scrollbar';
 
 function ActionBar() {
     const [time, setTime] = useState(new Date());
-    const [loginId, setLoginId]= useState();
+    const [loginId, setLoginId] = useState();
     const [point, setPoint] = useState();
 
     const handleLogoutClick = () => {
@@ -53,7 +53,7 @@ function ActionBar() {
             axios.post('/api/point', loginId)
                 .then(response => {
                     setPoint(response.data);
-                    console.log(response.data, "리스폰데이터",loginId);
+                    console.log(response.data, "리스폰데이터", loginId);
                 })
                 .catch(error => {
                     console.error('포인트 가져오는 중 오류 발생:', error);
@@ -73,19 +73,19 @@ function ActionBar() {
             <div className="action-bar">
                 <div className="logo">
                     <Link to="/">
-                        <img src="/logo3.png" alt="Logo" style={{ margin: '10px 0 0 20px' }} />
+                        <img src="/logo3.png" alt="Logo" style={{margin: '10px 0 0 20px'}}/>
                     </Link>
 
                 </div>
                 <div className="right-section">
                     <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
-                        {!loginId && <Link to="/login">로그인</Link>}
-                        {!loginId && <Link to="/signup">회원가입</Link>}
-                        {loginId && <Link to="/ProfilePage">내정보</Link>}
-                        {loginId && <Link to="/myPage">마이페이지</Link>}
-                        {loginId && <div className="pointClass">보유 포인트 : {point}</div>}
-                        <a href="/" className="action-bar-a">포인트 충전</a>
+                        <div>{!loginId && <Link to="/login">로그인</Link>}</div>
+                        <div>{!loginId && <Link to="/signup">회원가입</Link>}</div>
+                        <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>
+                        <div>{loginId && <Link to="/myPage">마이페이지</Link>}</div>
+                        <div>{loginId && <div className="pointClass">보유 포인트 : {point}</div>}</div>
+                        <div><a href="/" className="action-bar-a">포인트 충전</a></div>
                     </div>
                     {loginId && (
                         <div className="action-bar-div">
