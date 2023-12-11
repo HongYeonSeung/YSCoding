@@ -17,6 +17,7 @@ import MyPage from './components/Mypage';
 
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
+import CategoryPage from './components/CategoryPage';
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
@@ -40,7 +41,7 @@ const App = () => {
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path='*' element={<div className='error'>에러 페이지</div>} />
-              <Route path="/category1" component={ProductPage} />
+              <Route path="/category/:category" element={<CategoryPage />} />
               <Route path="/" component={Layout2} />
               <Route path="/product-create" element={<ProductCreate />} />
               <Route path="/product/:id" element={<ProductDetailPage />} />

@@ -25,5 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 
 //    Page<Product> findByProductNameEqualsOrContentEquals(String productName, String content, Pageable pageable);
 
+    // 카테고리로 상품 목록 조회 (페이징 처리)
+    Page<Product> findByCategoryIgnoreCase(String category, Pageable pageable);
 
 }

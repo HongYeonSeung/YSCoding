@@ -166,4 +166,10 @@ public class ProductServiceImpl implements ProductService {
 //        return productRepository.findByProductNameEqualsOrContentEquals(keyword, keyword, pageable);
 //    }
 
+    // 카테고리 기능
+    @Override
+    public Page<Product> getProductsByCategory(String category, Pageable pageable) {
+        return productRepository.findByCategoryIgnoreCase(category, pageable);
+    }
+
 }

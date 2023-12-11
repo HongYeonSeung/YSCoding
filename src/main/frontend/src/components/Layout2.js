@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Layout2.css';
 
-// 이미지 파일 경로
 const imagePaths = [
     'cate1.png',
     'cate2.png',
@@ -13,20 +12,19 @@ const imagePaths = [
     'cate7.png',
     'cate8.png',
     'cate9.png',
+    'cate4.png'
+];
+
+const categories = [
+    '의류', '뷰티', '유아', '주방', '가전디지털',
+    '스포츠', '자동차용품', '완구취미', '도서', '기타'
 ];
 
 function Layout2() {
-    const buttonData = [
-        { id: 1, label: '카테고리 1' },
-        { id: 2, label: '카테고리 2' },
-        { id: 3, label: '카테고리 3' },
-        { id: 4, label: '카테고리 4' },
-        { id: 5, label: '카테고리 5' },
-        { id: 6, label: '카테고리 6' },
-        { id: 7, label: '카테고리 7' },
-        { id: 8, label: '카테고리 8' },
-        { id: 9, label: '카테고리 9' },
-    ];
+    const buttonData = categories.map((category, index) => ({
+        id: index + 1,
+        label: category,
+    }));
 
     return (
         <div className="layout2">
@@ -36,14 +34,13 @@ function Layout2() {
             <div className="button-container">
                 {buttonData.map((button, index) => (
                     <div key={button.id} className="button-container-item">
-                        <Link to={`/category${button.id}`}>
+                        <Link to={`/category/${button.label}`}>
                             <button className="round-button">
-                                {/* 이미지 파일 경로를 사용하여 이미지를 추가 */}
                                 <img
                                     src={`/${imagePaths[index]}`}
                                     alt={`Category ${button.label}`}
                                 />
-                                {/*{button.label}*/}
+                                <p className="button-label">{button.label}</p>
                             </button>
                         </Link>
                     </div>

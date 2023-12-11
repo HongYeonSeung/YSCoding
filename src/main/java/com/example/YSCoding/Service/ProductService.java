@@ -23,4 +23,7 @@ public interface ProductService {
 
     // 검색 기능
     Page<Product> search(String keyword, Pageable pageable);
+
+    // 카테고리 기능
+    Page<Product> getProductsByCategory(String category, Pageable pageable);
 }

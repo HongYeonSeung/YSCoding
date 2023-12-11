@@ -108,8 +108,7 @@ public class ProductController {
         }
     }
 
-
-        // 검색
+    // 검색
     @GetMapping("/search")
     public ResponseEntity<Page<Product>> search(@RequestParam String keyword, @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Product> products = productService.search(keyword, pageable);
@@ -137,7 +136,19 @@ public class ProductController {
         }
     }
 
-
+    // 특정 카테고리의 상품 목록 조회 API (페이징 처리 추가)
+    @GetMapping("/category/{category}")
+    public ResponseEntity<Page<Product>> getProductsByCategory(
+            @PathVariable String category,
+            @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        try {
+            Page<Product> products = productService.getProductsByCategory(category, pageable);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     //마이페이지 상품조회쪽
     //본인이 판매중인 상품
