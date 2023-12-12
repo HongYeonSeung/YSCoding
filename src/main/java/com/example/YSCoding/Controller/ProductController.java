@@ -130,6 +130,8 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    //마이페이지 상품조회쪽
+    //본인이 판매중인 상품
     @GetMapping("/currentlySellingProducts/{username}")
     public ResponseEntity<List<Product>> getCurrentlySellingProducts(@PathVariable String username) {
         List<Product> products = productService.getCurrentlySellingProducts(username);
@@ -165,7 +167,6 @@ public class ProductController {
         }
     }
 
-    //마이페이지 상품조회쪽
-    //본인이 판매중인 상품
+
 
 }

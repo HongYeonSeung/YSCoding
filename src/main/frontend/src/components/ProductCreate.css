@@ -68,3 +68,33 @@ option {
 .product-create-form textarea[name="content"] {
     height: 150px; /* 높이를 조절하려면 원하는 값으로 변경하세요 */
 }
+
+
+
+
+.views-container {
+    display: flex; /* 내부 요소도 수평으로 정렬하기 위해 flex 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.product-views {
+    position: absolute;
+    top: 7%;
+    left: 77%;
+    display: flex;
+}
+
+.product-views img,.product-bids img{
+    margin-top: -3px;
+    margin-right: 10px;
+}
+
+.product-bids{
+    position: absolute;
+    top: 13%;
+    left: 77%;
+    display: flex;
+    color: #e74c3c;
+
+
+}

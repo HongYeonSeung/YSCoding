@@ -27,6 +27,8 @@ function ActionBar() {
             .catch();
     };
 
+
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         const fetchUsernameFromToken = async () => {
@@ -68,6 +70,9 @@ function ActionBar() {
     }, [loginId, setLoginId]);
 
 
+
+
+
     return (
         <div className="action-bar-main">
             <div className="action-bar">
@@ -85,7 +90,7 @@ function ActionBar() {
                         <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>
                         <div>{loginId && <Link to="/myPage">마이페이지</Link>}</div>
                         <div>{loginId && <div className="pointClass">보유 포인트 : {point}</div>}</div>
-                        <div><a href="/" className="action-bar-a">포인트 충전</a></div>
+                        <div>{loginId &&<a href="/" className="action-bar-a">포인트 충전</a>}</div>
                     </div>
                     {loginId && (
                         <div className="action-bar-div">
