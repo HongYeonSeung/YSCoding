@@ -26,6 +26,13 @@ function Layout3() {
         setCurrentPage(newPage);
     };
 
+    // 시간 끝난 거 조회 x
+    const isProductExpired = (product) => {
+        const currentTime = new Date();
+        const expirationTime = new Date(product.timeAfter24Hours);
+        return expirationTime <= currentTime;
+    };
+
 
     //상품설명 글자제한 밑 ... 붙히기
     const truncateDescription = (description, maxLength) => {
@@ -49,22 +56,25 @@ function Layout3() {
             <div className="rectangle">
                 <div className="product_container">
                     {products.map((product) => (
-                        <div key={product.id} className="product">
-                            <div className="product_box">
-                                <div className="product_img_div">
-                                    <img src={`/api/images/${product.imagePath}`} className="product_img" alt={product.productName}/>
-                                </div>
-                                <p className="product_title"> {product.productName}</p>
-                                <p className="product_des">{truncateDescription(product.content, 30)}</p>
-                                <div className="product_mon">시작 입찰가 : {formatCurrency(product.startingPrice)}원</div>
-                                <div className="product_mon2">현재 입찰가 : {formatCurrency(product.currentPrice)}원</div>
-                                <div className="product_link_div">
-                                    <Link to={`/product/${product.id}`} className="product_link">
-                                        입찰하기
-                                    </Link>
+                        // 상품이 만료되지 않은 경우에만 표시
+                        !isProductExpired(product) && (
+                            <div key={product.id} className="product">
+                                <div className="product_box">
+                                    <div className="product_img_div">
+                                        <img src={`/api/images/${product.imagePath}`} className="product_img" alt={product.productName}/>
+                                    </div>
+                                    <p className="product_title"> {product.productName}</p>
+                                    <p className="product_des">{truncateDescription(product.content, 30)}</p>
+                                    <div className="product_mon">시작 입찰가 : {formatCurrency(product.startingPrice)}원</div>
+                                    <div className="product_mon2">현재 입찰가 : {formatCurrency(product.currentPrice)}원</div>
+                                    <div className="product_link_div">
+                                        <Link to={`/product/${product.id}`} className="product_link">
+                                            입찰하기
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )
                     ))}
                 </div>
                 {[...Array(totalPages).keys()].map((page, index) => ( // totalPages 상태 사용

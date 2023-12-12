@@ -172,4 +172,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByCategoryIgnoreCase(category, pageable);
     }
 
+    // 남은 시간 초과 시 조회 x
+    public Page<Product> getAllProductsNotExpired(LocalDateTime currentTime, Pageable pageable) {
+        // 현재 시간 이전의 상품만 가져오도록 쿼리 조건 추가
+        return productRepository.findByTimeAfter24HoursGreaterThan(currentTime, pageable);
+    }
+
 }

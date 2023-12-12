@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -28,4 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
     // 카테고리로 상품 목록 조회 (페이징 처리)
     Page<Product> findByCategoryIgnoreCase(String category, Pageable pageable);
 
+
+    // 현재 시간 이후의 상품만 가져오는 메서드
+    Page<Product> findByTimeAfter24HoursGreaterThan(LocalDateTime currentTime, Pageable pageable);
 }
