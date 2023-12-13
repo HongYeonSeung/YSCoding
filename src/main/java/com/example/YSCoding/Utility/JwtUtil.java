@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class JwtUtil {
     private static final String SECRET_KEY = "yourSecretKey";
-    private static final long EXPIRATION_TIME = 6000000; // (단위: 밀리초)
+    private static final long EXPIRATION_TIME = 6000; // (단위: 밀리초)
 
     public static String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();

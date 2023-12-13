@@ -25,6 +25,8 @@ function ActionBar() {
         axios.post('/api/logout')
             .then()
             .catch();
+
+
     };
 
 
@@ -71,6 +73,26 @@ function ActionBar() {
 
 
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const intervalId = setInterval(() => {
+            if (loginId !== '') {
+                axios.get(`/api/validateToken/${token}`)
+                    .then(response => {
+                        console.log("Invalid 토큰 에러",response.data)
+                        if (response.data === "Invalid Token") {
+                            handleLogoutClick();
+                            alert("토큰이 유효하지 않음");
+                            window.location.reload();
+                        }
+                    })
+                    .catch(error => console.log("토큰 에러", error));
+                console.log("로그인중");
+            }
+        }, 5000); // 5초마다실행
+
+        return () => clearInterval(intervalId); // 컴포넌트가 언마운트될 때 clearInterval을 호출하여 메모리 누수 방지
+    }, [loginId]); // loginId가 변경될 때마다 useEffect 실행
 
 
     return (

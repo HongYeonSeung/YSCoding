@@ -27,7 +27,7 @@ public class JwtController {
 
     @GetMapping("/validateToken/{token}")
     public String validateToken(@PathVariable String token) {
-        System.out.println(token);
+        System.out.println("토큰 유효성 검사"+token);
         return JwtUtil.validateToken(token) ? "Valid Token" : "Invalid Token";
     }
 }
