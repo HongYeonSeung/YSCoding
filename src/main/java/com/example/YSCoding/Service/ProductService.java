@@ -25,8 +25,8 @@ public interface ProductService {
 
     void placeBid(Long productId, Double bidAmount, String bidderId);
 
-    // 검색 기능
-    Page<Product> search(String keyword, Pageable pageable);
+    // 시간이 지난 상품을 제외하고 검색하는 메서드
+    Page<Product> searchNotExpired(String keyword, LocalDateTime currentTime, Pageable pageable);
 
     // 카테고리 기능
     Page<Product> getProductsByCategory(String category, Pageable pageable);

@@ -15,7 +15,8 @@ function SearchResults() {
     useEffect(() => {
         const fetchSearchResults = async () => {
             try {
-                const response = await axios.get(`/api/search?keyword=${keyword}&page=${currentPage - 1}`);
+                const response = await axios.get(`/api/search-not-expired?keyword=${keyword}&page=${currentPage - 1}`);
+
                 setResults(response.data.content);
                 setTotalPages(response.data.totalPages);
                 setNoResults(response.data.content.length === 0);

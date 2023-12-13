@@ -123,10 +123,18 @@ public class ProductController {
         }
     }
 
-    // 검색
-    @GetMapping("/search")
-    public ResponseEntity<Page<Product>> search(@RequestParam String keyword, @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Product> products = productService.search(keyword, pageable);
+
+    // 검색기능(시간 지난 상품 제외)
+    @GetMapping("/search-not-expired")
+    public ResponseEntity<Page<Product>> searchNotExpired(@RequestParam String keyword,
+                                                          @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        Page<Product> products = productService.searchNotExpired(keyword, currentTime, pageable);
+
+        if (products.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 검색 결과가 없으면 204 No Content 반환
+        }
+
         return ResponseEntity.ok(products);
     }
 

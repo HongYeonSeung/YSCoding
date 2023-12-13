@@ -162,17 +162,13 @@ public class ProductServiceImpl implements ProductService {
         return buyer != null && buyer.getPoint() >= bidAmount;
     }
 
-    // 문자가 한 개라도 같으면 검색
+    // 검색 결과(시간 지난 상품 제외)
     @Override
-    public Page<Product> search(String keyword, Pageable pageable) {
-        return productRepository.findByProductNameIgnoreCaseContainingOrContentIgnoreCaseContaining(keyword, keyword, pageable);
+    public Page<Product> searchNotExpired(String keyword, LocalDateTime currentTime, Pageable pageable) {
+        // 현재 시간 이후의 상품만 검색
+        Page<Product> products = productRepository.searchNotExpired(keyword, currentTime, pageable);
+        return products;
     }
-
-    // 검색 기능
-//    @Override
-//    public Page<Product> search(String keyword, Pageable pageable) {
-//        return productRepository.findByProductNameEqualsOrContentEquals(keyword, keyword, pageable);
-//    }
 
     // 카테고리 기능
     @Override
