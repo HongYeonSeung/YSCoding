@@ -85,8 +85,7 @@ function ProductDetailPage() {
                 setEndTime(response.data.timeAfter24Hours);
             } catch (error) {
                 console.error('상품 상세 정보를 불러오는 중 에러 발생:', error);
-            }
-            finally {
+            } finally {
                 setLoading(false);
             }
         };
@@ -104,9 +103,8 @@ function ProductDetailPage() {
             // 값이 공백이거나 현재 입찰가보다 낮은 경우 확인 메시지 표시
             if (!bidAmount.trim()) {
                 alert('입찰 금액을 입력하세요.');
-            } else if (parseInt(bidAmount, 10) <= product.currentPrice) {
-                alert('현재 입찰가보다 높은 금액으로 입찰하세요.');
-            } else {
+            }
+            else {
                 // 모달 열기
                 setConfirmationModalOpen(true);
             }
@@ -175,9 +173,9 @@ function ProductDetailPage() {
         return (
             <div>
                 <p>{/* 빈 줄을 만들기 위한 p 태그 */}
-                    <br />
+                    <br/>
                     {/* 상품 설명 */}
-                    <span dangerouslySetInnerHTML={{ __html: formattedDescription }} />
+                    <span dangerouslySetInnerHTML={{__html: formattedDescription}}/>
                 </p>
             </div>
         );
