@@ -48,6 +48,8 @@ function ProductDetailPage() {
     const [endTime, setEndTime] = useState(null);
     const currentDate_log = new Date();
     const backendTimeDate = new Date(product.timeAfter24Hours);
+    const [loading, setLoading] = useState(true);
+
 
     // 토큰으로 아이디 검증
     const [loginId, setLoginId] = useState();
@@ -63,6 +65,7 @@ function ProductDetailPage() {
             } catch (error) {
                 console.error('토큰 아이디 검증 에러:', error);
             }
+
         };
         tokenToLogin();
     }, [token]);
@@ -82,6 +85,9 @@ function ProductDetailPage() {
                 setEndTime(response.data.timeAfter24Hours);
             } catch (error) {
                 console.error('상품 상세 정보를 불러오는 중 에러 발생:', error);
+            }
+            finally {
+                setLoading(false);
             }
         };
 
@@ -176,6 +182,10 @@ function ProductDetailPage() {
             </div>
         );
     };
+
+    if (loading) {
+        return <p>로딩 중...</p>;
+    }
 
     return (
         <div className="product-detail-container">
