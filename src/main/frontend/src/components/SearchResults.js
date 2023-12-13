@@ -16,7 +16,6 @@ function SearchResults() {
         const fetchSearchResults = async () => {
             try {
                 const response = await axios.get(`/api/search-not-expired?keyword=${keyword}&page=${currentPage - 1}`);
-
                 setResults(response.data.content);
                 setTotalPages(response.data.totalPages);
                 setNoResults(response.data.content.length === 0);
@@ -66,7 +65,7 @@ function SearchResults() {
                     <p className="no-results-message">검색 결과가 없습니다.</p>
                 ) : (
                     <div className="product_container">
-                        {results.map((product) => (
+                        {results && results.map((product) => (
                             <div key={product.id} className="product">
                                 <div className="product_box">
                                     <div className="product_img_div">

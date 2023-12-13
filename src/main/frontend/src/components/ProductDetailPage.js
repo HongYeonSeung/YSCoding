@@ -88,16 +88,25 @@ function ProductDetailPage() {
         fetchProductDetails();
     }, [params.id]);
 
+
     const handleBidClick = (event) => {
         event.preventDefault();
 
         if (loginId == null) {
             alert('로그인 후 입찰해 주세요.');
         } else {
-            // 모달 열기
-            setConfirmationModalOpen(true);
+            // 값이 공백이거나 현재 입찰가보다 낮은 경우 확인 메시지 표시
+            if (!bidAmount.trim()) {
+                alert('입찰 금액을 입력하세요.');
+            } else if (parseInt(bidAmount, 10) <= product.currentPrice) {
+                alert('현재 입찰가보다 높은 금액으로 입찰하세요.');
+            } else {
+                // 모달 열기
+                setConfirmationModalOpen(true);
+            }
         }
     };
+
 
     const handleConfirmation = () => {
         // 모달 닫기
