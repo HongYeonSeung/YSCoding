@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import './ProductDetailPage.css';
 import ConfirmationModal from './ConfirmationModal';
 
-const CountdownTimer = ({ endTime }) => {
+const CountdownTimer = ({endTime}) => {
     const calculateTimeRemaining = () => {
         const now = new Date();
         const endTimeDate = new Date(endTime);
         const difference = endTimeDate - now;
 
         if (difference < 0) {
-            return { hours: 0, minutes: 0, seconds: 0 };
+            return {hours: 0, minutes: 0, seconds: 0};
         }
 
         const hours = Math.floor(difference / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        return { hours, minutes, seconds };
+        return {hours, minutes, seconds};
     };
 
     const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
@@ -46,6 +46,8 @@ function ProductDetailPage() {
     const [bidAmount, setBidAmount] = useState('');
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
     const [endTime, setEndTime] = useState(null);
+    const currentDate_log = new Date();
+    const backendTimeDate = new Date(product.timeAfter24Hours);
 
     // 토큰으로 아이디 검증
     const [loginId, setLoginId] = useState();
@@ -147,14 +149,15 @@ function ProductDetailPage() {
         return '';
     };
 
+
     return (
         <div className="product-detail-container">
-            <div className="left-section">
+            <div className={`left-section ${!(backendTimeDate > currentDate_log) ? 'disabled' : ''}`}>
                 <div className="large-rectangle">
-                    {product.imagePath && <img src={`/api/images/${product.imagePath}`} alt={product.productName} />}
+                    {product.imagePath && <img src={`/api/images/${product.imagePath}`} alt={product.productName}/>}
                 </div>
             </div>
-            <div className="right-section">
+            <div className={`right-section ${!(backendTimeDate > currentDate_log) ? 'disabled' : ''}`}>
                 <div className="product-info">
                     <div className="category_text_list">카테고리 > {product.category}</div>
                     <h2>상품 이름: {product.productName}</h2>
@@ -165,9 +168,9 @@ function ProductDetailPage() {
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
                     <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>
-                    <div className="list">남은 시간 : <CountdownTimer endTime={endTime} /></div>
+                    <div className="list">남은 시간 : <CountdownTimer endTime={endTime}/></div>
                 </div>
-                <div className="product-detail-container-button-container">
+                <div className={`product-detail-container-button-container`}>
                     <form className='bidding_form'>
                         <input
                             className='bidding_form_input'
@@ -176,7 +179,9 @@ function ProductDetailPage() {
                             onChange={handleInputChange}
                             placeholder='입찰 금액을 입력하세요'
                         />
-                        <button type='submit' onClick={handleBidClick}>입찰하기</button>
+                        <button type='submit' onClick={handleBidClick} disabled={!(backendTimeDate > currentDate_log)}>
+                            입찰하기
+                        </button>
                     </form>
                 </div>
             </div>
@@ -186,7 +191,9 @@ function ProductDetailPage() {
                 onConfirm={handleConfirmation}
                 bidAmount={`${bidAmount}`}
             />
+            {!(backendTimeDate > currentDate_log) && <div className="sold-out-text">판 매 완 료</div>}
         </div>
+
     );
 }
 

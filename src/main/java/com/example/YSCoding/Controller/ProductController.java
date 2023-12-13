@@ -145,7 +145,19 @@ public class ProductController {
 
     @GetMapping("/currentlyBiddingProducts/{username}")
     public ResponseEntity<List<Product>> getCurrentlyBiddingProducts(@PathVariable String username) {
-        List<Product> products = productService.getCurrentlyBiddingProducts(username);
+        LocalDateTime currentTime = LocalDateTime.now();
+        List<Product> products = productService.getCurrentlyBiddingProducts(username,currentTime);
+        if (!products.isEmpty()) {
+            return ResponseEntity.ok(products);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/currentlyBiddingFinishProducts/{username}")
+    public ResponseEntity<List<Product>> getCurrentlyBiddingFinishProducts(@PathVariable String username) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        List<Product> products = productService.getCurrentlyBiddingFinishProducts(username,currentTime);
         if (!products.isEmpty()) {
             return ResponseEntity.ok(products);
         } else {

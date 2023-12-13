@@ -4,6 +4,7 @@ import CurrentlySelling from './CurrentlySelling';
 import CurrentlyBidding from './CurrentlyBidding';
 import UnsuccessfulBids from './UnsuccessfulBids';
 import axios from "axios";
+import CurrentlyBiddingFinish from "./CurrentlyBiddingFinish";
 
 const MyPage = () => {
     // 토큰으로 아이디 검증
@@ -25,13 +26,15 @@ const MyPage = () => {
     }, []);
     return (
         <div>
-            <h2>현재 판매중인 상품</h2>
+            <h2>판매 상품 리스트</h2>
             <CurrentlySelling LoginId={loginId}/>
 
             <h2>현재 입찰중인 상품</h2>
             <CurrentlyBidding LoginId={loginId}/>
+            <h2>입찰 완료 상품</h2>
+            <CurrentlyBiddingFinish LoginId={loginId}/>
 
-            <h2>유찰당한 상품</h2>
+            <h2>유찰 상품</h2>
             <UnsuccessfulBids LoginId={loginId}/>
         </div>
     );

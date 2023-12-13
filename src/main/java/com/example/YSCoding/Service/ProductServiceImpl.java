@@ -90,11 +90,19 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllByLoginId(username);
     }
 
-    //입찰중신상품
+    //입찰중인 상품 현재시간
     @Override
-    public List<Product> getCurrentlyBiddingProducts(String username) {
-        return productRepository.findAllByBuyId(username);
+    public List<Product> getCurrentlyBiddingProducts(String username,LocalDateTime currentTime) {
+        return productRepository.findAllByBuyIdAndTimeAfter24HoursGreaterThan(username,currentTime);
     }
+
+    //입찰 완료 상품
+    @Override
+    public List<Product> getCurrentlyBiddingFinishProducts(String username,LocalDateTime currentTime) {
+        return productRepository.findAllByBuyIdAndTimeAfter24HoursLessThanEqual(username,currentTime);
+    }
+
+
 
 
     @Transactional
@@ -132,7 +140,7 @@ public class ProductServiceImpl implements ProductService {
                 signupRepository.save(previousBidder);
             }
 
-            // Bid 엔터티 z생성
+            // Bid 엔터티 생성
             Bid bid = new Bid();
             bid.setBidderId(bidderId);
             bid.setBidAmount(bidAmount);

@@ -32,4 +32,13 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 
     // 현재 시간 이후의 상품만 가져오는 메서드
     Page<Product> findByTimeAfter24HoursGreaterThan(LocalDateTime currentTime, Pageable pageable);
+
+
+    //마이페이지 입찰중인
+    List<Product> findAllByBuyIdAndTimeAfter24HoursGreaterThan(String username, LocalDateTime currentTime);
+
+    //마이페이지 입찰완료
+    List<Product> findAllByBuyIdAndTimeAfter24HoursLessThanEqual(String username, LocalDateTime currentTime);
+
+
 }

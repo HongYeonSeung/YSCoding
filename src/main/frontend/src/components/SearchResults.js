@@ -35,7 +35,8 @@ function SearchResults() {
         if (keyword) {
             return (
                 <div>
-                    <SearchBar />
+                    <SearchBar style={{ textAlign: 'center' }} />
+
                     <div className="search-header">
                         <p className="popular-products-text">"{keyword}"에 대한 검색 결과</p>
                     </div>

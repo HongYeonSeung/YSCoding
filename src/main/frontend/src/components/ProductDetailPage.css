@@ -218,3 +218,21 @@
     margin: auto;
     align-items: end;
 }
+
+.disabled {
+    opacity: 0.5; /* 투명도를 줘서 비활성화된 효과를 줄 수 있음 */
+    pointer-events: none; /* 비활성화된 요소에 대한 이벤트를 막음 */
+    /* 다른 비활성화된 스타일을 추가할 수 있음 */
+}
+
+.sold-out-text {
+    opacity: 1; /* 또는 다른 값을 원하는 대로 설정 */
+    position: absolute;
+    top: 50%; /* 부모 요소의 중앙을 기준으로 설정 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위한 transform */
+    color: red; /* 빨간색 텍스트 */
+    font-size: 150px; /* 원하는 크기로 조절 */
+    font-weight: bold; /* 굵은 글씨체 */
+
+}

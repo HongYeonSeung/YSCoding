@@ -17,10 +17,9 @@ function Layout1() {
                 navigation
                 pagination={{ clickable: true }}
                 onSwiper={(swiper) => console.log(swiper)}>
-                <SwiperSlide><img src="/banner1.png"/></SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
+                <SwiperSlide><a href={"javascript:void(0)"}><img src="/banner1.png"/></a></SwiperSlide>
+                <SwiperSlide><a href={"javascript:void(0)"}><img src="/배너3.png"/></a></SwiperSlide>
+                <SwiperSlide><a href={"javascript:void(0)"}><img src="/배너5.png"/></a></SwiperSlide>
             </Swiper>
         </div>
     </div>

@@ -18,7 +18,10 @@ public interface ProductService {
 
     List<Product> getCurrentlySellingProducts(String username);
 
-    List<Product> getCurrentlyBiddingProducts(String username);
+    List<Product> getCurrentlyBiddingProducts(String username ,LocalDateTime currentTime);
+
+    List<Product> getCurrentlyBiddingFinishProducts(String username ,LocalDateTime currentTime);
+
 
     void placeBid(Long productId, Double bidAmount, String bidderId);
 
