@@ -30,17 +30,42 @@ const EditProfilePage = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserDto({ ...userDto, [name]: value });
+
+        // 생년월일과 전화번호는 숫자만 허용하도록 처리
+        if (name === 'birthdate' || name === 'phoneNumber') {
+            setUserDto((prevUserDto) => ({
+                ...prevUserDto,
+                [name]: value.replace(/[^0-9]/g, ''), // 숫자만 남기고 나머지 문자 제거
+            }));
+        } else {
+            setUserDto((prevUserDto) => ({
+                ...prevUserDto,
+                [name]: value,
+            }));
+        }
     };
 
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // 빈 값이 있는지 확인
+        if (
+            !userDto.email ||
+            !userDto.name ||
+            !userDto.birthdate ||
+            !userDto.phoneNumber
+        ) {
+            alert('모든 필드를 입력해주세요.');
+            return;
+        }
+
         if (password && password !== confirmPassword) {
             alert('비밀번호가 일치하지 않습니다.');
             return;
         }
+
         try {
             const updateData = {
                 ...userDto,
@@ -53,6 +78,7 @@ const EditProfilePage = () => {
             console.error('Error updating user info:', error);
         }
     };
+
 
     const handleDeleteAccount = async () => {
         if (window.confirm('정말로 계정을 삭제하시겠습니까?')) {
@@ -82,11 +108,11 @@ const EditProfilePage = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">비밀번호</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" placeholder="변경 시 입력" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="confirmPassword">비밀번호 확인</label>
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <input type="password" placeholder="변경 시 입력" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">이메일</label>
@@ -94,7 +120,7 @@ const EditProfilePage = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">이름</label>
-                    <input type="text" name="name" value={userDto?.name} onChange={handleInputChange} />
+                    <input type="text" name="name" value={userDto?.name} onChange={handleInputChange} disabled />
                 </div>
                 <div className="form-group">
                     <label htmlFor="birthdate">생년월일</label>
