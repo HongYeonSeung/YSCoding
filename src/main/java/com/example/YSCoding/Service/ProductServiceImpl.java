@@ -170,10 +170,11 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
-    // 카테고리 기능
+    // 카테고리 기능 (시간 초과 x)
     @Override
-    public Page<Product> getProductsByCategory(String category, Pageable pageable) {
-        return productRepository.findByCategoryIgnoreCase(category, pageable);
+    public Page<Product> getProductsByCategoryNotExpired(String category, LocalDateTime currentTime, Pageable pageable) {
+        // 현재 시간 이전의 상품만 가져오도록 쿼리 조건 추가
+        return productRepository.findByCategoryIgnoreCaseAndTimeAfter24HoursGreaterThan(category, currentTime, pageable);
     }
 
     // 남은 시간 초과 시 조회 x

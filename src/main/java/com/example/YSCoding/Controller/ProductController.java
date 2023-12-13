@@ -173,20 +173,19 @@ public class ProductController {
         }
     }
 
-    // 특정 카테고리의 상품 목록 조회 API (페이징 처리 추가)
+    // 특정 카테고리의 상품 목록 조회 API (시간이 지난 상품 제외)
     @GetMapping("/category/{category}")
     public ResponseEntity<Page<Product>> getProductsByCategory(
             @PathVariable String category,
             @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
-            Page<Product> products = productService.getProductsByCategory(category, pageable);
+            LocalDateTime currentTime = LocalDateTime.now();
+            Page<Product> products = productService.getProductsByCategoryNotExpired(category, currentTime, pageable);
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
-
 
 }

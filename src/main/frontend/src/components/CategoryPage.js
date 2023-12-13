@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import './CategoryPage.css';
-import SearchBar from "./SearchBar"; // 스타일 파일을 불러옵니다.
+import SearchBar from "./SearchBar";
 
 const CategoryPage = () => {
     const [categoryResults, setCategoryResults] = useState([]);
@@ -43,7 +43,7 @@ const CategoryPage = () => {
 
     return (
         <div>
-            <SearchBar/>
+            <SearchBar />
             <h2>카테고리 > {category}</h2>
             {categoryResults.length === 0 ? (
                 <p>카테고리 결과가 없습니다.</p>
@@ -69,7 +69,6 @@ const CategoryPage = () => {
                     ))}
                 </div>
             )}
-            {/* Flexbox를 적용한 부분 */}
             <div className="pagination-container">
                 {[...Array(totalPages).keys()].map((page, index) => (
                     <button key={index} onClick={() => handlePageChange(page + 1)}>

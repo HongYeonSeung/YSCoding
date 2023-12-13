@@ -25,8 +25,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
     @Query("SELECT p FROM Product p WHERE p.timeAfter24Hours > :currentTime AND (LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(p.content) LIKE LOWER(CONCAT('%', :keyword, '%')))")
     Page<Product> searchNotExpired(@Param("keyword") String keyword, @Param("currentTime") LocalDateTime currentTime, Pageable pageable);
 
-    // 카테고리로 상품 목록 조회 (페이징 처리)
-    Page<Product> findByCategoryIgnoreCase(String category, Pageable pageable);
+    // 특정 카테고리의 상품 목록 조회 API (페이징 처리 추가, 시간 초과 x)
+    Page<Product> findByCategoryIgnoreCaseAndTimeAfter24HoursGreaterThan(String category, LocalDateTime currentTime, Pageable pageable);
 
     // 현재 시간 이후의 상품만 가져오는 메서드
     Page<Product> findByTimeAfter24HoursGreaterThan(LocalDateTime currentTime, Pageable pageable);

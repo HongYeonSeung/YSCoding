@@ -28,8 +28,8 @@ public interface ProductService {
     // 시간이 지난 상품을 제외하고 검색하는 메서드
     Page<Product> searchNotExpired(String keyword, LocalDateTime currentTime, Pageable pageable);
 
-    // 카테고리 기능
-    Page<Product> getProductsByCategory(String category, Pageable pageable);
+    // 특정 카테고리의 상품 목록 조회 API (페이징 처리 추가)
+    Page<Product> getProductsByCategoryNotExpired(String category, LocalDateTime currentTime, Pageable pageable);
 
     // 상품 조회 시 시간 초과 x
     Page<Product> getAllProductsNotExpired(LocalDateTime currentTime, Pageable pageable);
