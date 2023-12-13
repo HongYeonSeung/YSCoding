@@ -77,6 +77,8 @@ function SearchResults() {
                                     <p className="product_des">{truncateDescription(product.content, 30)}</p>
                                     <div className="product_mon">시작 입찰가 : {formatCurrency(product.startingPrice)}원</div>
                                     <div className="product_mon2">현재 입찰가 : {formatCurrency(product.currentPrice)}원</div>
+                                    <div className="product-views"><img src="/img/visibility_icon.png"/>{product.views}</div>
+                                    <div className="product-bids"><img src="/img/group_icon.png"/>{product.biddersCount}</div>
                                     <div className="product_link_div">
                                         <Link to={`/product/${product.id}`} className="product_link">
                                             입찰하기

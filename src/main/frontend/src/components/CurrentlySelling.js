@@ -7,6 +7,7 @@ import axios from 'axios';
 const CurrentlySelling = ({ LoginId }) => {
     const [currentlySellingProducts, setCurrentlySellingProducts] = useState([]);
 
+
     useEffect(() => {
         if (LoginId) {
             axios.get(`/api/currentlySellingProducts/${LoginId}`)
@@ -18,6 +19,7 @@ const CurrentlySelling = ({ LoginId }) => {
                 });
         }
     }, [LoginId]);
+
 
     return (
         <div className="currently-selling-container">

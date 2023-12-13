@@ -79,8 +79,8 @@ option {
 
 .product-views {
     position: absolute;
-    top: 7%;
-    left: 80%;
+    top: 3%;
+    left: 60%;
     display: flex;
 }
 
@@ -91,7 +91,7 @@ option {
 
 .product-bids{
     position: absolute;
-    top: 13%;
+    top: 3%;
     left: 80%;
     display: flex;
     color: #e74c3c;
