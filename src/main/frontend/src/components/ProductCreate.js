@@ -50,6 +50,13 @@ function ProductCreate() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // 필수 필드에 대한 유효성 검사 추가
+        if (!product.productName || !product.startingPrice || !product.image || !product.category) {
+            // 에러 메시지 또는 토스트 표시
+            alert("모든 필드를 작성하세요!");
+            return;
+        }
+
         // 확인 메시지 표시
         const confirmResult = window.confirm("상품을 등록하시겠습니까?");
         if (!confirmResult) {
