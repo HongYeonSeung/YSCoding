@@ -158,6 +158,24 @@ function ProductDetailPage() {
         return '';
     };
 
+    const formatDescriptionWithLineBreaks = (description) => {
+        if (!description) {
+            return '';
+        }
+
+        // 개행 문자를 HTML 줄 바꿈 태그로 대체
+        const formattedDescription = description.replace(/\n/g, '<br/>');
+
+        return (
+            <div>
+                <p>{/* 빈 줄을 만들기 위한 p 태그 */}
+                    <br />
+                    {/* 상품 설명 */}
+                    <span dangerouslySetInnerHTML={{ __html: formattedDescription }} />
+                </p>
+            </div>
+        );
+    };
 
     return (
         <div className="product-detail-container">
@@ -171,7 +189,7 @@ function ProductDetailPage() {
                     <div className="category_text_list">카테고리 > {product.category}</div>
                     <h2>상품 이름: {product.productName}</h2>
                     <div className="list">판매자 ID : {product.loginId}</div>
-                    <div className="list">상품 설명 : {product.content}</div>
+                    <div className="list">상품 설명 : {formatDescriptionWithLineBreaks(product.content)}</div>
                     <div className="list">조회수 : {product.views}</div>
                     <div className="list">입찰 된 횟수 : {product.biddersCount}</div>
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
