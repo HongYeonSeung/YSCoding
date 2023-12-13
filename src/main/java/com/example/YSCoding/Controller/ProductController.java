@@ -36,18 +36,6 @@ public class ProductController {
         }
     }
 
-//    // 상품 목록 조회 API
-//    @GetMapping("/products")
-//    public ResponseEntity<Page<Product>> getAllProducts(@PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-//        try {
-//            Page<Product> products = productService.getAllProducts(pageable);
-//            return ResponseEntity.ok(products);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//        }
-//    }
-
     // 상품 목록 조회 시 시간 초과 x API
     @GetMapping("/products")
     public ResponseEntity<Page<Product>> getAllProducts(@PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -130,10 +118,6 @@ public class ProductController {
                                                           @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         LocalDateTime currentTime = LocalDateTime.now();
         Page<Product> products = productService.searchNotExpired(keyword, currentTime, pageable);
-
-        if (products.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 검색 결과가 없으면 204 No Content 반환
-        }
 
         return ResponseEntity.ok(products);
     }

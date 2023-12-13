@@ -16,6 +16,8 @@ function SearchResults() {
         const fetchSearchResults = async () => {
             try {
                 const response = await axios.get(`/api/search-not-expired?keyword=${keyword}&page=${currentPage - 1}`);
+                console.log('Response Data:', response.data); // 전체 응답 데이터 확인
+                console.log('Content:', response.data.content.length); // content 확인
                 setResults(response.data.content);
                 setTotalPages(response.data.totalPages);
                 setNoResults(response.data.content.length === 0);
