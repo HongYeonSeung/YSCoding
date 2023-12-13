@@ -79,7 +79,7 @@ function ActionBar() {
             if (loginId !== '') {
                 axios.get(`/api/validateToken/${token}`)
                     .then(response => {
-                        console.log("Invalid 토큰 에러",response.data)
+                        console.log("Invalid 토큰 에러",response.data,token)
                         if (response.data === "Invalid Token") {
                             handleLogoutClick();
                             alert("토큰이 유효하지 않음");

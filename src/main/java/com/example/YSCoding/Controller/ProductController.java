@@ -38,7 +38,7 @@ public class ProductController {
 
     // 상품 목록 조회 시 시간 초과 x API
     @GetMapping("/products")
-    public ResponseEntity<Page<Product>> getAllProducts(@PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<Product>> getAllProducts(@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
             // 현재 시간을 가져오기
             LocalDateTime currentTime = LocalDateTime.now();
@@ -115,7 +115,7 @@ public class ProductController {
     // 검색기능(시간 지난 상품 제외)
     @GetMapping("/search-not-expired")
     public ResponseEntity<Page<Product>> searchNotExpired(@RequestParam String keyword,
-                                                          @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                                          @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         LocalDateTime currentTime = LocalDateTime.now();
         Page<Product> products = productService.searchNotExpired(keyword, currentTime, pageable);
 
@@ -161,7 +161,7 @@ public class ProductController {
     @GetMapping("/category/{category}")
     public ResponseEntity<Page<Product>> getProductsByCategory(
             @PathVariable String category,
-            @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
             LocalDateTime currentTime = LocalDateTime.now();
             Page<Product> products = productService.getProductsByCategoryNotExpired(category, currentTime, pageable);

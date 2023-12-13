@@ -15,20 +15,28 @@
 .product_container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .product {
     position: relative;
     border: 2px solid #ddd;
     border-radius: 15px;
-    width: 30%;
-    max-width: 300px;
+    max-width: calc(20% - 2 * 1%);
+    margin: 20px 1%;
     height: 450px;
-    margin: 20px;
+    box-sizing: border-box; /* 배경색이나 테두리를 기준으로 크기 지정 */
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+}
+
+/* 모바일 환경에서는 한 행에 하나씩 표시하도록 설정 */
+@media (max-width: 768px) {
+    .product {
+        width: 100%;
+        margin: 20px 0;
+    }
 }
 
 .product:hover {
