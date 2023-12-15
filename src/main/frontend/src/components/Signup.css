@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 1100px;
   text-align: center;
   flex-direction: column;
 
@@ -13,7 +13,7 @@
   border: 1px solid #ccc;
   background-color: #fff;
   width: 350px; /* 가로 크기를 조정 (원하는 크기로 변경) */
-  height: 800px; /* 세로 크기를 조정 (원하는 크기로 변경) */
+  height: 920px; /* 세로 크기를 조정 (원하는 크기로 변경) */
   border-radius: 10px; /* 양 모서리를 둥글게 만듭니다. */
 }
 .signup-container h2 {
@@ -37,8 +37,9 @@
 
 .signup-container input {
   width: 100%;
+
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -46,7 +47,7 @@
 .signup-container button {
 
   width: 200px;
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 0.5rem;
 
   border: none;
@@ -66,4 +67,25 @@
   background: #007bff;
   outline: 0;
   color: #000;
+}
+
+#homeAddressDiv input{
+  width: 250px;
+}
+
+#homeAddressBox{
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+
+}
+#detailHomeAddressDiv input{
+  width: 130px;
+  margin: 0 20px 0 0;
+}
+
+#homeAddressBnt{
+  height: 34px;
+  width: 100px;
+  margin: 0;
 }

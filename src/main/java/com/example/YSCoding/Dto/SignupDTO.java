@@ -16,5 +16,6 @@ public class SignupDTO {
     private String birthdate;
     private String phoneNumber;
     private int point;
-
+    private String homeAddress;
+    private String detailHomeAddress;
 }

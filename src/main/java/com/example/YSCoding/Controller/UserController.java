@@ -6,6 +6,7 @@ import com.example.YSCoding.Entity.Product;
 import com.example.YSCoding.Entity.Signup;
 import com.example.YSCoding.Repository.ProductRepository;
 import com.example.YSCoding.Repository.SignupRepository;
+import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,8 @@ public class UserController {
             userDto.setBirthdate(user.getBirthdate());
             userDto.setPhoneNumber(user.getPhoneNumber());
             userDto.setPoint(user.getPoint());
-
+            userDto.setHomeAddress(user.getHomeAddress());
+            userDto.setDetailHomeAddress(user.getDetailHomeAddress());
             return userDto; // 사용자 정보 DTO 반환
         } else {
             return null; // 해당 아이디를 찾을 수 없음
@@ -72,6 +74,8 @@ public class UserController {
             user.setName(requestDto.getName());
             user.setBirthdate(requestDto.getBirthdate());
             user.setPhoneNumber(requestDto.getPhoneNumber());
+            user.setHomeAddress(requestDto.getHomeAddress());
+            user.setDetailHomeAddress(requestDto.getDetailHomeAddress());
             if (requestDto.getPassword() != null && !requestDto.getPassword().isEmpty()) {
                 user.setPassword(requestDto.getPassword()); // 새로운 비밀번호가 제공되면 업데이트
             }

@@ -1,6 +1,5 @@
 package com.example.YSCoding.Controller;
 
-import com.example.YSCoding.Dto.LoginDTO;
 import com.example.YSCoding.Dto.SignupDTO;
 import com.example.YSCoding.Entity.Signup;
 import com.example.YSCoding.Service.LoginService;

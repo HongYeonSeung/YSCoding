@@ -15,17 +15,15 @@ public class SignupService {
     }
     public String saveSignup(Signup signup) {
         if (!isUsernameAvailable(signup.getUsername())) {
-            System.out.println("에러4");
+            System.out.println("이미 존재하는 사용자명입니다 에러");
 
             return "이미 존재하는 사용자명입니다.";
         } else if (!isEmailAvailable(signup.getEmail())) {
-            System.out.println("에러3");
+            System.out.println("이미 존재하는 이메일입니다 에러");
 
             return "이미 존재하는 이메일입니다.";
         } else {
             signupRepository.save(signup);
-            System.out.println(signup.getUsername()+"에러2");
-
             return "회원가입이 성공적으로 완료되었습니다.";
         }
     }

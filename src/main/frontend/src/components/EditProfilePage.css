@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 1100px;
     text-align: center;
     flex-direction: column;
 }
@@ -15,7 +15,7 @@
     border: 1px solid #ccc;
     background-color: #fff;
     width: 350px;
-    height: 800px;
+    height: 920px;
     border-radius: 10px;
 }
 
@@ -48,7 +48,7 @@
 
 .edit-profile-form button {
     width: 200px;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 0.5rem;
     border: none;
     border-radius: 20px;
@@ -65,4 +65,14 @@
     background: #007bff;
     outline: 0;
     color: #000;
+}
+
+.edit-profile-container .delete-button{
+    background-color: #e74c3c;
+    margin-top: 10px;
+}
+
+.edit-profile-container .delete-button:hover{
+    background-color: #e74c3c;
+    color: black;
 }

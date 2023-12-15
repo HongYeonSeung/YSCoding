@@ -19,6 +19,9 @@ const PopupPostCode = (props) => {
         console.log(data)
         console.log(fullAddress)
         console.log(data.zonecode)
+
+        // 검색 결과를 메인 JS로 전달
+        props.onSearchResult(fullAddress);
         props.onClose()
     }
 
