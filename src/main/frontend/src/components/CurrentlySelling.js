@@ -3,9 +3,12 @@ import ProductCard from './ProductCard';
 import './CurrentlySelling.css';
 import axios from 'axios';
 
+
 //판매중인 상품 페이지
 const CurrentlySelling = ({ LoginId }) => {
-    const [currentlySellingProducts, setCurrentlySellingProducts] = useState([]);
+
+
+    const [currentlySellingProducts, setCurrentlySellingProducts] = useState();
 
 
     useEffect(() => {
@@ -13,6 +16,8 @@ const CurrentlySelling = ({ LoginId }) => {
             axios.get(`/api/currentlySellingProducts/${LoginId}`)
                 .then(response => {
                     setCurrentlySellingProducts(response.data);
+                    console.log("데이터",currentlySellingProducts.timeAfter24Hours)
+
                 })
                 .catch(error => {
                     console.error('데이터 가져오기 에러:', error);
@@ -24,12 +29,13 @@ const CurrentlySelling = ({ LoginId }) => {
     return (
         <div className="currently-selling-container">
             <hr />
-            <div className="product-list-horizontal">
+            {!currentlySellingProducts && <div className="myPage_notProduct">판매 상품이 없습니다</div>}
+            {currentlySellingProducts && <div className="product-list-horizontal">
                 {currentlySellingProducts.map((product, index) => (
                     <ProductCard key={index} product={product} />
                 ))}
-            </div>
-            <div></div>
+            </div>}
+            <hr/>
         </div>
     );
 };

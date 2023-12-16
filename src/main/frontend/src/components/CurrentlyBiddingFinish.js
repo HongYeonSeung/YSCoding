@@ -1,11 +1,11 @@
-import React,{useEffect, useState}  from 'react';
+import React, {useEffect, useState} from 'react';
 import ProductCard from './ProductCard';
 import './CurrentlyBiddingFinish.css';
 import axios from "axios";
 
 //입찰중인 페이지
-const CurrentlyBiddingFinish = ({ LoginId }) => {
-    const [currentlyBiddingFinishProducts, setCurrentlyBiddingFinishProducts] = useState([]);
+const CurrentlyBiddingFinish = ({LoginId}) => {
+    const [currentlyBiddingFinishProducts, setCurrentlyBiddingFinishProducts] = useState();
 
     useEffect(() => {
         if (LoginId) {
@@ -20,12 +20,14 @@ const CurrentlyBiddingFinish = ({ LoginId }) => {
     }, [LoginId]);
     return (
         <div className="currently-bidding-container">
-            <hr />
-            <div className="product-list-horizontal">
+            <hr/>
+            {!currentlyBiddingFinishProducts && <div className="myPage_notProduct">입찰 완료한 상품이 없습니다</div>}
+            {currentlyBiddingFinishProducts && <div className="product-list-horizontal">
                 {currentlyBiddingFinishProducts.map((product, index) => (
-                    <ProductCard key={index} product={product} />
+                    <ProductCard key={index} product={product}/>
                 ))}
-            </div>
+            </div>}
+            <hr/>
         </div>
     );
 }

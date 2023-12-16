@@ -5,6 +5,13 @@ import CurrentlyBidding from './CurrentlyBidding';
 import UnsuccessfulBids from './UnsuccessfulBids';
 import axios from "axios";
 import CurrentlyBiddingFinish from "./CurrentlyBiddingFinish";
+import './Mypage.css';
+
+
+import ProductDetailPage from "./ProductDetailPage"; // 프로젝트 구조에 따라 경로를 조절하세요.
+
+
+
 
 const MyPage = () => {
     // 토큰으로 아이디 검증
@@ -16,6 +23,7 @@ const MyPage = () => {
             try {
                 if (token) {  // 토큰이 존재하는 경우에만 실행
                     const response = await axios.get(`/api/getUsernameFromToken/${token}`);
+
                     setloginId(response.data);
                 }
             } catch (error) {

@@ -33,7 +33,8 @@ const PopupPostCode = (props) => {
         transform: "translate(-50%, -50%)",
         width: "600px",
         height: "600px",
-        border: "5px #000 solid",
+        border: "5px #CCC solid",
+        borderTop : "30px solid #1CC7FF",
     };
 
 
@@ -45,6 +46,7 @@ const PopupPostCode = (props) => {
         cursor: "pointer",
         background:"red",
         border: "1px solid #000", // 테두리 설정
+
     };
 
 

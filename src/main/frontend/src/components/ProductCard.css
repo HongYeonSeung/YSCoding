@@ -1,6 +1,6 @@
 /* src/components/ProductCard.css */
 
-.product-card {
+.myPage-product-card {
     position: relative;
     border: 2px solid #ddd;
     border-radius: 15px;
@@ -13,8 +13,24 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.product-card:hover {
+.product-card-myPage:hover {
     transform: scale(1.05);
+}
+
+.myPage-product-card-disabled{
+    opacity: 0.5;
+}
+
+.myPage-product-card-disabled::after {
+    content: "입찰종료"; /* 원하는 텍스트를 여기에 추가합니다 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    padding: 10px; /* 원하는 만큼의 여백을 추가합니다 */
+    color: red; /* 텍스트 색상을 조절할 수 있습니다 */
+    font-size: 70px;
+    font-weight: bold; /* 원하는 폰트 속성을 추가합니다 */
 }
 
 .product-img {
