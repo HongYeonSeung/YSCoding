@@ -105,8 +105,8 @@ function ActionBar() {
 
                 </div>
                 <div className="right-section">
-                    <div className="time">{time.toLocaleTimeString()}</div>
                     <div className="links">
+
                         <div>{!loginId && <Link to="/login">로그인</Link>}</div>
                         <div>{!loginId && <Link to="/signup">회원가입</Link>}</div>
                         <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>
@@ -120,6 +120,7 @@ function ActionBar() {
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
                         </div>
                     )}
+                    <div className="time">{time.toLocaleTimeString()}</div>
 
                 </div>
             </div>

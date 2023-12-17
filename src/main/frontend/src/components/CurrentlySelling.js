@@ -16,8 +16,6 @@ const CurrentlySelling = ({ LoginId }) => {
             axios.get(`/api/currentlySellingProducts/${LoginId}`)
                 .then(response => {
                     setCurrentlySellingProducts(response.data);
-                    console.log("데이터",currentlySellingProducts.timeAfter24Hours)
-
                 })
                 .catch(error => {
                     console.error('데이터 가져오기 에러:', error);

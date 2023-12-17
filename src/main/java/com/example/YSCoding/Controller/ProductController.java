@@ -1,8 +1,10 @@
 package com.example.YSCoding.Controller;
 
 import com.example.YSCoding.Dto.ProductDTO;
+import com.example.YSCoding.Entity.Bid;
 import com.example.YSCoding.Entity.Product;
 import com.example.YSCoding.Exception.InsufficientPointsException;
+import com.example.YSCoding.Service.BidService;
 import com.example.YSCoding.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -23,6 +26,9 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private BidService bidService;
 
     @PostMapping("/product-create")
     public ResponseEntity<?> createProduct(@ModelAttribute ProductDTO productDTO) {
@@ -157,6 +163,24 @@ public class ProductController {
         }
     }
 
+
+    //유찰
+    @GetMapping("/unsuccessfulBidsProducts/{username}")
+    public ResponseEntity<List<Product>> getUnsuccessfulBidsProducts(@PathVariable String username) {
+        List<Bid> bids = bidService.getUnsuccessfulBidsProducts(username);
+
+        List<Product> unsuccessfulProducts = bids.stream()
+                .map(Bid::getProduct)
+                .filter(product -> !username.equals(product.getBuyId()))
+                .distinct() // 중복 제거
+                .collect(Collectors.toList());
+
+        System.out.println("테스트 - Unsuccessful Products: " + unsuccessfulProducts);
+
+        return ResponseEntity.ok(unsuccessfulProducts);
+    }
+
+
     // 특정 카테고리의 상품 목록 조회 API (시간이 지난 상품 제외)
     @GetMapping("/category/{category}")
     public ResponseEntity<Page<Product>> getProductsByCategory(
@@ -171,5 +195,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+
 
 }
