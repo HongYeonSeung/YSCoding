@@ -24,12 +24,16 @@ const CurrentlyBidding = ({LoginId}) => {
         <div className="currently-bidding-container">
             <hr/>
             {!currentlyBiddingProducts && <div className="myPage_notProduct">입찰 완료한 상품이 없습니다</div>}
-            {currentlyBiddingProducts && <div className="product-list-horizontal">
-                {currentlyBiddingProducts.map((product, index) => (
-                    <ProductCard key={index} product={product}/>
-                ))}
-            </div>}
-
+            {currentlyBiddingProducts && (
+                <div className="product-list-horizontal">
+                    {currentlyBiddingProducts
+                        .slice()
+                        .reverse()
+                        .map((product, index) => (
+                            <ProductCard key={index} product={product}/>
+                        ))}
+                </div>
+            )}
         </div>
     );
 }

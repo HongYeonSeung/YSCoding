@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 import './CurrentlyBiddingFinish.css';
 import axios from "axios";
 
-//입찰중인 페이지
+//입찰완료 페이지
 const CurrentlyBiddingFinish = ({LoginId}) => {
     const [currentlyBiddingFinishProducts, setCurrentlyBiddingFinishProducts] = useState();
 
@@ -18,15 +18,21 @@ const CurrentlyBiddingFinish = ({LoginId}) => {
                 });
         }
     }, [LoginId]);
+
     return (
         <div className="currently-bidding-container">
             <hr/>
             {!currentlyBiddingFinishProducts && <div className="myPage_notProduct">입찰 완료한 상품이 없습니다</div>}
-            {currentlyBiddingFinishProducts && <div className="product-list-horizontal">
-                {currentlyBiddingFinishProducts.map((product, index) => (
-                    <ProductCard key={index} product={product}/>
-                ))}
-            </div>}
+            {currentlyBiddingFinishProducts && (
+                <div className="product-list-horizontal">
+                    {currentlyBiddingFinishProducts
+                        .slice()
+                        .reverse()
+                        .map((product, index) => (
+                            <ProductCard key={index} product={product}/>
+                        ))}
+                </div>
+            )}
             <hr/>
         </div>
     );

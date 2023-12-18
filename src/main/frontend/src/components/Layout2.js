@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 import './Layout2.css';
 
 const imagePaths = [
-    'cate1.png',
-    'cate2.png',
-    'cate3.png',
-    'cate10.png',
-    'cate5.png',
-    'cate6.png',
-    'cate7.png',
-    'cate8.png',
-    'cate9.png',
-    'cate4.png'
+    './img/cate1.png',
+    './img/cate2.png',
+    './img/cate3.png',
+    './img/cate4.png',
+    './img/cate5.png',
+    './img/cate6.png',
+    './img/cate7.png',
+    './img/cate8.png',
+    './img/cate9.png',
+    './img/cate10.png'
 ];
 
 const categories = [
     '의류', '뷰티', '유아', '주방', '가전디지털',
-    '스포츠', '자동차용품', '완구취미', '도서', '기타'
+    '스포츠', '자동차용품', '완구/취미', '도서', '기타'
 ];
 
 function Layout2() {
@@ -29,14 +29,14 @@ function Layout2() {
     return (
         <div className="layout2">
             <div className="category-header">
-                <span className="category-text">카테고리</span>
+                <div className="category-text">카테고리</div>
             </div>
             <div className="button-container">
                 {buttonData.map((button, index) => (
                     <div key={button.id} className="button-container-item">
                         <Link to={`/category/${button.label}`}>
                             <button className="round-button">
-                                <img
+                                <img className="category_img"
                                     src={`/${imagePaths[index]}`}
                                     alt={`Category ${button.label}`}
                                 />

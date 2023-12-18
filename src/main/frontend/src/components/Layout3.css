@@ -1,7 +1,7 @@
 /* src/components/Layout3.css */
 .layout3 {
     background-color: #f7f7f7; /* 변경: 배경색 조정 */
-    padding: 20px; /* 내부 여백 조정 */
+    padding: 0 20px; /* 내부 여백 조정 */
     text-align: center;
 }
 

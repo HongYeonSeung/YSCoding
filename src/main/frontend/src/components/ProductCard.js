@@ -12,7 +12,7 @@ const ProductCard = ({product, showButton}) => {
             <img className="product-img" src={`/api/images/${imagePath}`} alt={productName}/>
             <div className="views-container">
                 <div className="product-views"><img src="/img/visibility_icon.png"/>{views}</div>
-                <div className="product-bids"><img src="/img/group_icon.png"/>{biddersCount}</div>
+                <div className="product-bids"><img src="/img/group_icon2.png"/>{biddersCount}</div>
             </div>
             <div className="product-content">
                 <h3 className="product-title">{productName}</h3>
@@ -29,3 +29,5 @@ const ProductCard = ({product, showButton}) => {
 };
 
 export default ProductCard;
+
+

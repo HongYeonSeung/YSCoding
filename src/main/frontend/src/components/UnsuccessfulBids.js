@@ -26,9 +26,12 @@ const UnsuccessfulBids = ({LoginId}) => {
         <div className="unsuccessful-bids-container">
             <hr/>
             <div className="product-list-horizontal">
-                {unsuccessfulBidsProducts.map((product, index) => (
-                    <ProductCard key={index} product={product} showButton={true}/>
-                ))}
+                {unsuccessfulBidsProducts
+                    .slice()
+                    .reverse()
+                    .map((product, index) => (
+                        <ProductCard key={index} product={product} showButton={true}/>
+                    ))}
             </div>
         </div>
     );

@@ -54,7 +54,8 @@ const App = () => {
           <hr></hr>
           백엔드 연동 테스트: {hello}
           {/* ProductCreate 컴포넌트 추가 */}
-
+          <hr/>
+          <a style={{color:"black"}} href="https://www.flaticon.com/kr/free-icons/-" title="비디오 조회수 아이콘">비디오 조회수 아이콘  제작자: Fahrul Saputra - Flaticon</a>
         </div>
       </Router>
   );
