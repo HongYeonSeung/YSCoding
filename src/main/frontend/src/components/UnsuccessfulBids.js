@@ -25,14 +25,16 @@ const UnsuccessfulBids = ({LoginId}) => {
     return (
         <div className="unsuccessful-bids-container">
             <hr/>
-            <div className="product-list-horizontal">
-                {unsuccessfulBidsProducts
-                    .slice()
-                    .reverse()
-                    .map((product, index) => (
-                        <ProductCard key={index} product={product} showButton={true}/>
-                    ))}
-            </div>
+            {unsuccessfulBidsProducts && (
+                <div className="product-list-horizontal">
+                    {unsuccessfulBidsProducts
+                        .slice()
+                        .reverse()
+                        .map((product, index) => (
+                            <ProductCard key={index} product={product} showButton={true}/>
+                        ))}
+                </div>
+            )}
         </div>
     );
 }

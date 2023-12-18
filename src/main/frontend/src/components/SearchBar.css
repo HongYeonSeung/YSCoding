@@ -1,10 +1,8 @@
 /* src/components/SearchBar.css */
 .search-bar-container {
-
   display: flex;
   align-items: center;
   width: 500px;
-  margin: 10px;
 }
 
 .search-bar-input {

@@ -1,41 +1,55 @@
-/* CurrentlyBidding.css */
+/*!* CurrentlyBidding.css *!*/
+
+/*.currently-bidding-container {*/
+/*    margin-top: 20px;*/
+/*}*/
+
+/*.product-list-horizontal {*/
+/*    display: flex;*/
+/*    overflow-x: auto;*/
+/*}*/
+
+/*.product-card {*/
+/*    margin-right: 20px;*/
+/*    flex: 0 0 auto;*/
+/*}*/
+
+/*.product-img {*/
+/*    width: 200px;*/
+/*    height: 150px;*/
+/*    object-fit: cover;*/
+/*}*/
+
+/*.product-content {*/
+/*    text-align: center;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.product-title {*/
+/*    font-size: 18px;*/
+/*    margin-bottom: 5px;*/
+/*}*/
+
+/*.product-description {*/
+/*    font-size: 14px;*/
+/*    color: #555;*/
+/*}*/
+
+/*.product-price {*/
+/*    font-size: 16px;*/
+/*    color: #007bff;*/
+/*}*/
 
 .currently-bidding-container {
-    margin-top: 20px;
+    margin-bottom: 20px; /* 선택적으로 마진을 추가할 수 있습니다. */
+    overflow-x: auto; /* 부모 요소에서도 가로 스크롤이 필요할 경우 추가 */
 }
 
 .product-list-horizontal {
     display: flex;
-    overflow-x: auto;
+    white-space: nowrap; /* 가로로 나열되도록 설정 */
 }
 
-.product-card {
-    margin-right: 20px;
-    flex: 0 0 auto;
-}
-
-.product-img {
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-}
-
-.product-content {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.product-title {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.product-description {
-    font-size: 14px;
-    color: #555;
-}
-
-.product-price {
-    font-size: 16px;
-    color: #007bff;
+.product-list-horizontal > * {
+    flex: 0 0 auto; /* 자식 요소가 너비를 자동으로 설정하도록 합니다. */
 }

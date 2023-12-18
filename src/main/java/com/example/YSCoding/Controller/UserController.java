@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -96,14 +97,26 @@ public class UserController {
         Signup user = signupRepository.findByUsername(username); // 데이터베이스에서 사용자를 찾음
 
         if (user != null) { // 사용자가 존재하면
-            List<Product> userProducts = productRepository.findAllByLoginId(username); // 사용자의 모든 상품을 찾음
-            // 각 상품을 삭제
+            // 사용자가 판매 중인 상품을 찾음
+            List<Product> userProducts = productRepository.findAllByLoginId(username);
+
+            // 판매 중인 상품 중 time_after24hours가 현재 시간보다 큰 경우 확인
+            boolean hasActiveProducts = userProducts.stream()
+                    .anyMatch(product -> product.getTimeAfter24Hours().isAfter(LocalDateTime.now()));
+
+            if (hasActiveProducts) {
+                // 판매 중인 상품이 있고 그 중 하나라도 time_after24hours가 현재 시간 이후라면
+                // 성공 상태 코드와 함께 특별한 식별자를 반환
+                return ResponseEntity.ok().body(Map.of("status", "HAS_ACTIVE_PRODUCTS"));
+            }
+
+            // 판매 중인 상품이 없거나 모두 시간이 지났다면 계정 삭제 진행
             productRepository.deleteAll(userProducts);
             signupRepository.delete(user); // 사용자를 데이터베이스에서 삭제
 
-            return ResponseEntity.ok().body("계정이 성공적으로 삭제되었습니다.");
+            return ResponseEntity.ok().body(Map.of("status", "SUCCESS"));
         } else {
-            return ResponseEntity.badRequest().body("해당 아이디를 찾을 수 없습니다.");
+            return ResponseEntity.badRequest().body(Map.of("status", "USER_NOT_FOUND"));
         }
     }
 

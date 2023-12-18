@@ -12,7 +12,6 @@
 .popular-products-text {
     font-size: 3rem; /* 변경: 텍스트 크기 감소 */
     font-weight: bold; /* 추가: 굵게 표시 */
-    margin-bottom: 50px; /* 추가: 하단 여백 추가 */
 }
 
 .product_container {

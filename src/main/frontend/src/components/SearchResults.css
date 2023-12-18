@@ -1,8 +1,20 @@
 
-.popular-products {
-    margin-top: 120px;
+.layout3{
+    min-height: 800px;
 }
+.popular-products {
 
+}
+.SearchResultsCssMargin{
+    margin-top: -250px;
+}
+.SearchResultsCss{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+
+}
 /*.popular-products-text {*/
 /*    font-size: 3rem;*/
 /*    font-weight: bold;*/
@@ -16,6 +28,13 @@
 /*}*/
 
 
+/* 모바일 환경에서는 한 행에 하나씩 표시하도록 설정 */
+@media (max-width: 768px) {
+    .product {
+        width: 100%;
+        margin: 20px 0;
+    }
+}
 .product:hover {
     transform: scale(1.05);
 }

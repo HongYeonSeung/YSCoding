@@ -37,7 +37,6 @@ function SearchResults() {
         if (keyword) {
             return (
                 <div>
-                    <SearchBar style={{ textAlign: 'center' }} />
 
                     <div className="search-header">
                         <p className="popular-products-text">"{keyword}"에 대한 검색 결과</p>
@@ -61,6 +60,9 @@ function SearchResults() {
 
     return (
         <div className="layout3">
+            <div className="SearchResultsCss">
+                <div className="SearchResultsCssMargin"><SearchBar/></div>
+            </div>
             {renderSearchHeader()}
             <div className="rectangle">
                 {noResults ? (
@@ -81,7 +83,7 @@ function SearchResults() {
                                     <div className="product-bids"><img src="/img/group_icon2.png"/>{product.biddersCount}</div>
                                     <div className="product_link_div">
                                         <Link to={`/product/${product.id}`} className="product_link">
-                                            입찰하기
+                                            상세보기
                                         </Link>
                                     </div>
                                 </div>

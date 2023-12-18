@@ -12,6 +12,18 @@
 /*    justify-content: flex-start;*/
 /*}*/
 
+
+.SearchBarCss{
+    min-height: 800px;
+}
+
+.SearchBarCss_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 .product {
     position: relative;
     border: 2px solid #ddd;
@@ -129,7 +141,12 @@ button:hover {
     transition: background-color 0.3s ease-in-out;
 }
 
+.CategoryName{
+    font-size: 48px;
+}
 .pagination-container button:hover {
     background-color: #f0f0f0;
 }
+
+
 

@@ -66,12 +66,14 @@ function ProductDetailPage() {
 
         if (loginId == null) {
             alert('로그인 후 입찰해 주세요.');
+        } else if (loginId === product.loginId) {
+            // 상품 등록자와 로그인한 ID가 같은 경우 입찰 불가 메시지 표시
+            alert('본인이 등록한 상품은 입찰할 수 없습니다.');
         } else {
             // 값이 공백이거나 현재 입찰가보다 낮은 경우 확인 메시지 표시
             if (!bidAmount.trim()) {
                 alert('입찰 금액을 입력하세요.');
-            }
-            else {
+            } else {
                 // 모달 열기
                 setConfirmationModalOpen(true);
             }
@@ -164,15 +166,17 @@ function ProductDetailPage() {
                     <div className="category_text_list">카테고리 > {product.category}</div>
                     <h2>상품 이름: {product.productName}</h2>
                     <div className="list">판매자 ID : {product.loginId}</div>
-                    <div className="list">상품 설명 : {formatDescriptionWithLineBreaks(product.content)}</div>
+                    <div className="list" style={{ backgroundColor: '#F7F7F7' }}>
+                        상품 설명 : {formatDescriptionWithLineBreaks(product.content)}
+                    </div>
                     <div className="list">조회수 : {product.views}</div>
-                    <div className="list">입찰 된 횟수 : {product.biddersCount}</div>
+                    {}<div className="list">입찰 횟수 : {product.biddersCount}</div>
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
                     <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>
                     <div className="list">남은 시간 : <CountdownTimer endTime={endTime}/></div>
                 </div>
-                <div className={`product-detail-container-button-container`}>
+                <div id={`product-detail-container-button-container`}>
                     <form className='bidding_form'>
                         <input
                             className='bidding_form_input'

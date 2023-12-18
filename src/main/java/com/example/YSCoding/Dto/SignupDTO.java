@@ -1,6 +1,7 @@
 package com.example.YSCoding.Dto;
 
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 @Getter
@@ -18,4 +19,7 @@ public class SignupDTO {
     private int point;
     private String homeAddress;
     private String detailHomeAddress;
+    private boolean adminCheck;
+
+
 }

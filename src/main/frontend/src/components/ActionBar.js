@@ -2,21 +2,19 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './ActionBar.css';
 import axios from "axios";
-
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper/modules';
-
 import {Swiper, SwiperSlide} from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 function ActionBar() {
+
     const [time, setTime] = useState(new Date());
     const [loginId, setLoginId] = useState();
     const [point, setPoint] = useState();
+    const [admin, setAdmin] = useState(false);
 
     const handleLogoutClick = () => {
         localStorage.setItem('token', ''); // 토큰 삭제
@@ -25,8 +23,6 @@ function ActionBar() {
         axios.post('/api/logout')
             .then()
             .catch();
-
-
     };
 
 
@@ -57,11 +53,19 @@ function ActionBar() {
             axios.post('/api/point', loginId)
                 .then(response => {
                     setPoint(response.data);
-                    console.log(response.data, "리스폰데이터", loginId);
                 })
                 .catch(error => {
                     console.error('포인트 가져오는 중 오류 발생:', error);
                 });
+
+            axios.get(`/api/adminCheck/${loginId}`)
+                .then(response => {
+                    setAdmin(response.data);
+                })
+                .catch(error => {
+                    console.error('어드민 여부 확인 중 오류 발생:', error);
+                });
+
         }
 
         const id = setInterval(() => {
@@ -79,10 +83,9 @@ function ActionBar() {
             if (loginId !== '') {
                 axios.get(`/api/validateToken/${token}`)
                     .then(response => {
-                        console.log("Invalid 토큰 에러",response.data,token)
                         if (response.data === "Invalid Token") {
                             handleLogoutClick();
-                            alert("토큰이 유효하지 않음");
+                            alert("토큰 만료되었습니다, 다시 로그인해주세요.");
                             window.location.reload();
                         }
                     })
@@ -106,13 +109,19 @@ function ActionBar() {
                 </div>
                 <div className="right-section">
                     <div className="links">
-
+                        <div>{admin && <Link to="/AdminPage">관리자 페이지</Link>}</div>
                         <div>{!loginId && <Link to="/login">로그인</Link>}</div>
                         <div>{!loginId && <Link to="/signup">회원가입</Link>}</div>
                         <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>
                         <div>{loginId && <Link to="/myPage">마이페이지</Link>}</div>
-                        <div>{loginId && <div className="pointClass">보유 포인트 : {point}</div>}</div>
-                        <div>{loginId &&<a href="/" className="action-bar-a">포인트 충전</a>}</div>
+                        <div>
+                            {loginId && (
+                                <div className="pointClass">
+                                    보유 포인트: {point && point.toLocaleString()}
+                                </div>
+                            )}
+                        </div>
+                        <div>{loginId &&<a href="/" className="action-bar-a action-bar-b">포인트 충전</a>}</div>
                     </div>
                     {loginId && (
                         <div className="action-bar-div">
@@ -120,7 +129,7 @@ function ActionBar() {
                             <a href="/" onClick={handleLogoutClick} className="action-bar-a">로그아웃</a>
                         </div>
                     )}
-                    <div className="time">{time.toLocaleTimeString()}</div>
+                    {/*<div className="time">{time.toLocaleTimeString()}</div>*/}
 
                 </div>
             </div>

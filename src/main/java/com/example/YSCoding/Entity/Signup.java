@@ -41,6 +41,10 @@ public class Signup {
     @Column(name = "detailhomeaddress")
     private String detailHomeAddress;
 
+    @Column(name = "adminCheck")
+    private boolean adminCheck=false;
+
+
     public void deductPoints(double amount) {
         if (this.point >= amount) {
             this.point -= amount;

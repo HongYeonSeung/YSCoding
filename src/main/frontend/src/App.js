@@ -18,6 +18,7 @@ import MyPage from './components/Mypage';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import CategoryPage from './components/CategoryPage';
+import AdminPage from "./components/AdminPage";
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
@@ -49,12 +50,13 @@ const App = () => {
 
               <Route path="/search/:keyword" element={<SearchResults />} />
               <Route path="/myPage" element={<MyPage/>} />
+              <Route path="/AdminPage" element={<AdminPage/>} />
+
             </Routes>
 
-          <hr></hr>
-          백엔드 연동 테스트: {hello}
-          {/* ProductCreate 컴포넌트 추가 */}
           <hr/>
+          {/*백엔드 연동 테스트: {hello}*/}
+          {/*/!* ProductCreate 컴포넌트 추가 *!/*/}
           <a style={{color:"black"}} href="https://www.flaticon.com/kr/free-icons/-" title="비디오 조회수 아이콘">비디오 조회수 아이콘  제작자: Fahrul Saputra - Flaticon</a>
         </div>
       </Router>

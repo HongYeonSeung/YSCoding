@@ -42,9 +42,11 @@ const CategoryPage = () => {
     };
 
     return (
-        <div>
-            <SearchBar />
-            <h2>카테고리 > {category}</h2>
+        <div className="SearchBarCss">
+            <div className="SearchBarCss_box">
+                <div className="SearchResultsCssMargin"><SearchBar/></div>
+            </div>
+            <div className="CategoryName">카테고리 > {category}</div>
             {categoryResults.length === 0 ? (
                 <p>카테고리 결과가 없습니다.</p>
             ) : (
@@ -63,7 +65,7 @@ const CategoryPage = () => {
                                 <div className="product-bids"><img src="/img/group_icon2.png"/>{product.biddersCount}</div>
                                 <div className="product_link_div">
                                     <Link to={`/product/${product.id}`} className="product_link">
-                                        입찰하기
+                                        상세보기
                                     </Link>
                                 </div>
                             </div>

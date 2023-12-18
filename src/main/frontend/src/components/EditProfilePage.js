@@ -103,15 +103,23 @@ const EditProfilePage = () => {
         }
     };
 
-
     const handleDeleteAccount = async () => {
         if (window.confirm('정말로 계정을 삭제하시겠습니까?')) {
             try {
-                await axios.post(`api/delete-user`, {username: userDto.username});
-                alert('계정이 성공적으로 삭제되었습니다.');
-                localStorage.removeItem('token');
-                navigate('/', {replace: true});
-                window.location.reload();
+                const response = await axios.post(`api/delete-user`, { username: userDto.username });
+                const result = response.data;
+
+                if (result.status === 'HAS_ACTIVE_PRODUCTS') {
+                    alert('판매 중인 상품이 있어 탈퇴할 수 없습니다.');
+                } else if (result.status === 'SUCCESS') {
+                    alert('계정이 성공적으로 삭제되었습니다.');
+                    localStorage.removeItem('token');
+                    navigate('/', { replace: true });
+                    window.location.reload();
+                } else {
+                    // 사용자를 찾을 수 없는 경우 등 다른 상황에 대한 처리
+                    console.error('Unhandled status:', result.status);
+                }
             } catch (error) {
                 console.error('Error deleting account:', error);
             }

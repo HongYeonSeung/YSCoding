@@ -51,7 +51,7 @@ function Layout3() {
     return (
         <div className="layout3">
             <div className="popular-products">
-                <p className="popular-products-text">판매 상품</p>
+                <p className="popular-products-text">현재 판매중인 상품</p>
             </div>
             <div className="rectangle">
                 <div className="product_container">
@@ -71,7 +71,7 @@ function Layout3() {
                                     <div className="product-bids"><img src="/img/group_icon2.png"/>{product.biddersCount}</div>
                                     <div className="product_link_div">
                                         <Link to={`/product/${product.id}`} className="product_link">
-                                            입찰하기
+                                            상세보기
                                         </Link>
                                     </div>
                                 </div>

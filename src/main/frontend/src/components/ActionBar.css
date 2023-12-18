@@ -44,11 +44,11 @@
     color: #ffffff;
     margin: 0 10px; /* 변경: 각 링크 사이 여백 조정 */
     font-weight: bold;
-    transition: color 0.3s ease-in-out;
+
 }
 
 .links a:hover {
-    color: #f39c12;
+
 }
 
 .logged-in-user {
@@ -63,7 +63,7 @@
 }
 
 .action-bar-a {
-    background-color: #007bff;
+    background-color: #7eaae6;
     text-align: center;
     color: #ffffff;
     text-decoration: none;
@@ -71,10 +71,15 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    font-size: 14px;
 }
 
 .action-bar-a:hover {
     background-color: #e74c3c;
     color: black;
 
+}
+
+.action-bar-b:hover{
+    background-color:#456cd9;
 }
