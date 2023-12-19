@@ -56,8 +56,20 @@ public class ProductController {
         }
     }
 
+    // 어드민 전체 상품 조회
+    @GetMapping("/productsAdmin")
+    public ResponseEntity<Page<Product>> getAllProductAll(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        try {
+            Page<Product> products = productService.getAllProducts(pageable);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
-    //상품 페이지
+
+    //상품 상세 페이지
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);

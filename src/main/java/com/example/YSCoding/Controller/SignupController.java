@@ -47,5 +47,16 @@ public class SignupController {
         }
     }
 
+    @GetMapping("/adminLoginDateAll/{loginId}")
+    public ResponseEntity<Signup> adminLoginDateAll(@PathVariable String loginId) {
+        Signup user = signupRepository.findByUsername(loginId); // 데이터베이스에서 사용자를 찾음
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return null;
+        }
+    }
+
+
 
 }

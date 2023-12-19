@@ -28,6 +28,10 @@ public class SignupService {
         }
     }
 
+//    public Signup adminLoginDateAll(){
+//
+//    }
+
     private boolean isUsernameAvailable(String username) {
         return signupRepository.findByUsername(username) == null;
     }

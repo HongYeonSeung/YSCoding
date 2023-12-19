@@ -11,6 +11,8 @@ public interface SignupRepository extends JpaRepository<Signup, Long> {
     Signup findByEmail(String email);
 
 
+
+
     // 중복된 사용자명이 있는지 확인하는 쿼리
     @Query("SELECT COUNT(u) FROM Signup u WHERE u.username = :username")
     int countByUsername(@Param("username") String username);

@@ -109,7 +109,7 @@ function ActionBar() {
                 </div>
                 <div className="right-section">
                     <div className="links">
-                        <div>{admin && <Link to="/AdminPage">관리자 페이지</Link>}</div>
+                        <div>{admin && <Link to="/AdminMainPage">관리자 페이지</Link>}</div>
                         <div>{!loginId && <Link to="/login">로그인</Link>}</div>
                         <div>{!loginId && <Link to="/signup">회원가입</Link>}</div>
                         <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>

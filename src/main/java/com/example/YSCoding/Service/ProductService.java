@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     Product createProduct(ProductDTO productDTO);
+    // 어드민 전체 상품 조회
     Page<Product> getAllProducts(Pageable pageable);
 
     Product getProductById(Long id);
@@ -33,4 +34,7 @@ public interface ProductService {
 
     // 상품 조회 시 시간 초과 x
     Page<Product> getAllProductsNotExpired(LocalDateTime currentTime, Pageable pageable);
+
+
+
 }

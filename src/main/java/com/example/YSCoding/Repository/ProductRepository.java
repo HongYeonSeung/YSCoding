@@ -20,6 +20,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 
     List<Product> findAllByBuyId(String loginId);
 
+    Page<Product> findAll(Pageable pageable);
+
 
     // 현재 시간 이후의 상품만 검색하는 메서드
     @Query("SELECT p FROM Product p WHERE p.timeAfter24Hours > :currentTime AND (LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(p.content) LIKE LOWER(CONCAT('%', :keyword, '%')))")
@@ -30,6 +32,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 
     // 현재 시간 이후의 상품만 가져오는 메서드
     Page<Product> findByTimeAfter24HoursGreaterThan(LocalDateTime currentTime, Pageable pageable);
+
+
 
     //마이페이지 입찰중인
     List<Product> findAllByBuyIdAndTimeAfter24HoursGreaterThan(String username, LocalDateTime currentTime);

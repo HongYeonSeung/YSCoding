@@ -133,6 +133,7 @@ function ProductCreate() {
                         <input
                             type="number"
                             name="startingPrice"
+                            onWheel={ (e) => e.target.blur()}
                             onChange={handleInputChange}
                         />
                         <h2>상품 설명</h2>

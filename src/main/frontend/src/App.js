@@ -19,6 +19,7 @@ import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import CategoryPage from './components/CategoryPage';
 import AdminPage from "./components/AdminPage";
+import AdminMainPage from "./components/AdminMainPage";
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');
@@ -51,6 +52,8 @@ const App = () => {
               <Route path="/search/:keyword" element={<SearchResults />} />
               <Route path="/myPage" element={<MyPage/>} />
               <Route path="/AdminPage" element={<AdminPage/>} />
+              <Route path="/AdminMainPage" element={<AdminMainPage/>} />
+
 
             </Routes>
 
