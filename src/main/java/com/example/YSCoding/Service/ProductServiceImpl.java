@@ -113,7 +113,7 @@ public class ProductServiceImpl implements ProductService {
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDateTime calculatedTime = currentDateTime.plusHours(24);
         product.setTimeAfter24Hours(calculatedTime);
-        System.out.println("메소드 호출 현재 시간: " + currentDateTime);
+//        System.out.println("메소드 호출 현재 시간: " + currentDateTime);
     }
 
 
@@ -213,7 +213,7 @@ public class ProductServiceImpl implements ProductService {
     @Scheduled(fixedDelay = 10000) // 10초단위로 실행
     @Override
     public void awardPointsIf24HoursPassed() {
-        System.out.println("매분 테스트");
+//        System.out.println("매분 테스트");
         List<Product> products = productRepository.findAll();
         for (Product product : products) {
             if (!product.isPointsAwarded() && product.getRegistrationTime() != null) {

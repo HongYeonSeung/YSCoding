@@ -64,7 +64,7 @@ public class LoginService {
                 setLoginResultId(user.getUsername());
 
 
-                System.out.println(signupDTO);
+//                System.out.println(signupDTO);
                 return signupDTO; // 로그인 성공시 사용자 정보 DTO 반환
 
 

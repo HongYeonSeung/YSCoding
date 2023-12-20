@@ -113,10 +113,10 @@ public class ProductController {
             }
 
             // 상품 정보를 활용하여 필요한 처리 수행
-            System.out.println("상품 ID: " + product.getId());
-            System.out.println("상품 판매자 ID: " + product.getLoginId());
-            System.out.println("입찰 가격: " + bidAmount);
-            System.out.println("입찰자 ID: " + loginId);
+//            System.out.println("상품 ID: " + product.getId());
+//            System.out.println("상품 판매자 ID: " + product.getLoginId());
+//            System.out.println("입찰 가격: " + bidAmount);
+//            System.out.println("입찰자 ID: " + loginId);
 
             productService.placeBid(id, bidAmountValue, loginId);
 
@@ -203,7 +203,7 @@ public class ProductController {
                 .distinct() // 중복 제거
                 .collect(Collectors.toList());
 
-        System.out.println("테스트 - Unsuccessful Products: " + unsuccessfulProducts);
+//        System.out.println("테스트 - Unsuccessful Products: " + unsuccessfulProducts);
 
         return ResponseEntity.ok(unsuccessfulProducts);
     }

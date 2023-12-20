@@ -221,7 +221,6 @@ function ProductDetailPage() {
                         상품 설명 : {formatDescriptionWithLineBreaks(product.content)}
                     </div>
                     <div className="list">조회수 : {product.views}</div>
-                    {}
                     <div className="list">입찰 횟수 : {product.biddersCount}</div>
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>

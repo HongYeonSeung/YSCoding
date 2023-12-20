@@ -28,12 +28,12 @@ public class LoginController {
         String memberName = requestData.get("memberName"); // 이름 추출
         String memberPassword = requestData.get("memberPassword");
 
-        System.out.println("받은 이름 데이터: " + memberName); // 이름을 로그로 출력
-        System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
+//        System.out.println("받은 이름 데이터: " + memberName); // 이름을 로그로 출력
+//        System.out.println("받은 패스워드 데이터: " + memberPassword); // 이름을 로그로 출력
 
         // 로그인 서비스에서 SignupDTO로 정보 받아오기
         SignupDTO resultDTO = loginService.LoginFind(memberName, memberPassword);
-        System.out.println("로그인 결과: " + resultDTO);
+//        System.out.println("로그인 결과: " + resultDTO);
 
 //        loginBox(result);
         return ResponseEntity.ok(resultDTO);

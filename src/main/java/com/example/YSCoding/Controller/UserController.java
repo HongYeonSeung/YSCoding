@@ -29,8 +29,8 @@ public class UserController {
         String username = request.get("username"); // 로그인된 사용자의 ID를 가져옴
         String password = request.get("password"); // 사용자가 입력한 비밀번호를 가져옴
 
-        System.out.println("로그인한 id" + username);
-        System.out.println("사용자가 입력한 비밀번호" + password);
+//        System.out.println("로그인한 id" + username);
+//        System.out.println("사용자가 입력한 비밀번호" + password);
 
         Signup user = signupRepository.findByUsername(username); // 데이터베이스에서 사용자를 찾음
 

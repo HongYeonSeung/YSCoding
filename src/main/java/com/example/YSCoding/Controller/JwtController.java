@@ -13,15 +13,15 @@ public class JwtController {
 
     @GetMapping("/generateToken/{username}")
     public String generateToken(@PathVariable String username) {
-        System.out.println(username);
-        System.out.println(JwtUtil.generateToken(username));
+//        System.out.println(username);
+//        System.out.println(JwtUtil.generateToken(username));
         return JwtUtil.generateToken(username);
     }
 
 
     @GetMapping("/getUsernameFromToken/{token}")
     public String getUsernameFromToken(@PathVariable String token) {
-        System.out.println(token);
+//        System.out.println(token);
         return JwtUtil.getUsernameFromToken(token);
     }
 
