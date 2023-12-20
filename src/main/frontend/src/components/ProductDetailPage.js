@@ -4,6 +4,7 @@ import axios from 'axios';
 import './ProductDetailPage.css';
 import ConfirmationModal from './ConfirmationModal';
 import CountdownTimer from "./CountdownTimer";
+import DeleteModal from "./DeleteModal";
 
 
 function ProductDetailPage() {
@@ -12,10 +13,12 @@ function ProductDetailPage() {
     const [product, setProduct] = useState({});
     const [bidAmount, setBidAmount] = useState('');
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [endTime, setEndTime] = useState(null);
     const currentDate_log = new Date();
     const backendTimeDate = new Date(product.timeAfter24Hours);
     const [loading, setLoading] = useState(true);
+    const [admin, setAdmin] = useState(false);
 
 
     // 토큰으로 아이디 검증
@@ -61,6 +64,21 @@ function ProductDetailPage() {
     }, [params.id]);
 
 
+    //어드민 체킹
+    if (loginId) {
+        axios.get(`/api/adminCheck/${loginId}`)
+            .then(response => {
+                setAdmin(response.data);
+                console.log(response.data)
+                if (response.data) {
+                    //어드민이 권한 있음 
+                }
+            })
+            .catch(error => {
+                console.error('어드민 여부 확인 중 오류 발생:', error);
+            });
+    }
+
     const handleBidClick = (event) => {
         event.preventDefault();
 
@@ -80,6 +98,24 @@ function ProductDetailPage() {
         }
     };
 
+    const handleDeleteConfirm=()=>{
+        setDeleteModalOpen(false);
+        console.log("모달 메소드 전송")
+        axios.post(`/api/ProductDelete/${params.id}`)
+            .then((response) => {
+                // 성공적으로 처리된 경우에 할 일
+                console.log('응답 데이터:', response.data);
+            })
+            .catch((error) => {
+                // 에러가 발생한 경우에 할 일
+                alert(error.response.data);
+            })
+            .finally(() => {
+                // 새로고침
+                window.location.reload();
+            });
+
+    }
 
     const handleConfirmation = () => {
         // 모달 닫기
@@ -108,11 +144,21 @@ function ProductDetailPage() {
             });
     };
 
+
+    //입찰 모달 취소
     const handleCancelConfirmation = () => {
         // 모달 닫기
+        alert("입찰을 취소하였습니다")
         setConfirmationModalOpen(false);
         window.location.reload();
     };
+
+    //삭제 모달 취소
+    const handleCancelDeleteModal = () => {
+        alert("삭제를 취소하였습니다")
+        setDeleteModalOpen(false);
+        window.location.reload();
+    }
 
     const handleInputChange = (event) => {
         // 입력값이 숫자인지 확인하는 정규표현식
@@ -150,6 +196,11 @@ function ProductDetailPage() {
         );
     };
 
+    const adminDeleteClick = () => {
+        setDeleteModalOpen(true);
+        console.log("삭제")
+    }
+
     if (loading) {
         return <p>로딩 중...</p>;
     }
@@ -166,11 +217,12 @@ function ProductDetailPage() {
                     <div className="category_text_list">카테고리 > {product.category}</div>
                     <h2>상품 이름: {product.productName}</h2>
                     <div className="list">판매자 ID : {product.loginId}</div>
-                    <div className="list" style={{ backgroundColor: '#F7F7F7' }}>
+                    <div className="list" style={{backgroundColor: '#F7F7F7'}}>
                         상품 설명 : {formatDescriptionWithLineBreaks(product.content)}
                     </div>
                     <div className="list">조회수 : {product.views}</div>
-                    {}<div className="list">입찰 횟수 : {product.biddersCount}</div>
+                    {}
+                    <div className="list">입찰 횟수 : {product.biddersCount}</div>
                     <div className="list">시작 입찰가: {formatCurrency(product.startingPrice)}원</div>
                     <div className="list">현재 입찰가: {formatCurrency(product.currentPrice)}원</div>
                     <div className="list">{product.buyId && `최고 입찰자: ${product.buyId}`}</div>
@@ -191,13 +243,21 @@ function ProductDetailPage() {
                     </form>
                 </div>
             </div>
+
+            {!(backendTimeDate > currentDate_log) && <div className="sold-out-text">판 매 완 료</div>}
+            {admin && <div className="product-detail-admin"><img src="/img/delete.png" onClick={adminDeleteClick}/></div>}
             <ConfirmationModal
                 isOpen={isConfirmationModalOpen}
                 onClose={handleCancelConfirmation}
                 onConfirm={handleConfirmation}
                 bidAmount={`${bidAmount}`}
             />
-            {!(backendTimeDate > currentDate_log) && <div className="sold-out-text">판 매 완 료</div>}
+            <DeleteModal
+                isOpen={isDeleteModalOpen}
+                onClose={handleCancelDeleteModal}
+                onConfirm={handleDeleteConfirm}
+                productName={product.productName}
+            />
         </div>
 
     );

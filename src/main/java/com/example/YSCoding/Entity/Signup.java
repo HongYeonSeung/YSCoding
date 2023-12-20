@@ -33,7 +33,7 @@ public class Signup {
     private String phoneNumber;
 
     @Column(name = "point")
-    private int point=1000;
+    private int point=1000000;
 
     @Column(name = "homeaddress")
     private String homeAddress;

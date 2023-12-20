@@ -13,6 +13,8 @@ public interface ProductService {
     // 어드민 전체 상품 조회
     Page<Product> getAllProducts(Pageable pageable);
 
+
+    void awardPointsIf24HoursPassed();
     Product getProductById(Long id);
 
     Product getProductView(Long id);
@@ -25,6 +27,8 @@ public interface ProductService {
 
 
     void placeBid(Long productId, Double bidAmount, String bidderId);
+
+    void deleteProduct(Long id);
 
     // 시간이 지난 상품을 제외하고 검색하는 메서드
     Page<Product> searchNotExpired(String keyword, LocalDateTime currentTime, Pageable pageable);

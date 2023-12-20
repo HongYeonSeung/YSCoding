@@ -22,6 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 
     Page<Product> findAll(Pageable pageable);
 
+    // 상품 ID를 사용하여 상품 삭제
+    void deleteById(Long productId);
 
     // 현재 시간 이후의 상품만 검색하는 메서드
     @Query("SELECT p FROM Product p WHERE p.timeAfter24Hours > :currentTime AND (LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(p.content) LIKE LOWER(CONCAT('%', :keyword, '%')))")

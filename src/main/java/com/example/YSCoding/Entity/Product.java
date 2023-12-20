@@ -1,10 +1,12 @@
 package com.example.YSCoding.Entity;
 
+import com.example.YSCoding.Repository.SignupRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -15,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -67,6 +70,14 @@ public class Product {
     //입찰했던 사람의 수
     @Column
     private int biddersCount;
+
+    // 포인트 지급 여부를 나타내는 컬럼 (기본값은 false)
+    @Column(nullable = false)
+    private boolean pointsAwarded = false;
+
+
+
+
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

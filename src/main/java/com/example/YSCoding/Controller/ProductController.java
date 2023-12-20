@@ -58,7 +58,7 @@ public class ProductController {
 
     // 어드민 전체 상품 조회
     @GetMapping("/productsAdmin")
-    public ResponseEntity<Page<Product>> getAllProductAll(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<Product>> getAllProductAll(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         try {
             Page<Product> products = productService.getAllProducts(pageable);
             return ResponseEntity.ok(products);
@@ -79,6 +79,7 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
     //조회수 늘리기
     @GetMapping("/productsView/{id}")
     public ResponseEntity<Product> getProductView(@PathVariable Long id) {
@@ -130,6 +131,21 @@ public class ProductController {
     }
 
 
+    //상품 삭제
+    @PostMapping("/ProductDelete/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        try {
+            // 해당 상품의 정보 조회
+            productService.deleteProduct(id);
+
+            // 성공적으로 삭제되었을 때의 응답
+            return ResponseEntity.ok("Product deleted successfully");
+        } catch (Exception e) {
+            // 삭제 중에 예외가 발생했을 때의 응답
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting product");
+        }
+    }
+
     // 검색기능(시간 지난 상품 제외)
     @GetMapping("/search-not-expired")
     public ResponseEntity<Page<Product>> searchNotExpired(@RequestParam String keyword,
@@ -156,7 +172,7 @@ public class ProductController {
     @GetMapping("/currentlyBiddingProducts/{username}")
     public ResponseEntity<List<Product>> getCurrentlyBiddingProducts(@PathVariable String username) {
         LocalDateTime currentTime = LocalDateTime.now();
-        List<Product> products = productService.getCurrentlyBiddingProducts(username,currentTime);
+        List<Product> products = productService.getCurrentlyBiddingProducts(username, currentTime);
         if (!products.isEmpty()) {
             return ResponseEntity.ok(products);
         } else {
@@ -167,7 +183,7 @@ public class ProductController {
     @GetMapping("/currentlyBiddingFinishProducts/{username}")
     public ResponseEntity<List<Product>> getCurrentlyBiddingFinishProducts(@PathVariable String username) {
         LocalDateTime currentTime = LocalDateTime.now();
-        List<Product> products = productService.getCurrentlyBiddingFinishProducts(username,currentTime);
+        List<Product> products = productService.getCurrentlyBiddingFinishProducts(username, currentTime);
         if (!products.isEmpty()) {
             return ResponseEntity.ok(products);
         } else {
@@ -207,7 +223,6 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
 
 
 }

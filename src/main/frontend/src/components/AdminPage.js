@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import "./AdminPage.css";
+import {useNavigate} from "react-router-dom"; // 로그인 스타일 파일을 임포트합니다.
 
 const AdminPage = () => {
     const [time, setTime] = useState(new Date());
@@ -10,7 +11,12 @@ const AdminPage = () => {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
     const [totalPages, setTotalPages] = useState(0); // 총 페이지 수를 저장하기 위한 상태 추가
+    const navigate = useNavigate();
 
+    const [backendTimeDate,setBackendTimeDate] = useState(new Date());
+    const [backendTime, setBackendTime] = useState(new Date());
+
+    const currentDate_log = new Date();
 
     const handleLogoutClick = () => {
         localStorage.setItem('token', ''); // 토큰 삭제
@@ -58,7 +64,7 @@ const AdminPage = () => {
                         const buyData = buyDataResponse.data; // 예시로 받아온 데이터
 
                         // 기존 product 객체에 추가적인 데이터를 합치기
-                        return { ...product, loginData, buyData };
+                        return {...product, loginData, buyData};
                     })
                 );
 
@@ -71,8 +77,6 @@ const AdminPage = () => {
 
         fetchProducts();
     }, [currentPage]);
-
-
 
 
 //상품설명 글자제한 밑 ... 붙히기
@@ -122,11 +126,17 @@ const AdminPage = () => {
             axios.get(`/api/adminCheck/${loginId}`)
                 .then(response => {
                     setAdmin(response.data);
+                    console.log(response.data)
+                    if (!response.data) {
+                        // 얼럿 표시
+                        alert('어드민 권한이 없습니다.');
+                        // 메인 페이지로 이동
+                        navigate('/');
+                    }
                 })
                 .catch(error => {
                     console.error('어드민 여부 확인 중 오류 발생:', error);
                 });
-
         }
 
 
@@ -139,86 +149,95 @@ const AdminPage = () => {
 
     return (
         <div className="admin_main">
-            <div className="admin_main_box">
-                <p className="admin_main_text">전체 상품</p>
-            </div>
-            <div className="admin_main_container">
-                <div className="admin_main_product_container">
-                    {products.map((product) => (
-                        // 상품이 만료되지 않은 경우에만 표시
-                        <div key={product.id} className="admin_main_product">
-                            <div className="admin_main_product_box">
-                                <div className="admin_main_product_box_L">
-                                    <div className="admin_product_img_div">
-                                        <img src={`/api/images/${product.imagePath}`} className="product_img"
-                                             alt={product.productName}/>
+            {admin ? (
+                <div className={`admin_main_container`}>
+                    <div className="admin_main_product_container">
+                        {products.map((product) => (
+                            // 상품이 만료되지 않은 경우에만 표시
+                            <div key={product.id} className="admin_main_product">
+                                <div className={`admin_main_product_box${new Date() > new Date(product.timeAfter24Hours) ? "_red" : ""}`}>
+                                    <div className="admin_main_product_box_L">
+                                        <div className="admin_product_img_div">
+                                            <img src={`/api/images/${product.imagePath}`} className="product_img"
+                                                 alt={product.productName}/>
+                                        </div>
+                                    </div>
+                                    <div className="admin_main_product_box_R">
+                                        <div className="admin_main_product_box_R1">
+                                            <div className="admin_main_product_title">제목 : {product.productName}</div>
+                                            <div className="admin_main_product_des">내용
+                                                : {truncateDescription(product.content, 30)}</div>
+                                            <div className="admin_main_product_mon">시작 입찰가
+                                                : {formatCurrency(product.startingPrice)}원
+                                            </div>
+                                            <div className="admin_main_product_mon2">현재 입찰가
+                                                : {formatCurrency(product.currentPrice)}원
+                                            </div>
+                                            <div className="admin_main_product-views">
+                                                조회수 : {product.views}
+                                            </div>
+                                            <div className="admin_main_product-bids">
+                                                입찰한 횟수:{product.biddersCount}</div>
+                                            <div className="">
+                                                물품 등록일: {new Date(product.registrationTime).toLocaleString()}
+                                            </div>
+                                            <div className="">
+                                                입찰 마감일: {new Date(product.timeAfter24Hours).toLocaleString()}
+                                            </div>
+
+                                        </div>
+
+
+                                        <div className="admin_main_product_box_R2">
+
+                                            <div>판매자 정보</div>
+                                            <div>판매자: {product.loginId}</div>
+                                            <div>{`판매자 이름: ${(product.loginData.name)}`}</div>
+                                            <div>{`판매자 주소: ${(product.loginData.homeAddress)}`}</div>
+                                            <div>{`${(product.loginData.detailHomeAddress)}`}</div>
+                                            <div>{`판매자 전화번호: ${(product.loginData.phoneNumber)}`}</div>
+                                        </div>
+
+                                        {product.buyId &&
+                                            <div className="admin_main_product_box_R3">
+                                                <div>구매자 정보</div>
+                                                <div>구매자 :{product.buyId}</div>
+                                                <div>{`구매자 이름 : ${(product.buyData.name)}`}</div>
+                                                <div>{`구매자 주소 : ${(product.buyData.homeAddress)}`}</div>
+                                                <div>{`${(product.buyData.detailHomeAddress)}`}</div>
+                                                <div>{`구매자 전화번호: ${(product.buyData.phoneNumber)}`}</div>
+                                            </div>
+                                        }
+                                        {!product.buyId &&
+                                            <div className="admin_main_product_box_R3_notBuyId">구매자 없음</div>}
+
+                                    </div>
+                                    <div className="admin_product_link_box">
+                                        <div>
+                                            <Link to={`/product/${product.id}`} className="admin_product_link">
+                                                <div className="admin_main_product_link_div">페이지 이동</div>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="admin_main_product_box_R">
-                                    <div className="admin_main_product_box_R1">
-                                        <div className="admin_main_product_title">제목 : {product.productName}</div>
-                                        <div className="admin_main_product_des">내용
-                                            : {truncateDescription(product.content, 30)}</div>
-                                        <div className="admin_main_product_mon">시작 입찰가
-                                            : {formatCurrency(product.startingPrice)}원
-                                        </div>
-                                        <div className="admin_main_product_mon2">현재 입찰가
-                                            : {formatCurrency(product.currentPrice)}원
-                                        </div>
-                                        <div className="admin_main_product-views">
-                                            조회수 : {product.views}
-                                        </div>
-                                        <div className="admin_main_product-bids">
-                                            입찰한 횟수:{product.biddersCount}</div>
-                                        <div className="">
-                                            물품 등록일: {new Date(product.registrationTime).toLocaleString()}
-                                        </div>
-                                        <div className="">
-                                            입찰 마감일: {new Date(product.timeAfter24Hours).toLocaleString()}
-                                        </div>
-
-                                    </div>
-
-
-                                    <div className="admin_main_product_box_R2">
-
-                                        <div>판매자 정보</div>
-                                        <div>판매자: {product.loginId}</div>
-                                        <div>{`판매자 이름: ${(product.loginData.name)}`}</div>
-                                        <div>{`판매자 주소: ${(product.loginData.homeAddress)}`}</div>
-                                        <div>{`${(product.loginData.detailHomeAddress)}`}</div>
-                                        <div>{`판매자 전화번호: ${(product.loginData.phoneNumber)}`}</div>
-                                    </div>
-
-                                    {product.buyId &&
-                                        <div className="admin_main_product_box_R3">
-                                            <div>구매자 정보</div>
-                                            <div>구매자 :{product.buyId}</div>
-                                            <div>{`구매자 이름 : ${(product.buyData.name)}`}</div>
-                                            <div>{`구매자 주소 : ${(product.buyData.homeAddress)}`}</div>
-                                            <div>{`${(product.buyData.detailHomeAddress)}`}</div>
-                                            <div>{`구매자 전화번호: ${(product.buyData.phoneNumber)}`}</div>
-                                        </div>
-                                    }
-                                    {!product.buyId && <div className="admin_main_product_box_R3_notBuyId">구매자 없음</div>}
-
-                                </div>
-
-
-                                    <Link to={`/product/${product.id}`} className="admin_product_link">
-                                        <div className="admin_main_product_link_div">상세보기</div>
-                                    </Link>
-
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                    <div className="admin_main_product_container_bnt_box">
+                        {[...Array(totalPages).keys()].map((page, index) => ( // totalPages 상태 사용
+                            <button className="admin_main_product_container_bnt" key={index} onClick={() => handlePageChange(page + 1)}>
+                                {page + 1}
+                            </button>
+                        ))}
+                    </div>
+
                 </div>
-                {[...Array(totalPages).keys()].map((page, index) => ( // totalPages 상태 사용
-                    <button key={index} onClick={() => handlePageChange(page + 1)}>
-                        {page + 1}
-                    </button>
-                ))}
-            </div>
+                ) : (
+                <div>
+                <p>You do not have permission to access this page.</p>
+            {/* Optionally, you can redirect the user to another page or show a login link */}
+                </div>
+                )}
         </div>
     );
 };

@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private FileStorageService fileStorageService;
-
+    @Autowired
+    private SignupService signupService;
 
     @Autowired
     private SignupRepository signupRepository;  // SignupRepository 주입
@@ -50,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
         product.setImagePath(imageName);
         product.setBuyId(productDTO.getBuyId());
         product.setLoginId(productDTO.getLoginId());
+        product.setPointsAwarded(productDTO.isPointsAwarded());
 
         // 24시간을 더한 값을 설정
         calculateTimeAfter24Hours(product);
@@ -112,6 +115,30 @@ public class ProductServiceImpl implements ProductService {
         product.setTimeAfter24Hours(calculatedTime);
         System.out.println("메소드 호출 현재 시간: " + currentDateTime);
     }
+
+
+    //상품 삭제
+    @Override
+    public void deleteProduct(Long id){
+        Product product = getProductById(id);
+
+        //포인트 롤백
+        //어워드는 포인트 정산이 끝났기때문에 따로 롤백하지 않음(참이면 = 포인트 지급안함)
+        if(product.isPointsAwarded() == false && product.getBuyId() != null){
+            //구매자 buyId에게 포인트 지급
+            Signup signup = signupRepository.findByUsername(product.getBuyId());
+            int currentPoints = signup.getPoint();
+            int newPoints = currentPoints + (int)product.getCurrentPrice();
+            signup.setPoint(newPoints);
+            signupRepository.save(signup);
+
+            productRepository.deleteById(id);
+        }
+        else {
+            productRepository.deleteById(id);
+        }
+    }
+
 
 
     @Override
@@ -181,6 +208,38 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getAllProductsNotExpired(LocalDateTime currentTime, Pageable pageable) {
         // 현재 시간 이전의 상품만 가져오도록 쿼리 조건 추가
         return productRepository.findByTimeAfter24HoursGreaterThan(currentTime, pageable);
+    }
+
+    @Scheduled(fixedDelay = 10000) // 10초단위로 실행
+    @Override
+    public void awardPointsIf24HoursPassed() {
+        System.out.println("매분 테스트");
+        List<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            if (!product.isPointsAwarded() && product.getRegistrationTime() != null) {
+                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDateTime time24HoursAfterRegistration = product.getRegistrationTime().plusHours(24);
+                if (currentTime.isAfter(time24HoursAfterRegistration)) {
+                    awardPointsToBuyer(product);
+//                    이때 알람도 보내도 될듯
+                    product.setPointsAwarded(true);
+                    productRepository.save(product);
+                }
+            }
+        }
+    }
+
+    private void awardPointsToBuyer(Product product) {
+        String seller = product.getLoginId();
+
+        if (seller != null && product.getCurrentPrice() > 0) {
+            Signup signup = signupRepository.findByUsername(seller);
+//            System.out.println("10초 테스트 현재가"+(int) product.getCurrentPrice());
+//            System.out.println("10초 테스트 판매자 보유포인트"+signup.getPoint());
+//            System.out.println("총 포인트"+((int)product.getCurrentPrice()+signup.getPoint()));
+            signup.setPoint((int)product.getCurrentPrice()+signup.getPoint());
+            signupRepository.save(signup); // 변경된 엔터티를 저장
+        }
     }
 
 }
