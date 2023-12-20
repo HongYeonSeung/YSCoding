@@ -20,7 +20,7 @@ import SearchResults from './components/SearchResults';
 import CategoryPage from './components/CategoryPage';
 import AdminPage from "./components/AdminPage";
 import AdminMainPage from "./components/AdminMainPage";
-import BottomComponent from "./components/bottomComponent";
+import BottomComponent from "./components/BottomComponent";
 
 const App = () => {
   const [hello, setHello] = useState('연동 X');

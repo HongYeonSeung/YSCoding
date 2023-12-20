@@ -27,7 +27,7 @@
     border-radius: 15px;
     width: 30%;
     max-width: 300px; /* 변경: 최대 너비 설정 */
-    height: 450px;
+    height: 480px;
     margin: 20px;
     overflow: hidden; /* 추가: 내용이 넘칠 경우 숨김 처리 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 추가: 그림자 효과 */
@@ -40,7 +40,7 @@
     max-width: 85%;
     border-radius: 20px;
     object-fit: cover; /* 변경: 이미지 비율 유지하며 조절 */
-    margin-top: 30px;
+    margin: 30px 0 20px 0;
 }
 
 .product_content {

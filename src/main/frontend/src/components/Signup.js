@@ -42,9 +42,48 @@ const Signup = () => {
 
 
     const handleSignup = () => {
+        // 정규식 패턴 정의
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        const usernamePattern = /^[a-zA-Z0-9_]{5,}$/;
+        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const namePattern = /^[a-zA-Z가-힣\s]{1,10}$/;
+        const birthdatePattern = /^\d{8}$/;
+        const phoneNumberPattern = /^\d{11}$/;
+
         // 입력 필드가 비어 있는지 확인
         if (!email || !password || !confirmPassword || !username || !name || !birthdate || !phoneNumber || !homeAddress || !detailHomeAddress) {
             alert('모든 입력 필드를 채워주세요.');
+            return;
+        }
+
+        // 각 필드에 대한 정규식 검사
+        if (!emailPattern.test(email)) {
+            alert('올바른 이메일 형식이 아닙니다.');
+            return;
+        }
+
+        if (!usernamePattern.test(username)) {
+            alert('아이디는 5자 이상이어야 합니다.');
+            return;
+        }
+
+        if (!passwordPattern.test(password)) {
+            alert('비밀번호는 숫자 + 영문 8자 이상이어야 하며, 특수문자가 1개 이상 포함되어야 합니다.');
+            return;
+        }
+
+        if (!namePattern.test(name)) {
+            alert('이름은 10자 이내로 작성해주세요.');
+            return;
+        }
+
+        if (!birthdatePattern.test(birthdate)) {
+            alert('생년월일은 8자의 숫자로 작성되어야 합니다.');
+            return;
+        }
+
+        if (!phoneNumberPattern.test(phoneNumber)) {
+            alert('전화번호는 11자의 숫자로 작성되어야 합니다.');
             return;
         }
 
@@ -145,7 +184,7 @@ const Signup = () => {
                                 type="text"
                                 id="birthdate"
                                 value={birthdate}
-                                onChange={(e) => setBirthdate(e.target.value.replace(/[^0-9]/g, ''))}
+                                onChange={(e) => setBirthdate(e.target.value.replace(/[^0-9]/g, '').slice(0, 8))}
                                 placeholder="ex)19970101"
                             />
                         </div>
@@ -155,7 +194,7 @@ const Signup = () => {
                                 type="tel"
                                 id="phoneNumber"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value.replace(/[^0-9]/g, ''))}
+                                onChange={(e) => setPhoneNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 11))}
                                 placeholder="ex)01012345678"
                             />
                         </div>
@@ -190,7 +229,6 @@ const Signup = () => {
                                 )}
                             </div>
                         </div>
-
 
                         <button type="button" onClick={handleSignup}>
                             회원가입

@@ -1,11 +1,11 @@
 // EditProfilePage.js
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import './EditProfilePage.css';
-import PopupDom from "./PopupDom";
-import PopupPostCode from "./PopupPostCode";
+import PopupDom from './PopupDom';
+import PopupPostCode from './PopupPostCode';
 
 const EditProfilePage = () => {
     const [userDto, setUserDto] = useState(null);
@@ -14,19 +14,18 @@ const EditProfilePage = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
 
-    //다음 주소 api 관련
+    // 다음 주소 api 관련
     // 팝업창 상태 관리
-    const [isPopupOpen, setIsPopupOpen] = useState(false)
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     // 팝업창 열기
     const openPostCode = (event) => {
         event.preventDefault(); // 기본 동작 막기
-
-        setIsPopupOpen(true)
-    }
+        setIsPopupOpen(true);
+    };
     // 팝업창 닫기
     const closePostCode = () => {
-        setIsPopupOpen(false)
-    }
+        setIsPopupOpen(false);
+    };
 
     const handleSearchResult = (result) => {
         setUserDto((prevUserDto) => ({
@@ -40,7 +39,7 @@ const EditProfilePage = () => {
             try {
                 const response = await axios.get(`api/getUsernameFromToken/${token}`);
                 const username = response.data;
-                const userInfoResponse = await axios.post(`api/get-user-info`, {username: username});
+                const userInfoResponse = await axios.post(`api/get-user-info`, { username });
                 setUserDto(userInfoResponse.data);
             } catch (error) {
                 console.error('Error fetching user info:', error);
@@ -52,13 +51,22 @@ const EditProfilePage = () => {
     }, [token]);
 
     const handleInputChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
 
         // 생년월일과 전화번호는 숫자만 허용하도록 처리
         if (name === 'birthdate' || name === 'phoneNumber') {
+            // 정규식을 사용하여 숫자만 남기고 나머지 문자 제거
+            const numericValue = value.replace(/[^0-9]/g, '');
+
+            // 최대 길이 설정
+            const maxLength = name === 'birthdate' ? 8 : 11;
+
+            // 최대 길이를 초과하는 경우 자르기
+            const truncatedValue = numericValue.slice(0, maxLength);
+
             setUserDto((prevUserDto) => ({
                 ...prevUserDto,
-                [name]: value.replace(/[^0-9]/g, ''), // 숫자만 남기고 나머지 문자 제거
+                [name]: truncatedValue,
             }));
         } else {
             setUserDto((prevUserDto) => ({
@@ -74,14 +82,36 @@ const EditProfilePage = () => {
         event.preventDefault();
 
         // 빈 값이 있는지 확인
-        if (
-            !userDto.email ||
-            !userDto.name ||
-            !userDto.birthdate ||
-            !userDto.phoneNumber ||
-            !userDto.homeAddress
-        ) {
+        if (!userDto.email || !userDto.name || !userDto.birthdate || !userDto.phoneNumber || !userDto.homeAddress) {
             alert('모든 필드를 입력해주세요.');
+            return;
+        }
+
+        // 이메일 형식 확인
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(userDto.email)) {
+            alert('올바른 이메일 형식이 아닙니다.');
+            return;
+        }
+
+        // 비밀번호 형식 확인: 숫자 + 영문 8자 이상에 특수문자 1개 포함
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (password && !passwordPattern.test(password)) {
+            alert('비밀번호는 숫자 + 영문 8자 이상에 특수문자 1개 이상을 포함해야 합니다.');
+            return;
+        }
+
+        // 생년월일은 8자의 숫자만 작성 확인
+        const birthdatePattern = /^\d{8}$/;
+        if (!birthdatePattern.test(userDto.birthdate)) {
+            alert('생년월일은 8자의 숫자로 작성되어야 합니다.');
+            return;
+        }
+
+        // 전화번호는 11자의 숫자만 작성 확인
+        const phoneNumberPattern = /^\d{11}$/;
+        if (!phoneNumberPattern.test(userDto.phoneNumber)) {
+            alert('전화번호는 11자의 숫자로 작성되어야 합니다.');
             return;
         }
 
@@ -93,7 +123,7 @@ const EditProfilePage = () => {
         try {
             const updateData = {
                 ...userDto,
-                ...(password && {password}),
+                ...(password && { password }),
             };
             await axios.post(`api/update-user-info`, updateData);
             alert('사용자 정보가 성공적으로 업데이트되었습니다.');
@@ -136,61 +166,68 @@ const EditProfilePage = () => {
             <form className="edit-profile-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">사용자 ID</label>
-                    <input type="text" name="username" value={userDto?.username} disabled/>
+                    <input type="text" name="username" value={userDto?.username} disabled />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">비밀번호</label>
-                    <input type="password" placeholder="변경 시 입력" value={password}
-                           onChange={(e) => setPassword(e.target.value)}/>
+                    <input
+                        type="password"
+                        placeholder="변경 시 입력"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="confirmPassword">비밀번호 확인</label>
-                    <input type="password" placeholder="변경 시 입력" value={confirmPassword}
-                           onChange={(e) => setConfirmPassword(e.target.value)}/>
+                    <input
+                        type="password"
+                        placeholder="변경 시 입력"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">이메일</label>
-                    <input type="email" name="email" value={userDto?.email} onChange={handleInputChange}/>
+                    <input type="email" name="email" value={userDto?.email} onChange={handleInputChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">이름</label>
-                    <input type="text" name="name" value={userDto?.name} onChange={handleInputChange} disabled/>
+                    <input type="text" name="name" value={userDto?.name} onChange={handleInputChange} disabled />
                 </div>
                 <div className="form-group">
                     <label htmlFor="birthdate">생년월일</label>
-                    <input type="text" name="birthdate" value={userDto?.birthdate} onChange={handleInputChange}/>
+                    <input type="text" name="birthdate" value={userDto?.birthdate} onChange={handleInputChange} />
                 </div>
-
                 <div className="form-group">
                     <label htmlFor="phoneNumber">전화번호</label>
-                    <input type="tel" name="phoneNumber" value={userDto?.phoneNumber} onChange={handleInputChange}/>
+                    <input type="tel" name="phoneNumber" value={userDto?.phoneNumber} onChange={handleInputChange} />
                 </div>
                 <div id="homeAddressDiv">
                     <label htmlFor="phoneNumber">주소</label>
-                    <input type="tel" name="homeAddress" value={userDto?.homeAddress} onChange={handleInputChange}
-                           disabled/>
+                    <input type="tel" name="homeAddress" value={userDto?.homeAddress} onChange={handleInputChange} disabled />
                 </div>
-
                 <div id="homeAddressBox">
                     <div id="detailHomeAddressDiv">
-                        <input type="tel" name="detailHomeAddress" value={userDto?.detailHomeAddress}
-                               onChange={handleInputChange}/>
+                        <input type="tel" name="detailHomeAddress" value={userDto?.detailHomeAddress} onChange={handleInputChange} />
                     </div>
-                    <button id="homeAddressBnt" onClick={openPostCode}>주소 입력</button>
-                    <div id='popupDom'>
+                    <button id="homeAddressBnt" onClick={openPostCode}>
+                        주소 입력
+                    </button>
+                    <div id="popupDom">
                         {isPopupOpen && (
                             <PopupDom>
-                                <PopupPostCode onClose={closePostCode} onSearchResult={handleSearchResult}/>
+                                <PopupPostCode onClose={closePostCode} onSearchResult={handleSearchResult} />
                             </PopupDom>
                         )}
                     </div>
                 </div>
-
                 <button type="submit">수정 완료</button>
-                <button type="button" className="delete-button" onClick={handleDeleteAccount}>회원 탈퇴</button>
+                <button type="button" className="delete-button" onClick={handleDeleteAccount}>
+                    회원 탈퇴
+                </button>
             </form>
         </div>
     );
-}
+};
 
 export default EditProfilePage;
