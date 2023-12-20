@@ -128,6 +128,7 @@ function ProductCreate() {
                             type="text"
                             name="productName"
                             onChange={handleInputChange}
+                            maxLength={15}
                         />
                         <h2>시작 가격</h2>
                         <input
