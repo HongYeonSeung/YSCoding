@@ -2,6 +2,8 @@ package com.example.YSCoding.Service;
 
 import com.example.YSCoding.Dto.ProductDTO;
 import com.example.YSCoding.Entity.Product;
+import com.example.YSCoding.Repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,10 +11,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProductService {
+    // JpaRepository 또는 유사한 인터페이스의 인스턴스를 가지고 있다고 가정
     Product createProduct(ProductDTO productDTO);
     // 어드민 전체 상품 조회
     Page<Product> getAllProducts(Pageable pageable);
 
+    Product adminProductComplete(Long id,boolean bool);
 
     void awardPointsIf24HoursPassed();
     Product getProductById(Long id);

@@ -10,11 +10,11 @@ const BottomComponent = () => {
                         <div>상호명 및 호스팅 서비스 제공: 연성옥션(주)</div>
                         <div>대표이사: 홍연승,최영,김연수,최형우</div>
                         <div>서울시 강남구 강남대로 999-999</div>
-                        <div>사업자 등록번호: 123-45-67814861</div>
+                        <div>사업자 등록번호: 123-45-00000000</div>
                     </div>
 
                     <div className="company-info-right">
-                        <div>통신판매업신고: 2026-서울강남-131394</div>
+                        <div>통신판매업신고: 2026-서울강남-000000</div>
                         <div>고객센터 | 전자금융거래분쟁처리담당: 02-1234-56789 (유료)</div>
                         <div>서울시 강남구 강남대로 999-999</div>
                         <div>이메일: help@ysauction.com</div>

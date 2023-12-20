@@ -26,7 +26,7 @@ const App = () => {
   const [hello, setHello] = useState('연동 X');
 
   useEffect(() => {
-    console.log("화살표 함수 테스트");
+    // console.log("화살표 함수 테스트");
     axios.get('/api/hello')
         .then(response => setHello(response.data))
         .catch(error => console.log(error));
@@ -37,7 +37,6 @@ const App = () => {
       <Router>
         <div>
           <ActionBar />
-
             <Routes>
               <Route path="/" element={<Layout />} />
               <Route path="/login" element={<Login />} />

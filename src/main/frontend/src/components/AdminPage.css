@@ -153,8 +153,23 @@ admin_main_product_box_R{
     display: flex;
     justify-content: center;
     align-items: center; /* 세로로 가운데 정렬을 추가합니다. */
+}
 
+.admin_main_product_bnt{
+    font-family: "Maplestory Bold", sans-serif;
+    font-size: 16px;
+}
 
+.admin_main_product_bntred{
+    pointer-events: none;
+    font-family: "Maplestory Bold", sans-serif;
+    font-size: 16px;
+    background-color: #E35360;
+
+}
+.admin_product_link_subBox{
+    display: flex;
+    flex-direction: column;
 }
 .admin_product_link_box div{
     width: 100px;

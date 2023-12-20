@@ -22,7 +22,7 @@
 }
 
 .myPage-product-card-disabled::after {
-    content: "입찰종료"; /* 원하는 텍스트를 여기에 추가합니다 */
+    content: "입찰 마감"; /* 원하는 텍스트를 여기에 추가합니다 */
     position: absolute;
     top: 50%;
     left: 50%;

@@ -224,5 +224,9 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/adminProductCom")
+    public void adminProductComplete(@RequestParam Long productId) {
+        productService.adminProductComplete(productId,true);
+    }
 
 }

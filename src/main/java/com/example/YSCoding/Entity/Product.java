@@ -75,8 +75,9 @@ public class Product {
     @Column(nullable = false)
     private boolean pointsAwarded = false;
 
-
-
+    // 배송 여부 (기본값은 false)
+    @Column(nullable = false)
+    private boolean delivery = false;
 
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)

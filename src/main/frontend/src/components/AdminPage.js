@@ -13,7 +13,7 @@ const AdminPage = () => {
     const [totalPages, setTotalPages] = useState(0); // 총 페이지 수를 저장하기 위한 상태 추가
     const navigate = useNavigate();
 
-    const [backendTimeDate,setBackendTimeDate] = useState(new Date());
+    const [backendTimeDate, setBackendTimeDate] = useState(new Date());
     const [backendTime, setBackendTime] = useState(new Date());
 
     const currentDate_log = new Date();
@@ -147,6 +147,27 @@ const AdminPage = () => {
         return () => clearInterval(id);
     }, [loginId, setLoginId, admin, setAdmin]);
 
+    const adminproductbnt = (productId) => {
+
+        if (window.confirm('정말로 이 작업을 수행하시겠습니까?')) {
+            axios.post(`/api/adminProductCom?productId=${productId}`)
+                .then(response => {
+                    // 응답 처리 필요시 처리
+                })
+                .catch(error => {
+                    // 오류 처리 필요시 처리
+                })
+                .finally(response => {
+                    window.location.reload();
+                })
+            ;
+        } else {
+            // 사용자가 취소하면 아무 작업도 수행하지 않음
+        }
+    };
+
+
+
     return (
         <div className="admin_main">
             {admin ? (
@@ -155,7 +176,8 @@ const AdminPage = () => {
                         {products.map((product) => (
                             // 상품이 만료되지 않은 경우에만 표시
                             <div key={product.id} className="admin_main_product">
-                                <div className={`admin_main_product_box${new Date() > new Date(product.timeAfter24Hours) ? "_red" : ""}`}>
+                                <div
+                                    className={`admin_main_product_box${new Date() > new Date(product.timeAfter24Hours) ? "_red" : ""}`}>
                                     <div className="admin_main_product_box_L">
                                         <div className="admin_product_img_div">
                                             <img src={`/api/images/${product.imagePath}`} className="product_img"
@@ -213,10 +235,23 @@ const AdminPage = () => {
 
                                     </div>
                                     <div className="admin_product_link_box">
-                                        <div>
+                                        <div className="admin_product_link_subBox">
                                             <Link to={`/product/${product.id}`} className="admin_product_link">
                                                 <div className="admin_main_product_link_div">페이지 이동</div>
                                             </Link>
+                                            <div>
+                                                {new Date() > new Date(product.timeAfter24Hours)
+                                                    ?
+                                                    <button
+                                                        className={`admin_main_product_bnt${product.delivery ? 'red' : ''}`}
+                                                        onClick={() => adminproductbnt(product.id)}
+                                                    >
+                                                        {product.delivery ? '전달완료' : '물품전달'}
+                                                    </button>
+
+                                                    :
+                                                    <div></div>}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -225,19 +260,20 @@ const AdminPage = () => {
                     </div>
                     <div className="admin_main_product_container_bnt_box">
                         {[...Array(totalPages).keys()].map((page, index) => ( // totalPages 상태 사용
-                            <button className="admin_main_product_container_bnt" key={index} onClick={() => handlePageChange(page + 1)}>
+                            <button className="admin_main_product_container_bnt" key={index}
+                                    onClick={() => handlePageChange(page + 1)}>
                                 {page + 1}
                             </button>
                         ))}
                     </div>
 
                 </div>
-                ) : (
+            ) : (
                 <div>
-                <p>You do not have permission to access this page.</p>
-            {/* Optionally, you can redirect the user to another page or show a login link */}
+                    <p>You do not have permission to access this page.</p>
+                    {/* Optionally, you can redirect the user to another page or show a login link */}
                 </div>
-                )}
+            )}
         </div>
     );
 };

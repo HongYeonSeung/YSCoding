@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         product.setBuyId(productDTO.getBuyId());
         product.setLoginId(productDTO.getLoginId());
         product.setPointsAwarded(productDTO.isPointsAwarded());
-
+        product.setDelivery(productDTO.isDelivery());
         // 24시간을 더한 값을 설정
         calculateTimeAfter24Hours(product);
         product.setBiddersCount(0);
@@ -65,6 +65,19 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
+    }
+
+
+    @Override
+    public Product adminProductComplete(Long id,boolean bool) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            product.setDelivery(bool); // bool 값으로 delivery 업데이트
+            return productRepository.save(product); // 업데이트된 Product 반환
+        } else {
+            return null; // 해당 ID에 해당하는 상품이 없을 경우 null 반환
+        }
     }
 
 

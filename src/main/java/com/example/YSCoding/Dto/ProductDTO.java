@@ -24,7 +24,10 @@ public class ProductDTO {
     private LocalDateTime registrationTime;
     private LocalDateTime timeAfter24Hours;
     private boolean pointsAwarded;
+    private boolean delivery;
     private int views;
     private int biddersCount;
+
+
     // 생성자, getter, setter 등 필요한 메서드 추가
 }

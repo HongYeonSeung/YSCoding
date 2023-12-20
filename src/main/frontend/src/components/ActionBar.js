@@ -52,8 +52,6 @@ function ActionBar() {
             // 로그인 상태일 때 포인트 가져오기
             axios.post(`/api/point/${loginId}`)
                 .then(response => {
-                    console.log("백엔드에서 가져오는 포인트 요청 아이디", loginId);
-                    console.log("백엔드에서 가져오는 포인트", response);
                     setPoint(response.data);
                 })
                 .catch(error => {
@@ -93,9 +91,9 @@ function ActionBar() {
                         }
                     })
                     .catch(error => console.log("토큰 에러", error));
-                console.log("로그인중");
-                console.log(loginId)
-                console.log(token)
+                // console.log("로그인중");
+                // console.log(loginId)
+                // console.log(token)
             }
         }, 5000); // 5초마다실행
 
