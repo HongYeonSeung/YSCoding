@@ -50,13 +50,16 @@ function ActionBar() {
 
         if (loginId) {
             // 로그인 상태일 때 포인트 가져오기
-            axios.post('/api/point', loginId)
+            axios.post(`/api/point/${loginId}`)
                 .then(response => {
+                    console.log("백엔드에서 가져오는 포인트 요청 아이디", loginId);
+                    console.log("백엔드에서 가져오는 포인트", response);
                     setPoint(response.data);
                 })
                 .catch(error => {
                     console.error('포인트 가져오는 중 오류 발생:', error);
                 });
+
 
             axios.get(`/api/adminCheck/${loginId}`)
                 .then(response => {
@@ -91,6 +94,8 @@ function ActionBar() {
                     })
                     .catch(error => console.log("토큰 에러", error));
                 console.log("로그인중");
+                console.log(loginId)
+                console.log(token)
             }
         }, 5000); // 5초마다실행
 
@@ -109,7 +114,7 @@ function ActionBar() {
                 </div>
                 <div className="right-section">
                     <div className="links">
-                        <div>{admin && <Link to="/AdminMainPage">관리자 페이지</Link>}</div>
+                        <div>{admin && <Link to="/AdminPage">관리자 페이지</Link>}</div>
                         <div>{!loginId && <Link to="/login">로그인</Link>}</div>
                         <div>{!loginId && <Link to="/signup">회원가입</Link>}</div>
                         <div>{loginId && <Link to="/ProfilePage">내정보</Link>}</div>

@@ -41,6 +41,7 @@ function ProductDetailPage() {
     }, [token]);
 
     useEffect(() => {
+
         const fetchProductDetails = async () => {
             try {
                 if (!params.id) {

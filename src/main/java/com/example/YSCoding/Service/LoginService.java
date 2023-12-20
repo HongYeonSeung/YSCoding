@@ -31,9 +31,10 @@ public class LoginService {
         loginResultId = null;
     }
 
-    public int getPoint() {
-        if (loginResultId != null) {
-            Optional<Integer> userPoint = loginRepository.findPointByUsername(loginResultId);
+    public int getPoint(String name) {
+        System.out.println("포인트 요구 이름2"+name);
+        if (name != null) {
+            Optional<Integer> userPoint = loginRepository.findPointByUsername(name);
             // 만약 포인트를 찾을 수 있다면 해당 포인트를 반환, 찾을 수 없다면 기본값(여기서는 0) 반환
             return userPoint.orElse(-1);
         } else {

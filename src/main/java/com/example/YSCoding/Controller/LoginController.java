@@ -44,11 +44,13 @@ public class LoginController {
         loginService.getLogoutResultId();
     }
 
-    @PostMapping("/point")
-    public ResponseEntity<Integer> point() {
-        int userPoint = loginService.getPoint();
+    @PostMapping("/point/{loginId}")
+    public ResponseEntity<Integer> point(@PathVariable String loginId)  {
+        System.out.println("포인트 요구 이름: " + loginId);
+        int userPoint = loginService.getPoint(loginId);
         return ResponseEntity.ok(userPoint);
     }
+
 
 
 

@@ -39,18 +39,18 @@
     transform: scale(1.05);
 }
 
-.product_title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
+/*.product_title {*/
+/*    font-size: 1.8rem;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 8px;*/
+/*}*/
 
-.product_des {
-    font-size: 0.9rem;
-    align-items: center;
-    text-align: center;
-    margin: 0 20px 10px 20px;
-}
+/*.product_des {*/
+/*    font-size: 0.9rem;*/
+/*    align-items: center;*/
+/*    text-align: center;*/
+/*    margin: 0 20px 10px 20px;*/
+/*}*/
 
 .product_mon {
     font-size: 0.9rem;
