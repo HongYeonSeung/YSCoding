@@ -78,5 +78,4 @@ npm start
 ```sh
 YsCodingApplication execution
 ```
-## 배운 점 & 아쉬운 점
 
